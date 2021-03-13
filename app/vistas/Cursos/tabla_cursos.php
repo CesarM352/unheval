@@ -20,11 +20,10 @@
                             <th>Nombre</th>
                             <th>Descripción</th>
                             <th>Créditos</th>
-                            <th>Curso carrera</th>
                             <th>Escuela</th>
                             <th>Grupos</th>
-                            <th>Editar</th>
-                            <th>Eliminar</th>
+                            <!--<th>Editar</th>
+                            <th>Eliminar</th>-->
                         </tr>
                     </thead>
                     <tbody>";
@@ -34,13 +33,12 @@
                         <td>".utf8_encode($curso['nombre'])."</td>
                         <td>".utf8_encode($curso['descripcion'])."</td>
                         <td>".$curso['numerocredito']."</td>
-                        <td>".$curso['cursocarrera']."</td>
                         <td>".utf8_encode($curso['nombre_carrera'])."</td>
                         <td> <a href='../Grupos/index.php?codigocurso=".$curso['codigocurso'].
                                                         "&nombre=".utf8_encode($curso['nombre']).
                                                         "&carrera=".utf8_encode($curso['nombre_carrera'])."'>Ver</a> </td>
-                        <td> <a href='editar.php?codigocurso=".$curso['codigocurso']."'>Editar</a> </td>
-                        <td> <a href='eliminar.php?codigocurso=".$curso['codigocurso']."' onclick='eliminar(\"".$curso['nombre']."\", \"".utf8_encode($curso['nombre_carrera'])."\", event)'>Eliminar</a> </td>
+                        <!--<td> <a href='editar.php?codigocurso=".$curso['codigocurso']."'>Editar</a> </td>
+                        <td> <a href='eliminar.php?codigocurso=".$curso['codigocurso']."' onclick='eliminar(\"".utf8_encode($curso['nombre'])."\", \"".utf8_encode($curso['nombre_carrera'])."\", event)'>Eliminar</a></td>-->
                     </tr>";
                     }
         $salida.="  </tbody>

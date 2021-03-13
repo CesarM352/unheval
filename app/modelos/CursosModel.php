@@ -4,7 +4,6 @@
         private $nombre;
         private $descripcion;
         private $numerocredito;
-        private $cursocarrera;
         private $codigocarrera;
 
         function __construct(){
@@ -20,16 +19,14 @@
             $this->nombre = $data_consulta_bd->nombre;
             $this->descripcion = $data_consulta_bd->descripcion;
             $this->numerocredito = $data_consulta_bd->numerocredito;
-            $this->cursocarrera = $data_consulta_bd->cursocarrera;
             $this->codigocarrera = $data_consulta_bd->codigocarrera;
         }
 
-        public function __construct2($codigocurso, $nombre, $descripcion, $numerocredito, $cursocarrera, $codigocarrera){
+        public function __construct2($codigocurso, $nombre, $descripcion, $numerocredito, $codigocarrera){
             $this->codigocurso = $codigocurso;
             $this->nombre = $nombre;
             $this->descripcion = $descripcion;
             $this->numerocredito = $numerocredito;
-            $this->cursocarrera = $cursocarrera;
             $this->codigocarrera = $codigocarrera;
         }
 
@@ -59,14 +56,6 @@
 
         public function setNumerocredito($numerocredito){
             $this->numerocredito = $numerocredito;
-        }
-
-        public function getCursocarrera(){
-            return $this->cursocarrera;
-        }
-
-        public function setCursocarrera($cursocarrera){
-            $this->cursocarrera = $cursocarrera;
         }
 
         public function getCodigocarrera(){

@@ -94,4 +94,58 @@
             $sql_eliminar = "DELETE FROM $tabla WHERE codigogrupo=$id";
             return self::consultar($conexion_bd, $sql_eliminar);
         }
+
+        //----------------------------------------------------------------------------------------------
+        public static function actualizarDocentes($conexion_bd, $tabla, $id, $datos){
+            $cad_actualizar = "";
+            foreach ($datos as $key => $value) {
+                $cad_actualizar.= $key." = '$value',";
+            }
+
+            $cad_actualizar = substr($cad_actualizar, 0, -1);
+
+            $sql_actualizar = "UPDATE $tabla SET $cad_actualizar WHERE codigodocente=$id";
+            return self::consultar($conexion_bd, $sql_actualizar);
+        }
+
+        public static function eliminarDocentes($conexion_bd, $tabla, $id){
+            $sql_eliminar = "DELETE FROM $tabla WHERE codigodocente=$id";
+            return self::consultar($conexion_bd, $sql_eliminar);
+        }
+
+        //----------------------------------------------------------------------------------------------
+        public static function actualizarTecnicos($conexion_bd, $tabla, $id, $datos){
+            $cad_actualizar = "";
+            foreach ($datos as $key => $value) {
+                $cad_actualizar.= $key." = '$value',";
+            }
+
+            $cad_actualizar = substr($cad_actualizar, 0, -1);
+
+            $sql_actualizar = "UPDATE $tabla SET $cad_actualizar WHERE numerocontrato=$id";
+            return self::consultar($conexion_bd, $sql_actualizar);
+        }
+
+        public static function eliminarTecnicos($conexion_bd, $tabla, $id){
+            $sql_eliminar = "DELETE FROM $tabla WHERE numerocontrato=$id";
+            return self::consultar($conexion_bd, $sql_eliminar);
+        }
+
+        //----------------------------------------------------------------------------------------------
+        public static function actualizarEstudiantes($conexion_bd, $tabla, $id, $datos){
+            $cad_actualizar = "";
+            foreach ($datos as $key => $value) {
+                $cad_actualizar.= $key." = '$value',";
+            }
+
+            $cad_actualizar = substr($cad_actualizar, 0, -1);
+
+            $sql_actualizar = "UPDATE $tabla SET $cad_actualizar WHERE codigoestudiante=$id";
+            return self::consultar($conexion_bd, $sql_actualizar);
+        }
+
+        public static function eliminarEstudiantes($conexion_bd, $tabla, $id){
+            $sql_eliminar = "DELETE FROM $tabla WHERE codigoestudiante=$id";
+            return self::consultar($conexion_bd, $sql_eliminar);
+        }
     }

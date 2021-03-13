@@ -25,7 +25,7 @@
       $srv_archivo_actual = basename($_SERVER["REQUEST_URI"]);
   
       if(strtolower($srv_archivo_actual)=='neo'){
-          header("Location:../neo/");
+          header("Location:../neo/public");
       }
   }
 ?>
@@ -97,11 +97,34 @@
             <a href="../app/vistas/LabDocente/index.php" class="nav-link" target="base">
               <i class="nav-icon fas fa-book-open"></i>
               <p>
-                Docente
+                MenuDocente
               </p>
             </a>
           </li>
-          
+          <li class="nav-item">
+            <a href="../app/vistas/Docentes/index.php" class="nav-link" target="base">
+              <i class="nav-icon fas fa-book-open"></i>
+              <p>
+                DocentesCrud
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../app/vistas/Tecnicos/index.php" class="nav-link" target="base">
+              <i class="nav-icon fas fa-book-open"></i>
+              <p>
+                TecnicosCrud
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../app/vistas/Estudiantes/index.php" class="nav-link" target="base">
+              <i class="nav-icon fas fa-book-open"></i>
+              <p>
+                EstudiantesCrud
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="../app/vistas/LabTecnico/ver_mantenimiento.php" class="nav-link" target="base">
               <i class="nav-icon fas fa-ambulance"></i>
@@ -190,7 +213,7 @@
     <br>
     <section>
       <div class="container-fluid">
-        <iframe src="" name="base" width="100%" height="90%" style="border-width: 0px; height: 780px;"></iframe>
+        <iframe src="" name="base" width="100%" height="90%" style="border-width: 0px; height: 780px;" scrolling="auto"></iframe>
       </div>
     </section>
   </div>

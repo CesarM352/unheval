@@ -49,14 +49,6 @@
             </div>
             <div class="row form-group">
                 <div class="col-md-2">
-                    <label for="cursocarrera">Curso/Carrera: </label>
-                </div>
-                <div class="col-md-1">
-                    <input class="form-control" type="text" name="cursocarrera"/>
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-md-2">
                     <label for="carrera">Escuela: </label>
                 </div>
                 <div class="col-md-4">

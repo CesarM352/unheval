@@ -7,7 +7,6 @@
         "nombre" => utf8_decode($_POST["nombre"]),
         "descripcion" => utf8_decode($_POST["descripcion"]),
         "numerocredito" => $_POST["numerocredito"],
-        "cursocarrera" => $_POST["cursocarrera"],
         "codigocarrera" => $_POST["codigocarrera"]
     ];
     $usuario_controlador = new CursosController;
