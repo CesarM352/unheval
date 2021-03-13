@@ -13,6 +13,9 @@
 ?>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wraper" style="text-align: center">
+		<button id="btn_nuevo" class="btn btn-info font-weight-bolder">
+			<a href="../LabSoftware/index.php" style="color: inherit">Administrar Softwares <i class="fa fa-book"></i></a>
+		</button>
         <br>
         <h2> <?php //echo $proceso_mdl->getCodigo()." ".$proceso_mdl->getNombre() ?></h2>
         <br>

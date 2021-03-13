@@ -14,7 +14,9 @@
                                     FROM $this->tabla AS t
                                     INNER JOIN equipos e ON t.codigopatrimonio = e.codigopatrimonio
                                     INNER JOIN oficina o ON t.codigooficina = o.codigooficina
-                                    INNER JOIN tipoequipos te ON e.codtipoequipo = te.codtipoequipo";
+                                    INNER JOIN tipoequipos te ON e.codtipoequipo = te.codtipoequipo
+                                    INNER JOIN estadoequipo ee ON e.codigoestado = ee.codigoestado
+                                    WHERE ee.nombre <> 'BAJA' AND estadopresente = 1";
             else
                 $sql_documento = "SELECT t.*,  
                                         o.nombre AS ambiente_nombre,
@@ -25,7 +27,8 @@
                                     INNER JOIN equipos e ON t.codigopatrimonio = e.codigopatrimonio
                                     INNER JOIN oficina o ON t.codigooficina = o.codigooficina
                                     INNER JOIN tipoequipos te ON e.codtipoequipo = te.codtipoequipo
-                                    WHERE t.codigooficina=$ambiente_id";
+                                    INNER JOIN estadoequipo ee ON e.codigoestado = ee.codigoestado
+                                    WHERE ee.nombre <> 'BAJA' AND estadopresente = 1 AND t.codigooficina=$ambiente_id";
 
             return ConexionController::consultar($conexion, $sql_documento);
         }

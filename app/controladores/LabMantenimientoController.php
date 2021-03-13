@@ -46,7 +46,7 @@
 
         public function actualizar($conexion, $id, $datos){
             //$area_unidad_mdl = new AreaUnidadModel(null,$datos['denominacion']);
-            return ConexionController::actualizar($conexion, $this->tabla, $id, $datos);
+            return ConexionController::actualizar($conexion, $this->tabla, $id, $datos, 'codigoproblema');
         }
 
         public function eliminar($conexion, $id){
@@ -66,5 +66,11 @@
         public function calcularCantidadPendientes($conexion){
             $sql_documento = "SELECT * FROM $this->tabla WHERE estado='PENDIENTE'";
             return $this->getFunciones($conexion, ConexionController::consultar($conexion, $sql_documento), "cantidad");
+        }
+
+        public function calcularNuevoCodigo($conexion){
+            $sql_documento = "SELECT IFNULL(MAX(CAST( codigoproblema AS INT )),0)+1 AS codigo_siguiente FROM $this->tabla";
+            $fila = ConexionController::consultar($conexion, $sql_documento)->fetch_object();
+            return $fila->codigo_siguiente;
         }
     }

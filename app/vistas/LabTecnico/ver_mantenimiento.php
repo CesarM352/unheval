@@ -37,6 +37,7 @@
                         <th>Fecha atención</th>
                         <th>Estado</th>
                         <th>Justificación</th>
+						<th>ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,6 +56,11 @@
                     <td> <?php echo $mantenimiento["fecha_hora_atencion"] ?> </td>
                     <td> <?php echo $mantenimiento["estado"] ?> </td>
                     <td> <?php echo $mantenimiento["justificacion"] ?> </td>
+					<td>
+						<?php if( $mantenimiento["estado"] == 'PENDIENTE' ){ ?> 
+						<a href="../LabMantenimiento/editar_atencion.php?id=<?php echo $mantenimiento["codigoproblema"] ?>">ACTUALIZAR</a>
+						<?php } ?>
+					</td>
                 </tr>
                 <?php
                     }

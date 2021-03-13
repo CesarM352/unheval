@@ -7,18 +7,18 @@
         public function getAllSoftwaresAdquisiciones($conexion, $software_id=0){
             if($software_id==0)
                 $sql_documento = "SELECT t.*, 
-                                        s.descripcion AS software_descripcion,
+                                        s.nombre AS software_descripcion,
                                         s.tipo_sw AS software_tipo_sw,
                                         s.forma AS software_forma
                                     FROM $this->tabla AS t
-                                    INNER JOIN software s ON t.software_id = s.id";
+                                    INNER JOIN softwares s ON t.software_id = s.codigosoftware";
             else
-                $sql_documento = "SELECT SELECT t.*, 
-                                        s.descripcion AS software_descripcion,
+                $sql_documento = "SELECT t.*, 
+                                        s.nombre AS software_descripcion,
                                         s.tipo_sw AS software_tipo_sw,
                                         s.forma AS software_forma
                                     FROM $this->tabla AS t
-                                    INNER JOIN software s ON t.software_id = s.id
+                                    INNER JOIN softwares s ON t.software_id = s.codigosoftware
                                     WHERE software_id=$software_id";
 
             return ConexionController::consultar($conexion, $sql_documento);

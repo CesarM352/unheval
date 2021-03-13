@@ -42,7 +42,11 @@
 			foreach($dias_semana as $key => $dia){
 				$cantidad_filas_dia = 0;
 				//$sql_horario = "SELECT * FROM $this->tabla WHERE codigooficina=$codigooficina AND nro_dia = ".($key + 1)."  ORDER BY hora_inicio ASC";
-				$sql_horario = "SELECT * FROM $this->tabla WHERE codigooficina=$codigooficina AND nro_dia = ".($key + 1)." AND ( (fecha is NULL || fecha = '') || (fecha BETWEEN date_format(date_sub(now(), INTERVAL (DAYOFWEEK(now()) - 2) DAY),'%Y-%m-%d') AND date_format(date_add(now(), INTERVAL (8 - DAYOFWEEK(now()) )  DAY),'%y-%m-%d')   ) ) ORDER BY hora_inicio ASC";
+				$sql_horario = "SELECT * FROM $this->tabla 
+								WHERE codigooficina=$codigooficina 
+								AND nro_dia = ".($key + 1)." AND ( ((fecha is NULL || fecha = '') AND tipo_horario=1) || (fecha BETWEEN date_format(date_sub(now(), INTERVAL (WEEKDAY(now()) - 2) DAY),'%Y-%m-%d') 
+								AND date_format(date_add(now(), INTERVAL (8 - WEEKDAY(now()) )  DAY),'%y-%m-%d')  AND tipo_horario=2  ) ) 
+								ORDER BY hora_inicio ASC";
 				$dias_bd = ConexionController::consultar($conexion, $sql_horario);
 				
 				foreach( $dias_bd as $s_key => $dia_bd ){
@@ -58,11 +62,11 @@
 					$cantidad_filas_maxima = $cantidad_filas_dia;
 			}
 			
-			echo "<table class='table table-bordered table-hover'><thead><tr>";
+			echo "<table  class='table table-bordered table-hover'><tr>";
 			foreach($dias_semana as $key => $dia){
 				echo "<td>".$dia."</td>";
 			}
-			echo "</tr></thead>";
+			echo "</tr>";
 			
 			for( $j=0; $j<$cantidad_filas_maxima; $j++ ){
 				echo "<tr>";
@@ -75,5 +79,11 @@
 				echo "</tr>";
 			}
 			echo "</table>";
+        }
+
+		public function calcularNuevoCodigo($conexion){
+            $sql_documento = "SELECT IFNULL(MAX(CAST( codigohorario AS INT )),0)+1 AS codigo_siguiente FROM $this->tabla";
+            $fila = ConexionController::consultar($conexion, $sql_documento)->fetch_object();
+            return $fila->codigo_siguiente;
         }
     }

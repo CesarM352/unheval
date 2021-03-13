@@ -29,7 +29,6 @@
             $this->camaravigilancia = $data_consulta_bd->camaravigilancia;
             $this->codtipoofi = $data_consulta_bd->codtipoofi;
             $this->codpabellon = $data_consulta_bd->codpabellon;
-            $this->idclases = $data_consulta_bd->idclases;
         }
 
         /*public function __construct2($id, $tipo, $nombre, $url, $estado, $proceso_id){
