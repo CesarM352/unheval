@@ -15,7 +15,7 @@
         <!-- <a href="nuevo.php?proceso_id=<?php echo $_GET['proceso_id'] ?>">Nuevo</a>-->
 
         <button class="btn btn-info font-weight-bolder">
-            <a href="../LabHorario/nuevo.php?ambiente_id=<?php echo $_GET['ambiente_id'] ?>" style="color: inherit">Nuevo <i class="fa fa-plus-circle"></i></a>
+            <a href="../LabHorario/nuevo.php?ambiente_id=<?php echo $_GET['ambiente_id'].'&perfil=tecnico' ?>" style="color: inherit">Nuevo <i class="fa fa-plus-circle"></i></a>
         </button>
         <br><br>
         <div class="container-fluid" style="text-align:center">

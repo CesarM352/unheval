@@ -15,8 +15,8 @@
             return ConexionController::guardar($conexion, $this->tabla, $datos);
         }
 
-        public function getDocumento($conexion, $id){
-            $sql_documento = "SELECT * FROM $this->tabla WHERE id=$id";
+        public function getTipoProblema($conexion, $id){
+            $sql_documento = "SELECT * FROM $this->tabla WHERE codigoasunto=$id";
             $documento_mdl = new LabTipoProblemaModel( ConexionController::consultar($conexion, $sql_documento)->fetch_object() );
 
             return $documento_mdl;

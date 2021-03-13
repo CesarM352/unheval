@@ -7,7 +7,8 @@
     $ambientes = $ambiente_controlador->getAllAmbientes($conexion, 0);
 
     $equipo_controlador = new LabEquipoController;
-    $equipos = $equipo_controlador->getAllEquipos($conexion, 0);
+    $equipos = $equipo_controlador->equiposActivos($conexion, 0);
+    $equipos_baja = $equipo_controlador->equiposEnBaja($conexion, 0);
     //$proceso_mdl = $proceso_controlador->getProceso( $conexion, $_GET['proceso_id'] );
     include '../cabecera.html';
 ?>
@@ -69,6 +70,10 @@
             </div>
         </div>
         <br>
+		
+		<button id="btn_nuevo" class="btn btn-info font-weight-bolder">
+			<a href="../LabEquipo/nuevo.php" style="color: inherit">Nuevo <i class="fa fa-plus-circle"></i></a>
+		</button>
 
         <div class="wraper">
             <div class="row form-group" style="text-align:center">
@@ -127,6 +132,35 @@
             ?>
                 </tbody>
             </table>
+			
+			<br>
+
+			<table id="tbl_datos" class='table table-bordered table-hover'>
+				<thead>
+					<tr id="fil">
+						<th>CÓDIGO</th>
+						<th>DESCRIPCIÓN</th>
+						<th>TIPO</th>
+						<th>FECHA BAJA</th>
+						<th>DOCUMENTO</th>
+					</tr>
+				</thead>
+				<tbody>
+			<?php
+				foreach ($equipos_baja as $key => $equipo) {
+			?>
+				<tr>
+					<td> <?php echo $equipo["codigopatrimonio"] ?> </td>
+					<td> <?php echo $equipo["descripcion"] ?> </td>
+					<td> <?php echo $equipo["equipo_tipo"] ?> </td>
+					<td> <?php echo $equipo["fechabaja"] ?> </td>
+					<td> <a href='../../../public/doc/<?php echo $equipo["documentobaja"] ?>'><?php echo $equipo["documentobaja"] ?></a> </td>
+				</tr>
+			<?php
+				}
+			?>
+				</tbody>
+			</table>
         </div>
     </div>
 

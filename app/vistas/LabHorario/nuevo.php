@@ -15,7 +15,7 @@
     <div class="container-fluid">
         <form action="guardar.php" method="POST">
             <br>
-            <div style="text-align:left"><h2>Nuevo grupo</h2></div>
+            <div style="text-align:left"><h2>Nuevo horario</h2></div>
             <br>
             <div class="row form-group">
                 <div class="col-md-2">
@@ -60,6 +60,7 @@
                 <div class="col-md-3">
                     <input type="time" name="hora_inicio" class="form-control" required/>
                     <input type="hidden" name="ambiente_id" class="form-control" required value="<?php echo $_GET['ambiente_id'] ?>"/>
+					<input type="hidden" name="perfil" required value="<?php echo $_GET['perfil'] ?>"/>
                 </div>
             </div>
             <div class="row form-group">

@@ -42,7 +42,7 @@
             return self::consultar($conexion_bd, $sql_insertar);
         }
 
-        public static function actualizar($conexion_bd, $tabla, $id, $datos){
+        public static function actualizar($conexion_bd, $tabla, $id, $datos, $nombre_pk_alternativo=''){
             $cad_actualizar = "";
             foreach ($datos as $key => $value) {
                 $cad_actualizar.= $key." = '$value',";
@@ -50,7 +50,10 @@
 
             $cad_actualizar = substr($cad_actualizar, 0, -1);
 
-            $sql_actualizar = "UPDATE $tabla SET $cad_actualizar WHERE id=$id";
+            if( $nombre_pk_alternativo=='' )
+                $sql_actualizar = "UPDATE $tabla SET $cad_actualizar WHERE id=$id";
+            else
+                $sql_actualizar = "UPDATE $tabla SET $cad_actualizar WHERE $nombre_pk_alternativo=$id";
             return self::consultar($conexion_bd, $sql_actualizar);
         }
 

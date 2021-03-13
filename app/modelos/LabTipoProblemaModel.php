@@ -14,8 +14,6 @@
         public function __construct1($data_consulta_bd){
             $this->codigoasunto = $data_consulta_bd->codigoasunto;
             $this->nombre = $data_consulta_bd->nombre;
-            $this->tipo_sw = $data_consulta_bd->tipo_sw;
-            $this->forma = $data_consulta_bd->forma;
         }
 
         public function getId(){

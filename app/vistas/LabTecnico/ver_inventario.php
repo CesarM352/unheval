@@ -4,6 +4,11 @@
 
     $inventario_controlador = new LabInventarioController;
     $inventarios = $inventario_controlador->getAllInventarios($conexion, $_GET['ambiente_id']);
+	
+	require_once '../../controladores/LabAmbienteController.php';
+    $ambiente_controlador = new LabAmbienteController;
+    $ambiente = $ambiente_controlador->getAmbiente($conexion, $_GET['ambiente_id']);
+    $ambientes = $ambiente_controlador->getAllAmbientes($conexion, 0);
 
     //$proceso_mdl = $proceso_controlador->getProceso( $conexion, $_GET['proceso_id'] );
 
@@ -12,10 +17,17 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wraper" style="text-align: center">
         <br>
-        <h3> <?php echo $_GET['ambiente_id']//echo $proceso_mdl->getCodigo()." ".$proceso_mdl->getNombre() ?> AMBIENTE </h3>
+		<h3> <?php //echo $proceso_mdl->getCodigo()." ".$proceso_mdl->getNombre() ?> OFICINA <?php echo $ambiente->getNombre() ?> </h3>
         <br>
         <!-- <a href="nuevo.php?proceso_id=<?php echo $_GET['proceso_id'] ?>">Nuevo</a>-->
         <div class="container-fluid" style="text-align:center">
+		
+		<form action="#" id="frm_operacion" method="POST">
+			<div id="div_botones">
+				<button onclick="cambiarOperacion(1,0,0)" class="btn btn-primary">Dar de baja</button>
+				<!--<button onclick="cambiarOperacion(2,0,0)" class="btn btn-primary">Pasar a otra oficina</button>-->
+			</div>
+			
             <table class='table table-bordered table-hover'>
                 <thead>
                     <tr>
@@ -25,7 +37,6 @@
                         <th>ESTADO</th>
                         <th>EDITAR</th>
                         <th>PASAR A</th>
-                        <th>DAR DE BAJA</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,19 +44,83 @@
                 foreach ($inventarios as $key => $inventario) {
             ?>
                 <tr>
-                    <td> <?php echo $inventario["equipo_codigo"] ?> </td>
+                    <td>
+						<label>
+							<input type="checkbox" value="<?php echo $inventario["equipo_codigo"] ?>" name="equipos[]" />
+							<?php echo $inventario["equipo_codigo"] ?> 
+						</label>
+					</td>
                     <td> <?php echo $inventario["equipo_descripcion"] ?> </td>
                     <td> <?php echo $inventario["equipo_tipo"] ?> </td>
                     <td> <?php echo $inventario["estadopresente"] ?> </td>
                     <td> <a href="#">EDITAR</a> </td>
-                    <td> <a href="#">PASAR A</a> </td>
-                    <td> <a href="#">DAR DE BAJA</a> </td>
+					<td> <a href="#" onclick="cambiarOperacion(2,<?php echo $inventario["equipo_codigo"].",".$inventario["codigolaboratorioequipo"] ?> )">PASAR A</a> </td>
                 </tr>
             <?php
                 }
             ?>
                 </tbody>
             </table>
+		</form>
+			
+			<form action="#" id="frm_transferir" method="POST" style="display:none">
+				<div class="row form-group">
+					<div class="col-md-2">
+						<label>Código del equipo a transferir: </label>
+					</div>
+					<div class="col-md-7" id="div_equipo_transferir">
+					</div>
+				</div>
+				<div class="row form-group">
+					<div class="col-md-2">
+						<label>Oficina de Destino: </label>
+					</div>
+					<div class="col-md-7">
+						<select name="codigooficina" class="form-control" required>
+							<option value="">Seleccione</option>
+							<?php
+								foreach ($ambientes as $key => $amb) {
+									if( $amb['codigooficina'] == $_GET['ambiente_id'] )
+										continue;
+							?>
+								<option value="<?php echo $amb['codigooficina'] ?>"><?php echo $amb['nombre'] ?></option>
+							<?php
+								}
+							?>
+						</select>
+					</div>
+				</div>
+
+				<div class="row form-group">
+					<div class="col-md-2">
+						<label>Justificación: </label>
+					</div>
+					<div class="col-md-7">
+						<textarea class="form-control" name="justificacionretiro" maxlength=250 placeholder='250 caracteres' required></textarea>
+					</div>
+				</div>
+
+				<div class="row form-group">
+					<div class="col-md-2">
+						<label>Fecha de retiro: </label>
+					</div>
+					<div class="col-md-7">
+						<input type="hidden" name="codigopatrimonio" id="codigopatrimonio" class="form-control" value="" required />
+						<input type="hidden" name="codigolaboratorioequipo" id="codigolaboratorioequipo" class="form-control" value="" required />
+						<input type="hidden" name="oficinaorigen" class="form-control" value="<?php echo $ambiente->getNombre() ?>" required />
+						<input type="date" name="fecharetiro" class="form-control" required />
+					</div>
+				</div>
+
+				<div class="row form-group">
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-7">
+						<button class="btn btn-primary">Guardar</button>
+						<button class="btn btn-primary" onclick="document.getElementById('frm_transferir').style.display = 'none'"><a href="#">Cancelar</button>
+					</div>
+				</div>
+			</form>
         </div>
     </div>
     <script>
@@ -53,6 +128,21 @@
             if(!confirm("Desea elminar el registro de codigo " + id) )
                 event.preventDefault()
         }
+		
+		function cambiarOperacion(opcion, codigoequipo, codigolaboratorioequipo){
+			switch(opcion){
+				case 1:
+					document.getElementById('frm_operacion').action = "../LabEquipo/dar_baja.php?oficinacodigo=<?php echo $_GET['ambiente_id'] ?>"
+					break;
+				case 2:
+					document.getElementById('frm_transferir').action = "../LabLaboratorioEquipo/transferir.php?oficinacodigo=<?php echo $_GET['ambiente_id'] ?>"
+					document.getElementById('frm_transferir').style.display = 'inline'
+					document.getElementById('div_equipo_transferir').innerText = codigoequipo
+					document.getElementById('codigopatrimonio').value = codigoequipo
+					document.getElementById('codigolaboratorioequipo').value = codigolaboratorioequipo
+					break;
+			}
+		}
     </script>
 </body>
 </html>

@@ -4,8 +4,8 @@
     class LabAmbienteController{
         private $tabla = "oficina";
 
-        public function getAllAmbientes($conexion, $facultad_id='0'){
-            if($facultad_id=='0')
+        public function getAllAmbientes($conexion, $facultad_id=0){
+            if($facultad_id==0)
                 $sql_documento = "SELECT t.*, ta.nombre as tipo_oficina_nombre 
                                     FROM $this->tabla AS t
                                     INNER JOIN tipooficina AS ta ON t.codtipoofi = ta.codtipoofi";
@@ -23,8 +23,8 @@
             return ConexionController::guardar($conexion, $this->tabla, $datos);
         }
 
-        public function getDocumento($conexion, $id){
-            $sql_documento = "SELECT * FROM $this->tabla WHERE id=$id";
+        public function getAmbiente($conexion, $id){
+            $sql_documento = "SELECT * FROM $this->tabla WHERE codigooficina=$id";
             $documento_mdl = new LabAmbienteModel( ConexionController::consultar($conexion, $sql_documento)->fetch_object() );
 
             return $documento_mdl;
