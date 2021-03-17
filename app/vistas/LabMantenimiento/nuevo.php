@@ -27,7 +27,8 @@
                     <label>Laboratorio: </label>
                 </div>
                 <div class="col-md-5">
-                    <select name="ambiente_id" class="form-control" required>
+                    <input type="hidden" name="perfil" required value="tecnico"/>
+                    <select name="codigooficina" id="ambiente_id" class="form-control select2bs4" required>
                         <option value="">Seleccione</option>
                         <?php
                             foreach ($ambientes as $key => $ambiente) {
@@ -44,12 +45,14 @@
                     <label>Equipo: </label>
                 </div>
                 <div class="col-md-5">
-                    <select name="equipo_id" class="form-control" required>
+                    <select name="codigopatrimonio" id="equipo_id" class="form-control select2bs4" required>
                         <option value="">Seleccione</option>
                         <?php
+                            $arr_usos = [];
                             foreach ($equipos as $key => $equipo) {
+                                $arr_usos[$equipo['ambiente_codigooficina']][] = [ "id" => $equipo['codigopatrimonio'], "text" => $equipo['codigopatrimonio']." ".$equipo['equipo_tipo']." ".$equipo['descripcion'] ];
                         ?>
-                            <option value="<?php echo $equipo['codigopatrimonio'] ?>"><?php echo $equipo['codigopatrimonio']." ".$equipo['equipo_tipo']." ".$equipo['descripcion'] ?></option>
+                            <!-- <option value="<?php echo $equipo['codigopatrimonio'] ?>"><?php echo $equipo['codigopatrimonio']." ".$equipo['equipo_tipo']." ".$equipo['descripcion'] ?></option> -->
                         <?php
                             }
                         ?>
@@ -61,7 +64,7 @@
                     <label>Tipo de problema: </label>
                 </div>
                 <div class="col-md-5">
-                    <select name="tipo_problema" class="form-control" required>
+                    <select name="codigoasunto" class="form-control select2bs4" required>
                         <option value="">Seleccione</option>
                         <?php
                             foreach ($tipos_problemas as $key => $tipo_problema) {
@@ -92,8 +95,33 @@
             </div>
         </form>
     </div>
-    <script src="../../../public/js/bootstrap/bootstrap.min.js"></script>
-    <script src="../../../public/js/jquery-3.4.1.min.js"></script>
-    <script src="../../../public/js/jquery-ui.js"></script>
+    <?php include '../foot.html' ?>
+    <script>
+        $(function () {
+            //Inicializar Select2
+            $('.select2bs4').select2({
+            theme: 'bootstrap4'
+            });
+
+            $("#ambiente_id").change( function(){
+                $("#equipo_id option").remove()
+                $("#equipo_id").select2("destroy");
+
+                let valor_sel = $(this).val()
+                    $.ajax(
+                        {
+                            url: '../LabEquipo/equipooficina.php?codigooficina=' + $("#ambiente_id").val(),
+                            dataType: 'json',
+                            success: function( result ) {
+                                $('#equipo_id').select2({
+                                    data: result,
+                                    theme: 'bootstrap4'
+                                })
+                            }
+                        }
+                    )
+            })
+        })
+    </script>
 </body>
 </html>

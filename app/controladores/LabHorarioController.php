@@ -53,7 +53,7 @@
 					$cantidad_filas_dia++;
 					$var_tipo_horario = "";
 					if( $dia_bd["tipo_horario"] == 2 )
-						$var_tipo_horario = "PRÉSTAMO";
+						$var_tipo_horario = "PRÉSTAMO <BR> Fecha: ".$dia_bd["fecha"];
 
 					$horarios_semana[$key + 1][$s_key] = $dia_bd["hora_inicio"]." - ".$dia_bd["hora_fin"]."<br>".$dia_bd["curso"]."<br>".$dia_bd["docente"]."<br>".$var_tipo_horario;
 				}

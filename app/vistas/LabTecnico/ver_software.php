@@ -13,6 +13,9 @@
         <br>
         <h2> <?php //echo $proceso_mdl->getCodigo()." ".$proceso_mdl->getNombre() ?> AMBIENTE </h2>
         <br>
+        <button class="btn btn-info font-weight-bolder">
+            <a href="../LabSoftwareAmbiente/nuevo.php?ambiente_id=<?php echo $_GET['ambiente_id']?>" style="color: inherit">Agregar Software <i class="fa fa-plus-circle"></i></a>
+        </button>
         <!-- <a href="nuevo.php?proceso_id=<?php //echo $_GET['proceso_id'] ?>">Nuevo</a>-->
         <div class="container-fluid" style="text-align:center">
             <table class='table table-bordered table-hover'>

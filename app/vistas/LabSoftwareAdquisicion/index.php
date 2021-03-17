@@ -1,17 +1,22 @@
 <?php
             require_once '../../Conexion.php';
             require_once '../../controladores/LabSoftwareAdquisicionController.php';
+            require_once '../../controladores/LabSoftwareController.php';
 
             $software_adquisicion_controlador = new LabSoftwareAdquisicionController;
             $softwares_adquisicion = $software_adquisicion_controlador->getAllSoftwaresAdquisiciones($conexion, $_GET['id']);
 
+            $software_controlador = new LabSoftwareController;
+			$software = $software_controlador->getSoftware($conexion, $_GET['id']);
             include '../cabecera.html';
         ?>
     <body class="hold-transition sidebar-mini layout-fixed">
 		<div class="wraper" style="text-align: center">
+		<?php if( $software->getPropietario() == 1 && $software->getConLicencia() == 1 ){ ?>
 			<button id="btn_nuevo" class="btn btn-info font-weight-bolder">
 				<a href="nuevo.php?software_id=<?php echo $_GET['id'] ?>" style="color: inherit">Nuevo <i class="fa fa-plus-circle"></i></a>
 			</button>
+		<?php } ?>
 			<div class="container-fluid" style="text-align:center">
 				<table class='table table-bordered table-hover'>
 

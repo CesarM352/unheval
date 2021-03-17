@@ -28,19 +28,19 @@
             </div>
             <div class="row form-group">
                 <div class="col-md-2">
-                    <label>Código Patrimonial: </label>
+                    <label>Código Patrimonial: (*)</label>
                 </div>
                 <div class="col-md-5">
-                    <input type="text" name="codigopatrimonio" class="form-control" />
+                    <input type="text" name="codigopatrimonio" class="form-control" required />
                 </div>
             </div>
 
             <div class="row form-group">
                 <div class="col-md-2">
-                    <label>Nombre: </label>
+                    <label>Nombre: (*) </label>
                 </div>
                 <div class="col-md-5">
-                    <input type="text" name="nombre" class="form-control" />
+                    <input type="text" name="nombre" class="form-control" required />
                 </div>
             </div>
 
@@ -91,10 +91,10 @@
 
             <div class="row form-group">
                 <div class="col-md-2">
-                    <label>Fecha Ingreso</label>
+                    <label>Fecha Ingreso: (*)</label>
                 </div>
                 <div class="col-md-5">
-                    <input type="date" name="fechaingreso" class="form-control" />
+                    <input type="date" name="fechaingreso" class="form-control" required />
                 </div>
             </div>
 
@@ -128,19 +128,19 @@
 
             <div class="row form-group">
                 <div class="col-md-2">
-                    <label>Fecha Caduca</label>
+                    <label>Fecha Caduca: (*)</label>
                 </div>
                 <div class="col-md-5">
-                    <input type="date" name="fechacaduca" class="form-control" />
+                    <input type="date" name="fechacaduca" class="form-control" required />
                 </div>
             </div>
 
             <div class="row form-group" id="fecha_clase">
                 <div class="col-md-2">
-                    <label>Tipo Ingreso: </label>
+                    <label>Tipo Ingreso: (*)</label>
                 </div>
                 <div class="col-md-5">
-                    <select name="codtipoingreso" id="codtipoingreso" class="form-control">
+                    <select name="codtipoingreso" id="codtipoingreso" class="form-control" required>
                         <option value="">Seleccione</option>
                         <?php foreach ($tipos_ingresos as $key => $tipo_ingreso) {
                         ?>
@@ -152,10 +152,10 @@
 
             <div class="row form-group" id="fecha_clase">
                 <div class="col-md-2">
-                    <label>Tipo Equipo: </label>
+                    <label>Tipo Equipo: (*)</label>
                 </div>
                 <div class="col-md-5">
-                    <select name="codtipoequipo" id="codtipoequipo" class="form-control">
+                    <select name="codtipoequipo" id="codtipoequipo" class="form-control" required>
                         <option value="">Seleccione</option>
                         <?php foreach ($tipos_equipos as $key => $tipo_equipo) {
                         ?>
@@ -167,12 +167,14 @@
 
             <div class="row form-group" id="fecha_clase">
                 <div class="col-md-2">
-                    <label>Estado: </label>
+                    <label>Estado: (*)</label>
                 </div>
                 <div class="col-md-5">
-                    <select name="codigoestado" id="codigoestado" class="form-control">
+                    <select name="codigoestado" id="codigoestado" class="form-control" required>
                         <option value="">Seleccione</option>
                         <?php foreach ($estados_equipos as $key => $estado_equipo) {
+                            if($estado_equipo['nombre'] == 'BAJA')
+                                continue;
                         ?>
                         <option value="<?php echo $estado_equipo['codigoestado'] ?>"><?php echo $estado_equipo['nombre'] ?></option>
                         <?php } ?>
@@ -209,10 +211,10 @@
 
             <div class="row form-group" id="fecha_clase">
                 <div class="col-md-2">
-                    <label>Laboratorio: </label>
+                    <label>Oficina: (*)</label>
                 </div>
                 <div class="col-md-5">
-                    <select name="codigooficina" class="form-control">
+                    <select name="codigooficina" class="form-control" required>
                         <option value="">Seleccione</option>
                         <?php foreach ($ambientes as $key => $ambiente) {
                         ?>

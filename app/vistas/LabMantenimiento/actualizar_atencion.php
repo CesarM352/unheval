@@ -1,12 +1,13 @@
 <?php
     require_once '../../Conexion.php';
     require_once '../../controladores/LabMantenimientoController.php';
+    session_start();
 
     $id = $_GET['id'];
     $mantenimiento_actualizar = [
         "estado" => $_POST["estado"],
         "justificacion" => $_POST["justificacion"],
-        "tecnico" => "El técnico",
+        "tecnico" => $_SESSION["nombre"],
         "fecha_hora_atencion" => date('Y-m-d H:i:s'),
     ];
     $mantenimiento_controlador = new LabMantenimientoController;

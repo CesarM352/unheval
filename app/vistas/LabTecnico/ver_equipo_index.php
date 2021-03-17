@@ -106,6 +106,7 @@
         </div>
 
         <div class="container-fluid" style="text-align:center">
+            <H2>REPORTE DE EQUIPOS</H2>
             <table id="tbl_datos" class='table table-bordered table-hover'>
                 <thead>
                     <tr id="fil">
@@ -135,6 +136,7 @@
 			
 			<br>
 
+            <H2>REPORTE DE EQUIPOS DADOS DE BAJA</H2>
 			<table id="tbl_datos" class='table table-bordered table-hover'>
 				<thead>
 					<tr id="fil">

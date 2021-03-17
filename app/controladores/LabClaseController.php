@@ -49,7 +49,7 @@
                                     cu.nombre AS curso_nombre
                                 FROM $this->tabla AS t
                                 INNER JOIN horarios h ON t.codigohorario = h.codigohorario
-                                INNER JOIN grupos g ON h.codigogrupo = h.codigogrupo
+                                INNER JOIN grupos g ON h.codigogrupo = g.codigogrupo
                                 INNER JOIN cursos cu ON g.codigocurso = cu.codigocurso
                                 WHERE h.codigooficina = $codigooficina
                                 AND (nro_dia = (WEEKDAY(NOW())+1) AND NOW() BETWEEN h.hora_inicio AND h.hora_fin )";

@@ -1,12 +1,12 @@
 <?php
     require_once '../../Conexion.php';
-    include_once '../../controladores/LabAmbienteController.php';
-    $ambiente_controlador = new LabAmbienteController;
-    $ambientes = $ambiente_controlador->getAllAmbientes($conexion);
+    include_once '../../controladores/GruposController.php';
+    $grupo_controlador = new GruposController;
+    $grupos = $grupo_controlador->getAllGrupos($conexion);
 
-    include_once '../../controladores/LabEquipoController.php';
-    $equipo_controlador = new LabEquipoController;
-    $equipos = $equipo_controlador->getAllEquipos($conexion);
+    include_once '../../controladores/DocentesController.php';
+    $docente_controlador = new DocentesController;
+    $docentes = $docente_controlador->getAllDocentes($conexion);
 
     include '../cabecera.html';
 ?>
@@ -58,7 +58,7 @@
                     <label>Hora de inicio: </label>
                 </div>
                 <div class="col-md-3">
-                    <input type="time" name="hora_inicio" class="form-control" required/>
+                    <input type="time" name="hora_inicio" id="hora_inicio" class="form-control" required/>
                     <input type="hidden" name="ambiente_id" class="form-control" required value="<?php echo $_GET['ambiente_id'] ?>"/>
 					<input type="hidden" name="perfil" required value="<?php echo $_GET['perfil'] ?>"/>
                 </div>
@@ -68,7 +68,7 @@
                     <label>Hora de término: </label>
                 </div>
                 <div class="col-md-3">
-                    <input type="time" name="hora_fin" class="form-control" required/>
+                    <input type="time" name="hora_fin" id="hora_fin" class="form-control" required/>
                 </div>
             </div>
             <div class="row form-group" id="curso_clase">
@@ -76,12 +76,13 @@
                     <label>Curso: </label>
                 </div>
                 <div class="col-md-5">
-                    <select name="curso_clase" class="form-control select2bs4">
+                    <input type="hidden" name="codigo_curso" id="codigo_curso" class="form-control" required/>
+                    <select name="curso_clase" id="sel_curso_clase" class="form-control select2bs4">
                         <option value="">Seleccione</option>
-                        <option value="BASE DE DATOS">BASE DE DATOS</option>
-                        <option value="TICS">TICS</option>
-                        <option value="SISTEMAS OPERATIVOS">SISTEMAS OPERATIVOS</option>
-                        <option value="PROYECTO INTER Y TRANSDISCIPLIARIO">PROYECTO INTER Y TRANSDISCIPLIARIO</option>
+                        <?php foreach ($grupos as $key => $grupo) {
+                        ?>
+                        <option value="<?php echo $grupo['codigogrupo'] ?>" data-cod_curso="<?php echo $grupo['codigocurso'] ?>" data-cod_docente="<?php echo $grupo['codigodocente'] ?>" data-docente="<?php echo $grupo['nombre_docente'] ?>" ><?php echo $grupo['codigogrupo']." ".$grupo['nombre_curso']." ".$grupo['nombre'] ?></option>
+                        <?php } ?>
                     </select>
                 </div>
             </div>
@@ -99,12 +100,12 @@
                     <label>Docente: </label>
                 </div>
                 <div class="col-md-5">
-                    <select name="docente_clase" class="form-control select2bs4">
+                    <select name="docente_clase" id="sel_docente_clase" class="form-control select2bs4">
                         <option value="">Seleccione</option>
-                        <option value="ELMER CHUQUIYAURI">ELMER CHUQUIYAURI</option>
-                        <option value="VELSY RIVERA VIDAL">VELSY RIVERA VIDAL</option>
-                        <option value="INÉS JESÚS TOLENTINO">INÉS JESÚS TOLENTINO</option>
-                        <option value="ADAM FRANCISCO PAREDES">ADAM FRANCISCO PAREDES</option>
+                        <?php foreach ($docentes as $key => $docente) {
+                        ?>
+                        <option value="<?php echo $docente['codigodocente'] ?>" data-docente="<?php echo $docente['nombre'] ?>" ><?php echo $docente['nombre'] ?></option>
+                        <?php } ?>
                     </select>
                 </div>
             </div>
@@ -132,6 +133,26 @@
             //Inicializar Select2
             $('.select2bs4').select2({
             theme: 'bootstrap4'
+            });
+
+            $("#sel_curso_clase").change( function(){
+                let valor_sel = $(this).val()
+                let doc_codigo = $("#sel_curso_clase option[value='"+valor_sel+"']").data('cod_docente')
+                let doc_nombre = $("#sel_curso_clase option[value='"+valor_sel+"']").data('docente')
+                $("#codigo_curso").val($("#sel_curso_clase option[value='"+valor_sel+"']").data('cod_curso'))
+
+                console.log(doc_codigo + ',' +doc_nombre + ',' + valor_sel )
+
+                $("#sel_docente_clase").val(doc_codigo)
+                $('#sel_docente_clase').select2().trigger('change'); 
+                $('#sel_docente_clase').select2({
+                    theme: 'bootstrap4'
+                });
+            })
+
+            $("#hora_inicio").change(function(){
+                $("#hora_fin").val($(this).val())
+                $("#hora_fin").prop('min',$(this).val())
             })
         })
     </script>

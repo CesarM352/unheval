@@ -58,12 +58,9 @@
 
         public function equiposEnBaja($conexion){
             $sql_documento = "SELECT t.*, 
-                                o.nombre AS ambiente_nombre,
                                 te.nombre AS equipo_tipo,
                                 ee.nombre AS equipo_estado
                                 FROM $this->tabla AS t 
-                                INNER JOIN laboratorios_equipo le ON t.codigopatrimonio = le.codigopatrimonio
-                                INNER JOIN oficina o ON le.codigooficina = o.codigooficina
                                 INNER JOIN tipoequipos te ON t.codtipoequipo = te.codtipoequipo
                                 INNER JOIN estadoequipo ee ON t.codigoestado = ee.codigoestado
                                 WHERE ee.nombre = 'BAJA'";
