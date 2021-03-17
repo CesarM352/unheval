@@ -103,7 +103,7 @@
           </li>
           <li class="nav-item">
             <a href="../app/vistas/Docentes/index.php" class="nav-link" target="base">
-              <i class="nav-icon fas fa-book-open"></i>
+              <i class="nav-icon fas fa-chalkboard-teacher"></i>
               <p>
                 DocentesCrud
               </p>
@@ -111,7 +111,7 @@
           </li>
           <li class="nav-item">
             <a href="../app/vistas/Tecnicos/index.php" class="nav-link" target="base">
-              <i class="nav-icon fas fa-book-open"></i>
+              <i class="nav-icon fas fa-user-shield"></i>
               <p>
                 TecnicosCrud
               </p>
@@ -119,7 +119,7 @@
           </li>
           <li class="nav-item">
             <a href="../app/vistas/Estudiantes/index.php" class="nav-link" target="base">
-              <i class="nav-icon fas fa-book-open"></i>
+              <i class="nav-icon fas fa-id-card"></i>
               <p>
                 EstudiantesCrud
               </p>

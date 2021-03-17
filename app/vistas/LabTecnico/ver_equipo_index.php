@@ -71,9 +71,7 @@
         </div>
         <br>
 		
-		<button id="btn_nuevo" class="btn btn-info font-weight-bolder">
-			<a href="../LabEquipo/nuevo.php" style="color: inherit">Nuevo <i class="fa fa-plus-circle"></i></a>
-		</button>
+		
 
         <div class="wraper">
             <div class="row form-group" style="text-align:center">
@@ -85,13 +83,16 @@
                 <div class="col-md-3">
                     <input type="text" class="form-control" id="buscar_curso"></input>
                 </div>
-                <div class="col-md-2">
-                </div>
                 <div class="col-md-1">
                     <label>Ambiente:</label>
                 </div>
                 <div class="col-md-3">
                     <input type="text" class="form-control" id="buscar_curso"></input>
+                </div>
+                <div class="col-md-2">
+                    <button id="btn_nuevo" class="btn btn-info font-weight-bolder">
+                        <a href="../LabEquipo/nuevo.php" style="color: inherit">Nuevo <i class="fa fa-plus-circle"></i></a>
+                    </button>
                 </div>
                 <!--<div class="col-md-2">
                     <button id="btn_nuevo" class="btn btn-info font-weight-bolder">

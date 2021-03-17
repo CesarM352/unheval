@@ -5,17 +5,16 @@
         private $tabla = "docentes";
 
         public function getAllDocentes($conexion){
-            $sql_docentes = "SELECT D.codigodocente, D.celular, D.dni, DI.nropuerta direccion, D.nombre, T.nombre nombrecontrato, D.user, D.pass
+            $sql_docentes = "SELECT D.codigodocente, D.celular, D.dni, D.direccion, D.nombre, T.nombre nombrecontrato, D.user, D.pass
                             FROM docentes D
                             INNER JOIN tipocontratodoc T ON D.codtipocontrato = T.codtipocontrato
-                            INNER JOIN direcciones DI ON D.codigodireccion = DI.codigodireccion
                             ORDER BY D.codigodocente";
 
             return ConexionController::consultar($conexion, $sql_docentes);
         }
 
         public function guardar($conexion, $datos){
-            $docentes_mdl = new DocentesModel(null,$datos['codigodocente'],['celular'],['dni'],['codigodireccion'],['nombre'],['codtipocontrato'],['user'],['pass']);
+            $docentes_mdl = new DocentesModel(null,$datos['codigodocente'],['celular'],['dni'],['direccion'],['nombre'],['codtipocontrato'],['user'],['pass']);
             return ConexionController::guardar($conexion, $this->tabla, $datos);
         }
 
@@ -26,7 +25,7 @@
         }
 
         public function actualizar($conexion, $codigodocente, $datos){
-            $docentes_mdl = new DocentesModel(null,$datos['codigodocente'],['celular'],['dni'],['codigodireccion'],['nombre'],['codtipocontrato'],['user'],['pass']);
+            $docentes_mdl = new DocentesModel(null,$datos['codigodocente'],['celular'],['dni'],['direccion'],['nombre'],['codtipocontrato'],['user'],['pass']);
             return ConexionController::actualizarDocentes($conexion, $this->tabla, $codigodocente, $datos);
         }
 
@@ -35,27 +34,18 @@
         }
 
         public function getAllDocentesComplete($conexion, $term){
-            $sql_docentes = "SELECT D.codigodocente, D.celular, D.dni, DI.nropuerta direccion, D.nombre, T.nombre nombrecontrato, D.user, D.pass
+            $sql_docentes = "SELECT D.codigodocente, D.celular, D.dni, D.direccion, D.nombre, T.nombre nombrecontrato, D.user, D.pass
                             FROM docentes D
                             INNER JOIN tipocontratodoc T ON D.codtipocontrato = T.codtipocontrato
-                            INNER JOIN direcciones DI ON D.codigodireccion = DI.codigodireccion
                             WHERE D.nombre like '%" .$term. "%' or D.codigodocente like '%" .$term. "%'
                             ORDER BY D.nombre";
             return ConexionController::consultar($conexion, $sql_docentes);
         }
-/*
-        public function getdocentesPerfil($conexion, $perfil){
-            $sql_docentes = "SELECT U.nombre nombre, P.perfil_id perfil_id, P.nombre_perfil FROM cursos U
-                            INNER JOIN perfil P ON U.perfil_id = P.perfil_id
-                            WHERE P.nombre_perfil = '$perfil'
-                            ORDER BY nombre";
-            return ConexionController::consultar($conexion, $sql_cursos);
-        }
 
-        public function getcursosLogin($conexion, $usuario, $password){
-            $sql_cursos = "SELECT * FROM cursos WHERE usuario = '$usuario' and password = '$password'";
-            $cursos_mdl = new CursosModel( ConexionController::consultar($conexion, $sql_cursos)->fetch_object() );
-            return $cursos_mdl;
-        }*/
+        public function calcularNuevoCodigo($conexion){
+            $sql_documento = "SELECT IFNULL(MAX(CAST( codigodocente AS INT )),0)+1 AS codigo_siguiente FROM $this->tabla";
+            $fila = ConexionController::consultar($conexion, $sql_documento)->fetch_object();
+            return $fila->codigo_siguiente;
+        }
     }
 ?>

@@ -4,7 +4,7 @@
 
     $salida="";
     if(isset($_POST['tecnico'])){
-        $term=$_POST['tecnico'];
+        $term=utf8_decode($_POST['tecnico']);
         $tecnicos_controlador = new TecnicosController;
         $tecnicos = $tecnicos_controlador->getAllTecnicosComplete($conexion, $term);
     }else{

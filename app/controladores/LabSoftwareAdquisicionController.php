@@ -44,4 +44,16 @@
         public function eliminar($conexion, $id){
             return ConexionController::eliminar($conexion, $this->tabla, $id);
         }
+
+        public function getAllSoftwaresAdquisicionesComplete($conexion, $term){
+            $sql_software = "SELECT t.*, 
+                                    s.nombre AS software_descripcion,
+                                    s.tipo_sw AS software_tipo_sw,
+                                    s.forma AS software_forma
+                                FROM $this->tabla AS t
+                                INNER JOIN softwares s ON t.software_id = s.codigosoftware
+                                WHERE s.nombre like '%" .$term. "%'
+                                ORDER BY s.nombre";
+            return ConexionController::consultar($conexion, $sql_software);
+        }
     }

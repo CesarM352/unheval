@@ -22,7 +22,7 @@
         <form action="actualizar.php?codigodocente=<?php echo $codigodocente ?>" method="POST">
         <!--<form action="actualizar.php" method="POST">-->
             <br>
-            <div style="text-align:center"><h2>Editar docente</h2></div>
+            <div style="text-align:center"><h2>Editar Docente</h2></div>
             <br>
             <div class="row form-group">
                 <div class="col-md-2">
@@ -58,20 +58,28 @@
             </div>
             <div class="row form-group">
                 <div class="col-md-2">
+                    <label for="direccion">Dirección: </label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="direccion" value="<?php echo $docentes_mdl->getDireccion() ?>"/>
+                </div>
+            </div>
+            <!--<div class="row form-group">
+                <div class="col-md-2">
                     <label for="codigodireccion">Dirección: </label>
                 </div>
                 <div class="col-md-5">
                     <select name="codigodireccion" class="form-control">
                         <?php
-                            foreach ($direcciones as $key => $direccion) {
+                            //foreach ($direcciones as $key => $direccion) {
                         ?>
-                        <option value="<?php echo $direccion['codigodireccion'] ?>" <?php echo ( $docentes_mdl->getCodigodireccion() == $direccion['codigodireccion'] ) ? "selected" : "" ?> ><?php echo utf8_encode($direccion['nombre'].' '.$direccion['nropuerta']) ?></option>
+                        <option value="<?php //echo $direccion['codigodireccion'] ?>" <?php //echo ( $docentes_mdl->getCodigodireccion() == $direccion['codigodireccion'] ) ? "selected" : "" ?> ><?php echo utf8_encode($direccion['nombre'].' '.$direccion['nropuerta']) ?></option>
                         <?php
-                            }
+                           // }
                         ?>
                     </select>
                 </div>
-            </div>
+            </div>-->
             <div class="row form-group">
                 <div class="col-md-2">
                     <label for="codtipocontrato">tipo Contrato: </label>

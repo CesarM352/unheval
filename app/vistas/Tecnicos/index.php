@@ -2,6 +2,8 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <br>
+    <div style="text-align:center"><h2>TÉCNICOS</h2></div>
+    <br>
     <div class="wraper">
         <div class="row form-group" style="text-align:center">
             <div class="col-md-2">

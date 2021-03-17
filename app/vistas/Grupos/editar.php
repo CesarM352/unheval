@@ -31,7 +31,7 @@
                     <label for="nombre">Nombre grupo: </label>
                 </div>
                 <div class="col-md-5">
-                    <input type="text" class="form-control" name="nombre" value="<?php echo utf8_encode($grupos_mdl->getNombre()) ?>"/>
+                    <input type="text" class="form-control" name="nombre" value="<?php echo utf8_encode($grupos_mdl->getNombre()) ?>" readonly/>
                 </div>
             </div>
             <div class="row form-group">
