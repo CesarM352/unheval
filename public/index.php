@@ -74,144 +74,167 @@
             //Presentación de los menus según el perfil del usuario
             if($_SESSION["perfil_id"]=='1'){ //Administrador
           ?>
-
+              <li class="nav-item">
+              <a href="../app/vistas/cursos/index.php" class="nav-link" target="base">
+                <i class="nav-icon fas fa-book"></i>
+                <p>
+                  Cursos
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../app/vistas/LabDocente/index.php" class="nav-link" target="base">
+                <i class="nav-icon fas fa-book-open"></i>
+                <p>
+                  MenuDocente
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../app/vistas/Docentes/index.php" class="nav-link" target="base">
+                <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                <p>
+                  DocentesCrud
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../app/vistas/Tecnicos/index.php" class="nav-link" target="base">
+                <i class="nav-icon fas fa-user-shield"></i>
+                <p>
+                  TecnicosCrud
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../app/vistas/Estudiantes/index.php" class="nav-link" target="base">
+                <i class="nav-icon fas fa-id-card"></i>
+                <p>
+                  EstudiantesCrud
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../app/vistas/LabTecnico/ver_mantenimiento.php" class="nav-link" target="base">
+                <i class="nav-icon fas fa-ambulance"></i>
+                <p>
+                  Mantenimiento<span class="badge badge-danger right"><?php echo $_SESSION["mant_pendientes"] ?></span>
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../app/vistas/LabTecnico/ver_equipo_index.php" class="nav-link" target="base">
+                <i class="nav-icon fas fa-book-open"></i>
+                <p>
+                  Inventario
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../app/vistas/LabTecnico/ver_software_index.php" class="nav-link" target="base">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Software
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../app/vistas/LabTecnico/ver_horario_index.php" class="nav-link" target="base">
+                <i class="nav-icon fas fa-calendar-alt"></i>
+                <p>
+                  Horario
+                </p>
+              </a>
+            </li>
 
           <?php }
             if($_SESSION["perfil_id"]=='2'){ // Docente
           ?>
 
-
+            <li class="nav-item">
+              <a href="../app/vistas/LabDocente/index.php" class="nav-link" target="base">
+                <i class="nav-icon fas fa-book-open"></i>
+                <p>
+                  Menu
+                </p>
+              </a>
+            </li>
 
           <?php } 
             if($_SESSION["perfil_id"]=='3'){ //Técnico
           ?>
-
+              <li class="nav-item">
+              <a href="../app/vistas/LabTecnico/ver_mantenimiento.php" class="nav-link" target="base">
+                <i class="nav-icon fas fa-ambulance"></i>
+                <p>
+                  Mantenimiento<span class="badge badge-danger right"><?php echo $_SESSION["mant_pendientes"] ?></span>
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../app/vistas/LabTecnico/ver_equipo_index.php" class="nav-link" target="base">
+                <i class="nav-icon fas fa-book-open"></i>
+                <p>
+                  Inventario
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../app/vistas/LabTecnico/ver_software_index.php" class="nav-link" target="base">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Software
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../app/vistas/LabTecnico/ver_horario_index.php" class="nav-link" target="base">
+                <i class="nav-icon fas fa-calendar-alt"></i>
+                <p>
+                  Horario
+                </p>
+              </a>
+            </li>
 
           <?php } 
-            if($_SESSION["perfil_id"]=='3'){ //Estudiante
+            if($_SESSION["perfil_id"]=='4'){ //Estudiante
           ?>
-
-
+              <li class="nav-item">
+                <a href="../app/vistas/LabEstudiante/registrar_asistencia.php" class="nav-link" target="base">
+                  <i class="nav-icon fas fa-book"></i>
+                  <p>
+                    Registrar asistencia
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../app/vistas/LabEstudiante/registrar_problema.php" class="nav-link" target="base">
+                  <i class="nav-icon fas fa-book"></i>
+                  <p>
+                    Registrar Problemas
+                  </p>
+                </a>
+              </li>
+          <?php } 
+            if($_SESSION["perfil_id"]=='5'){ //Secretaria
+          ?>
+              <li class="nav-item">
+                <a href="../app/vistas/LabSecretaria/ver_horario_index.php" class="nav-link" target="base">
+                  <i class="nav-icon fas fa-book"></i>
+                  <p>
+                    Ver horarios
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../app/vistas/LabSecretaria/ver_software_index.php" class="nav-link" target="base">
+                  <i class="nav-icon fas fa-book"></i>
+                  <p>
+                    Ver software
+                  </p>
+                </a>
+              </li>
           <?php } ?>
-
-
-          <li class="nav-item">
-            <a href="../app/vistas/cursos/index.php" class="nav-link" target="base">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Cursos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../app/vistas/LabDocente/index.php" class="nav-link" target="base">
-              <i class="nav-icon fas fa-book-open"></i>
-              <p>
-                MenuDocente
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../app/vistas/Docentes/index.php" class="nav-link" target="base">
-              <i class="nav-icon fas fa-chalkboard-teacher"></i>
-              <p>
-                DocentesCrud
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../app/vistas/Tecnicos/index.php" class="nav-link" target="base">
-              <i class="nav-icon fas fa-user-shield"></i>
-              <p>
-                TecnicosCrud
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../app/vistas/Estudiantes/index.php" class="nav-link" target="base">
-              <i class="nav-icon fas fa-id-card"></i>
-              <p>
-                EstudiantesCrud
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../app/vistas/LabTecnico/ver_mantenimiento.php" class="nav-link" target="base">
-              <i class="nav-icon fas fa-ambulance"></i>
-              <p>
-                Mantenimiento<span class="badge badge-danger right"><?php echo $_SESSION["mant_pendientes"] ?></span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../app/vistas/LabTecnico/ver_equipo_index.php" class="nav-link" target="base">
-              <i class="nav-icon fas fa-book-open"></i>
-              <p>
-                Inventario
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../app/vistas/LabTecnico/ver_software_index.php" class="nav-link" target="base">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Software
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../app/vistas/LabTecnico/ver_horario_index.php" class="nav-link" target="base">
-              <i class="nav-icon fas fa-calendar-alt"></i>
-              <p>
-                Horario
-              </p>
-            </a>
-          </li>
-          <!--<li class="nav-item">
-            <a href="public/pages/calendar2.html" class="nav-link" target="base">
-              <i class="nav-icon far fa-calendar-alt"></i>
-              <p>
-                Calendar
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="app/vistas/cursos/jsgrid.html" class="nav-link" target="base">
-              <i class="nav-icon far fa-image"></i>
-              <p>
-                Gallery
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
-              <p>
-                Mailbox
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="public/pages/mailbox/mailbox.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inbox</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="public/pages/mailbox/compose.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Compose</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="public/pages/mailbox/read-mail.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Read</p>
-                </a>
-              </li>
-            </ul>
-          </li>-->
         </ul>
       </nav>
     </div>

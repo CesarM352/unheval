@@ -64,6 +64,7 @@
                                     OR ( s.propietario=1 && s.conlicencia=0 && ( t.duracion_dias = -1 || ( now() BETWEEN fecha_compra AND DATE_ADD(t.fecha_compra, INTERVAL t.duracion_dias+1 DAY) ) ) )";
 
             return ConexionController::consultar($conexion, $sql_documento);
+        }
 
         public function getAllSoftwaresAdquisicionesComplete($conexion, $term){
             $sql_software = "SELECT t.*, 

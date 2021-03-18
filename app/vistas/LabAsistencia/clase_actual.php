@@ -9,7 +9,7 @@
     $retorno = [0,''];
 
     foreach ($clases as $key => $value) {
-        $retorno = [$value['idclases'], $value['curso_nombre']];
+        $retorno = [$value['idclases'], utf8_encode($value['curso_nombre'])];
     }
 
     echo json_encode($retorno);

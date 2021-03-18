@@ -21,7 +21,7 @@
         <h2> <?php //echo $proceso_mdl->getCodigo()." ".$proceso_mdl->getNombre() ?></h2>
         <br>
         <!-- <a href="nuevo.php?proceso_id=<?php //echo $_GET['proceso_id'] ?>">Nuevo</a>-->
-        <!--<div class="form-inline" style="justify-content: center;">
+        <div class="form-inline" style="justify-content: center;">
             <div class="icheck-primary d-inline">
                 <input type="radio" id="rdb_tipo_ambiente_0" name="rdb_tipo_ambiente" value="0" checked onclick="filtrarPorTipoAmbiente(0)"/>
                 <label for="rdb_tipo_ambiente_0">TODOS &nbsp;&nbsp;&nbsp;</label>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-md-2"></div>
             </div>
-        </div>-->
+        </div>
         <div class="wraper">
             <div class="row form-group" style="text-align:center">
                 <div class="col-md-2">
@@ -98,7 +98,7 @@
                 
             </div>
         </div>
-        <!--<br>
+        <br>
         <div class="container-fluid" style="text-align:center">
             Días por vencer: <input type="number" id="dias_por_vencer" min=0 />
             <button class="btn btn-sm btn-danger" id="btn_ver_vencidos">Ver Vencidos</button>
@@ -221,7 +221,7 @@
             filas_mostrar.item(i).style.display="table-row"
         }
     }
-    </script>-->
+    </script>
     <script>
         //Para la carga de la tabla software en el módulo software
         $(buscar_software());

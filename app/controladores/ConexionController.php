@@ -38,7 +38,7 @@
             $cad_campos_insertar = substr($cad_campos_insertar, 0, -1);
             $cad_valores_insertar = substr($cad_valores_insertar, 0, -1);
 
-            $sql_insertar = "INSERT INTO $tabla ($cad_campos_insertar) VALUES($cad_valores_insertar)";
+            $sql_insertar = "INSERT INTO $tabla ($cad_campos_insertar) VALUES($cad_valores_insertar)"; //echo $sql_insertar;
             return self::consultar($conexion_bd, $sql_insertar);
         }
 

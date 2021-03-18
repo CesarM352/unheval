@@ -73,7 +73,7 @@
 		
 		
 
-        <div class="wraper">
+        <!--<div class="wraper">
             <div class="row form-group" style="text-align:center">
                 <div class="col-md-1">
                 </div>
@@ -94,18 +94,21 @@
                         <a href="../LabEquipo/nuevo.php" style="color: inherit">Nuevo <i class="fa fa-plus-circle"></i></a>
                     </button>
                 </div>
-                <!--<div class="col-md-2">
+                <div class="col-md-2">
                     <button id="btn_nuevo" class="btn btn-info font-weight-bolder">
                         <a href="nuevo.php" style="color: inherit">Nuevo <i class="fa fa-plus-circle"></i></a>
                     </button>
-                </div>-->
+                </div>
             </div>
             <br>
             <div class="container-fluid" style="text-align:center" id="tabla_equipos">
                 
             </div>
-        </div>
-
+        </div>-->
+        
+        <button id="btn_nuevo" class="btn btn-info font-weight-bolder">
+                        <a href="../LabEquipo/nuevo.php" style="color: inherit">Nuevo <i class="fa fa-plus-circle"></i></a>
+                    </button>
         <div class="container-fluid" style="text-align:center">
             <H2>REPORTE DE EQUIPOS</H2>
             <table id="tbl_datos" class='table table-bordered table-hover'>
