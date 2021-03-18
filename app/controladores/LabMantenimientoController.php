@@ -7,14 +7,12 @@
         public function getAllMantenimientos($conexion, $ambiente_id=0){
             if($ambiente_id==0)
                 $sql_documento = "SELECT t.*,  
-                                        o.nombre AS ambiente_nombre,
+                                        (SELECT oficina.nombre FROM oficina WHERE oficina.codigooficina = (SELECT laboratorios_equipo.codigooficina FROM laboratorios_equipo WHERE laboratorios_equipo.codigopatrimonio = e.codigopatrimonio AND laboratorios_equipo.estadopresente=1 ORDER BY laboratorios_equipo.codigolaboratorioequipo DESC LIMIT 1 )) AS ambiente_nombre,
                                         e.codigopatrimonio AS equipo_codigo,
                                         e.descripcion AS equipo_descripcion,
                                         te.nombre AS equipo_tipo
                                     FROM $this->tabla AS t
                                     INNER JOIN equipos e ON t.codigopatrimonio = e.codigopatrimonio
-                                    INNER JOIN laboratorios_equipo le ON e.codigopatrimonio = le.codigopatrimonio
-                                    INNER JOIN oficina o ON le.codigooficina = o.codigooficina
                                     INNER JOIN tipoequipos te ON e.codtipoequipo = te.codtipoequipo";
             else
                 $sql_documento = "SELECT t.*,  
@@ -24,8 +22,8 @@
                                         te.nombre AS equipo_tipo
                                     FROM $this->tabla AS t
                                     INNER JOIN equipos e ON t.codigopatrimonio = e.codigopatrimonio
-                                    INNER JOIN laboratorios_equipo le ON e.codigopatrimonio = le.codigopatrimonio
-                                    INNER JOIN oficina o ON le.codigooficina = o.codigooficina
+                                    -- INNER JOIN laboratorios_equipo le ON e.codigopatrimonio = le.codigopatrimonio
+                                    -- INNER JOIN oficina o ON le.codigooficina = o.codigooficina
                                     INNER JOIN tipoequipos te ON e.codtipoequipo = te.codtipoequipo
                                     WHERE le.codigooficina=$ambiente_id";
 

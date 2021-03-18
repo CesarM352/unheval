@@ -5,16 +5,14 @@
         private $tabla = "asistencias";
 
         public function getAllAsistencias($conexion, $codigoestudiante=0){
-            $sql_documento = "SELECT DISTINCT t.*,  
+            /* $sql_documento = "SELECT DISTINCT t.*,  
                                     e.nombre AS equipo_nombre,
-                                    o.nombre AS oficina_nombre,
-                                    CONCAT(es.nombres,' ',es.apepaterno,' ', es.apematerno) AS estudiante_nombres,
+                                    (SELECT oficina.nombre FROM oficina WHERE oficina.codigooficina = (SELECT laboratorios_equipo.codigooficina FROM laboratorios_equipo WHERE laboratorios_equipo.codigopatrimonio = e.codigopatrimonio AND laboratorios_equipo.estadopresente=1 ORDER BY laboratorios_equipo.codigolaboratorioequipo DESC LIMIT 1 )) AS oficina_nombre,
+                                    es.nombre AS estudiante_nombres,
                                     g.nombre AS grupo_nombre,
                                     cu.nombre AS curso_nombre
                                 FROM $this->tabla AS t
                                 INNER JOIN equipos e ON t.codigopatrimonio = e.codigopatrimonio
-                                -- INNER JOIN laboratorios_equipo le ON e.codigopatrimonio = le.codigopatrimonio
-                                -- INNER JOIN oficina o ON le.codigooficina = o.codigooficina
                                 INNER JOIN alumnos_en_matricula am ON t.codigoalum_matri = am.codigoalum_matri
                                 INNER JOIN matriculas m ON am.codigomatricula = m.codigomatricula
                                 INNER JOIN estudiantes es ON m.codigoestudiante = es.codigoestudiante
@@ -22,9 +20,16 @@
                                 INNER JOIN horarios h ON c.codigohorario = h.codigohorario
                                 INNER JOIN oficina o ON h.codigooficina = o.codigooficina
                                 INNER JOIN grupos g ON h.codigogrupo = h.codigogrupo
-                                INNER JOIN cursos cu ON g.codigocurso = cu.codigocurso";
+                                INNER JOIN cursos cu ON g.codigocurso = cu.codigocurso"; */
+            $sql_documento = "SELECT t.*,  
+                                    e.nombre AS equipo_nombre,
+                                    (SELECT oficina.nombre FROM oficina WHERE oficina.codigooficina = t.codigooficina ) AS oficina_nombre,
+                                    (SELECT es.nombre FROM estudiantes es WHERE es.codigoestudiante = ( SELECT m.codigoestudiante FROM matriculas m WHERE m.codigomatricula = ( SELECT am.codigomatricula FROM alumnos_en_matricula am WHERE am.codigoalum_matri = t.codigoalum_matri) ) ) AS estudiante_nombres,
+                                    (SELECT CONCAT(cu.nombre, ' ', g.nombre) FROM grupos g INNER JOIN cursos cu ON cu.codigocurso = g.codigocurso WHERE g.codigogrupo = ( SELECT h.codigogrupo FROM horarios h WHERE h.codigohorario = ( SELECT c.codigohorario FROM clases c WHERE c.idclases = t.idclases ) ) ) AS grupo_nombre
+                                FROM $this->tabla AS t
+                                INNER JOIN equipos e ON t.codigopatrimonio = e.codigopatrimonio";
             if($codigoestudiante>0)
-                $sql_documento .= " WHERE es.codigoestudiante = $codigoestudiante ";
+                $sql_documento .= " WHERE (SELECT es1.codigoestudiante FROM estudiantes es1 WHERE es1.codigoestudiante = ( SELECT m.codigoestudiante FROM matriculas m WHERE m.codigomatricula = ( SELECT am.codigomatricula FROM alumnos_en_matricula am WHERE am.codigoalum_matri = t.codigoalum_matri) ) ) = '$codigoestudiante' ";
 
             return ConexionController::consultar($conexion, $sql_documento);
         }

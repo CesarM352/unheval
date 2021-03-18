@@ -5,7 +5,13 @@
         private $tabla = "grupos";
 
         public function getAllGrupos($conexion){
-            $sql_grupos = "SELECT * FROM grupos ORDER BY nombre";
+            $sql_grupos = "SELECT G.*,
+                            D.nombre nombre_docente,
+                            C.nombre nombre_curso
+                            FROM grupos G
+                            INNER JOIN docentes D ON G.codigodocente = D.codigodocente
+                            INNER JOIN cursos C ON G.codigocurso = C.codigocurso
+                            ORDER BY nombre";
 
             return ConexionController::consultar($conexion, $sql_grupos);
         }

@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once '../../Conexion.php';
     include_once '../../controladores/LabAmbienteController.php';
     $ambiente_controlador = new LabAmbienteController;
@@ -10,7 +11,7 @@
 
     include_once '../../controladores/LabAsistenciaController.php';
     $asistencia_controlador = new LabAsistenciaController;
-    $asistencias_alumno = $asistencia_controlador->getAllAsistencias($conexion,1);
+    $asistencias_alumno = $asistencia_controlador->getAllAsistencias($conexion,$_SESSION["codigo"]);
 	
 	include '../cabecera.html';
 ?>
@@ -28,9 +29,11 @@
                 </div>
                 <div class="col-md-5">
                     <input type="hidden" name="idclases" id="idclases" value="" />
-                    <select name="codigooficina" id="codigooficina" onchange="verEquipos()" class="form-control select2bs4">
+                    <select name="codigooficina" id="codigooficina" class="form-control select2bs4">
                         <option value="">Seleccione</option>
                         <?php foreach ($ambientes as $key => $ambiente) {
+                            if( $ambiente['tipo_oficina_nombre'] != 'LABORATORIO' )
+                                continue;
                         ?>
                         <option value="<?php echo $ambiente['codigooficina'] ?>"><?php echo $ambiente['nombre'] ?></option>
                         <?php } ?>
@@ -43,13 +46,13 @@
                     <label>Equipo: </label>
                 </div>
                 <div class="col-md-5">
-                    <select name="codigopatrimonio" class="form-control select2bs4">
+                    <select name="codigopatrimonio" id="equipo_id" class="form-control select2bs4">
                         <option value="">Seleccione</option>
                         <?php foreach ($equipos as $key => $equipo) {
                             if( substr($equipo['codigopatrimonio'],0,8) != '72142530' )
                                 continue;
                         ?>
-                        <option class=" equipos_lab lab_<?php echo $equipo['ambiente_codigooficina'] ?>" value="<?php echo $equipo['codigopatrimonio'] ?>"><?php echo substr($equipo['codigopatrimonio'],8,4).' '.$equipo['nombre'] ?></option>
+                        <!-- <option class=" equipos_lab lab_<?php echo $equipo['ambiente_codigooficina'] ?>" value="<?php echo $equipo['codigopatrimonio'] ?>"><?php echo substr($equipo['codigopatrimonio'],8,4).' '.$equipo['nombre'] ?></option> -->
                         <?php } ?>
                     </select>
                 </div>
@@ -70,8 +73,7 @@
             <thead>
                 <tr>
                     <th>Nombres y Apellidos</th>
-                    <th>CURSO</th>
-                    <th>GRUPO</th>
+                    <th>Curso - Grupo</th>
                     <th>Fecha</th>
                     <th>Hora</th>
                     <th>Oficina</th>
@@ -84,7 +86,6 @@
         ?>
             <tr>
                 <td> <?php echo $asistencia["estudiante_nombres"] ?> </td>
-                <td> <?php echo $asistencia["curso_nombre"] ?> </td>
                 <td> <?php echo $asistencia["grupo_nombre"] ?> </td>
                 <td> <?php echo $asistencia["fecha"] ?> </td>
                 <td> <?php echo $asistencia["hora"] ?> </td>
@@ -98,11 +99,39 @@
         </table>
     </div>
 
+    <?php include '../foot.html' ?>
         <!-- <script src="../../../public/js/bootstrap/bootstrap.min.js"></script>
         <script src="../../../public/js/jquery-ui.js"></script> -->
-        <script src="../../../public/js/jquery-3.4.1.min.js"></script>
+        <!-- <script src="../../../public/js/jquery-3.4.1.min.js"></script> -->
 
         <script>
+        $(function () {
+            //Inicializar Select2
+            $('.select2bs4').select2({
+            theme: 'bootstrap4'
+            });
+
+            $("#codigooficina").change( function(){
+                $("#equipo_id option").remove()
+                $("#equipo_id").select2("destroy");
+                claseActual($(this).val())
+
+                let valor_sel = $(this).val()
+                    $.ajax(
+                        {
+                            url: '../LabEquipo/equipooficina.php?codigooficina=' + $("#codigooficina").val(),
+                            dataType: 'json',
+                            success: function( result ) {
+                                $('#equipo_id').select2({
+                                    data: result,
+                                    theme: 'bootstrap4'
+                                })
+                            }
+                        }
+                    )
+            })
+        })
+/* 
                 filas = document.getElementsByClassName("equipos_lab")
                 for(i=0; i<filas.length; i++){
                     if( codigooficina != '0' )
@@ -123,7 +152,7 @@
                 }
 
                 claseActual(codigooficina)
-            }
+            } */
 
             function claseActual(codigooficina){
                 $.ajax(

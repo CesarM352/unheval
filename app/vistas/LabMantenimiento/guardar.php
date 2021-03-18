@@ -3,6 +3,8 @@
     require_once '../../controladores/LabMantenimientoController.php';
     require_once '../../controladores/LabTipoProblemaController.php';
 
+    session_start();
+
     //Calcular el nuevo código
     $mantenimiento_controlador = new LabMantenimientoController;
 
@@ -17,7 +19,7 @@
         "codigoasunto" => $_POST["codigoasunto"],
         "codigopatrimonio" => $_POST["codigopatrimonio"],
         //"codigooficina" => $_POST["codigooficina"],
-        "usuario" => 'mi nombre',
+        "usuario" => 'REGISTRADO POR: '.$_SESSION["nombre"],
         "estado" => 'PENDIENTE',
         "tipo_problema" => $tipo_problema->getNombre(),
     ];

@@ -100,7 +100,10 @@
         </div>
         <!--<br>
         <div class="container-fluid" style="text-align:center">
-            <table id="tbl_datos" class='table table-bordered table-hover'>
+            Días por vencer: <input type="number" id="dias_por_vencer" min=0 />
+            <button class="btn btn-sm btn-danger" id="btn_ver_vencidos">Ver Vencidos</button>
+            <button class="btn btn-sm btn-info" id="btn_ver_todos">Ver Todos</button>
+            <table id="tbl_datos_todos" class='table table-bordered table-hover'>
                 <thead>
                     <tr id="fil">
                         <th>SOFTWARE</th>
@@ -108,8 +111,9 @@
                         <th>FORMA</th>
                         <th>NRO LICENCIAS</th>
                         <th>FECHA COMPRA</th>
-                        <th>DURACIÓN</th>
+                        <th>DÍAS DE DURACIÓN</th>
                         <th>PERIODO DE VIGENCIA</th>
+                        <th>CONDICÓN</th>
                         <th>LICENCIAS DISPONIBLES</th>
                         <th>REQUISITOS MINIMOS</th>
                     </tr>
@@ -117,16 +121,49 @@
                 <tbody>
             <?php
                 foreach ($softwares as $key => $software) {
+                    $texto_vencimiento = "";
+                    $color_fondo = "";
+                    if( $software["duracion_dias"] >0 )
+                        if($software["dias_por_vencer"] > 0){
+                            $texto_vencimiento = "Se venció hace ".abs($software["dias_por_vencer"])." días";
+                            $color_fondo = "bg-danger vencidos";
+                        }
+                        elseif($software["dias_por_vencer"] < 0){
+                            $texto_vencimiento = "Quedan ".abs($software["dias_por_vencer"])." días para vencer";
+                            $color_fondo = "por_vencer";
+                        }
+                        else{
+                            $texto_vencimiento = "Hoy se vencen las licencias";
+                            $color_fondo = "red";
+                            $color_fondo = "bg-warning por_vencer";
+                        }
             ?>
-                <tr>
+                <tr class="<?php echo $color_fondo ?>" data-dias_por_vencer="<?php if( $software["dias_por_vencer"] <= 0) echo abs($software["dias_por_vencer"])  ?>">
                     <td> <?php echo $software["software_descripcion"] ?> </td>
                     <td> <?php echo $software["software_tipo_sw"] ?> </td>
                     <td> <?php echo $software["software_forma"] ?> </td>
                     <td> <?php echo $software["nro_licencias"] ?> </td>
                     <td> <?php echo $software["fecha_compra"] ?> </td>
-                    <td> <?php echo $software["duracion_dias"] ?> </td>
-                    <td> <?php echo $software["duracion_dias"] ?> </td>
-                    <td> <?php echo $software["nro_licencias_disponibles"] ?> </td>
+                    <td> <?php 
+                        if( $software["duracion_dias"] >0 )
+                            echo $software["duracion_dias"] ;
+                        else
+                            echo "&infin;";
+                        ?> 
+                    </td>
+                    <td> <?php 
+                        if($software["software_propietario"] == 1 && $software["duracion_dias"] > 0 )
+                            echo $software["fecha_vencimiento"];
+                        else
+                            echo " - ";
+                    ?> </td>
+                    <td> <?php echo $texto_vencimiento; ?> </td>
+                    <td> <?php 
+                        if( $software["duracion_dias"] >0 || $software["duracion_dias"] == -1 )
+                            echo $software["nro_licencias_disponibles"] ;
+                        else
+                            echo "&infin;";
+                    ?> </td>
                     <td> <?php echo $software["requisitos_minimos"] ?> </td>
                 </tr>
             <?php
@@ -135,9 +172,37 @@
                 </tbody>
             </table>
         </div>
-    </div>-->
+
+    </div>
     <?php include '../foot.html' ?>
-    <!--<script>
+    <script>
+        $(function () {
+            $("#btn_ver_todos").click( function(){
+                $("#dias_por_vencer").val('')
+                $("#tbl_datos_todos tbody tr").css('display','table-row')
+            })
+
+            $("#btn_ver_vencidos").click( function(){
+                $("#dias_por_vencer").val('')
+                $("#tbl_datos_todos tbody tr").css('display','none')
+                $(".vencidos").css('display','table-row')
+                
+            })
+
+            $("#dias_por_vencer").change( function(){
+                let valor = $(this).val()
+                if( $(this).val() != '' ){
+                    $("#tbl_datos_todos tbody tr").css('display','none')
+                    $(".por_vencer").each( function(){
+                        if( parseInt($(this).data('dias_por_vencer')) <= valor )
+                            $(this).css('display','table-row')
+                    })
+                }
+                
+            })
+        })
+
+
         function eliminar(id, event){
             if(!confirm("Desea elminar el registro de codigo " + id) )
                 event.preventDefault()

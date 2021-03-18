@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-md-7">
                     <input type="hidden" name="perfil" required value="estudiante"/>
-                    <select name="codigooficina" class="form-control select2bs4">
+                    <select name="codigooficina" id="codigooficina" class="form-control select2bs4">
                         <option value="">Seleccione</option>
                         <?php foreach ($ambientes as $key => $ambiente) {
                         ?>
@@ -48,11 +48,11 @@
                     <label>Equipo: </label>
                 </div>
                 <div class="col-md-7">
-                    <select name="codigopatrimonio" class="form-control select2bs4">
+                    <select name="codigopatrimonio" id="equipo_id" class="form-control select2bs4">
                         <option value="">Seleccione</option>
                         <?php foreach ($equipos as $key => $equipo) {
                         ?>
-                        <option value="<?php echo $equipo['codigopatrimonio'] ?>"><?php echo $equipo['codigopatrimonio'].' '.$equipo['nombre'] ?></option>
+                        <!-- <option value="<?php echo $equipo['codigopatrimonio'] ?>"><?php echo $equipo['codigopatrimonio'].' '.$equipo['nombre'] ?></option> -->
                         <?php } ?>
                     </select>
                 </div>
@@ -95,9 +95,34 @@
             </div>
         </form>
     </div>
+    <?php include '../foot.html' ?>
 
-        <!-- <script src="../../../public/js/bootstrap/bootstrap.min.js"></script>
-        <script src="../../../public/js/jquery-3.4.1.min.js"></script>
-        <script src="../../../public/js/jquery-ui.js"></script> -->
+    <script>
+        $(function () {
+            //Inicializar Select2
+            $('.select2bs4').select2({
+            theme: 'bootstrap4'
+            });
+
+            $("#codigooficina").change( function(){
+                $("#equipo_id option").remove()
+                $("#equipo_id").select2("destroy");
+
+                let valor_sel = $(this).val()
+                    $.ajax(
+                        {
+                            url: '../LabEquipo/equipooficina.php?codigooficina=' + $("#codigooficina").val(),
+                            dataType: 'json',
+                            success: function( result ) {
+                                $('#equipo_id').select2({
+                                    data: result,
+                                    theme: 'bootstrap4'
+                                })
+                            }
+                        }
+                    )
+            })
+        })
+        </script>
     </body>
 </html>

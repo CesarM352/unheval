@@ -3,7 +3,7 @@
     require_once '../../controladores/LabEquipoController.php';
     require_once '../../controladores/LabLaboratorioEquipoController.php';
 
-    $oficinacodigo = $_GET['oficinacodigo'];
+    //$oficinacodigo = $_GET['oficinacodigo'];
 
     $equipo_nuevo = [
         "codigopatrimonio" => $_POST["codigopatrimonio"],

@@ -51,6 +51,16 @@
 
             <div class="row form-group">
                 <div class="col-md-2">
+                    <label>Licencia es perpetua: </label>
+                </div>
+                <div class="col-md-5">
+                    <label><input type="radio" name="licenciaperpetua" id="licenciaperpetua1" value="1" onclick="asignarValorDefecto('licenciaperpetua',1)" required />SÍ</label>
+                    <label><input type="radio" name="licenciaperpetua" id="licenciaperpetua0" value="0" onclick="asignarValorDefecto('licenciaperpetua',0)" required />NO</label>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-2">
                     <label>Tipo SW</label>
                 </div>
                 <div class="col-md-5">
@@ -165,6 +175,25 @@
                     }
                     else if(opcion==1){
                         document.getElementById('tipo_sw').value='LICENCIADO'
+                    }
+                }
+                else if( campo == 'conlicencia' ){
+                    if(opcion==0){
+                        document.getElementById('duracion_dias').value=0
+                        document.getElementById('licenciaperpetua0').check()
+                    }
+                    else if(opcion==1){
+                        document.getElementById('licenciaperpetua0').checked=false
+                        document.getElementById('licenciaperpetua1').checked=false
+                    }
+                }
+                else if( campo == 'licenciaperpetua' ){
+                    if(opcion==0){
+                        document.getElementById('duracion_dias').value=-1
+                        document.getElementById('licenciaperpetua0').check()
+                    }
+                    else if(opcion==1){
+                        document.getElementById('duracion_dias').value=-1
                     }
                 }
             }
