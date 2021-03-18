@@ -8,9 +8,11 @@
 ?>
     <body class="hold-transition sidebar-mini layout-fixed">
 		<div class="wraper" style="text-align: center">
+			<br>
 			<button id="btn_nuevo" class="btn btn-info font-weight-bolder">
 				<a href="nuevo.php" style="color: inherit">Nuevo <i class="fa fa-plus-circle"></i></a>
 			</button>
+			<br><br>
 			<div class="container-fluid" style="text-align:center">
 				<table  class='table table-bordered table-hover'>
 

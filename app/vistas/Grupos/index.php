@@ -9,7 +9,6 @@
         require_once '../../Conexion.php';
         require_once '../../controladores/GruposController.php';
 
-
         $codigo_curso=$_GET['codigocurso'];
         $nombre_escuela=$_GET['carrera'];
         $nombre_curso=$_GET['nombre'];

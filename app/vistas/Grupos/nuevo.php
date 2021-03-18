@@ -13,7 +13,7 @@
 
 <body class="hold-transition sidebar-mini layout-fixed" style="padding-left: 40px">
     <div class="container-fluid">
-        <form action="guardar.php?codigocurso=<?php echo $codigo_curso ?>&carrera=<?php echo $nombre_escuela ?>&nombre=<?php echo $nombre_curso ?>" method="POST">
+        <form onsubmit="return validar_form()" action="guardar.php?codigocurso=<?php echo $codigo_curso ?>&carrera=<?php echo $nombre_escuela ?>&nombre=<?php echo $nombre_curso ?>" method="POST">
             <br>
             <div class="container-fluid" style="text-align:center">
                 <h2><?php echo $nombre_escuela ?></h2>
@@ -35,8 +35,12 @@
                     <label for="nombre">Nombre: </label>
                 </div>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" name="nombre" required/>
+                    <input type="text" class="form-control" name="nombre" id="nombre" autocomplete="off" required/>
+                    <input type="hidden" class="form-control" id="codigocurso" value="<?php echo $codigo_curso ?>"/>
+                    <input type="hidden" class="form-control" name="validar" id="validar"/>
+                    
                 </div>
+                <div id="mensaje"></div>
             </div>
             <div class="row form-group">
                 <div class="col-md-2">
@@ -95,6 +99,55 @@
                 theme: 'bootstrap4'
                 })
             })
+        </script>
+        <script>
+            //Para buscar la existencia del nombre de grupo
+            $(buscar_nombregrupo());
+
+            function buscar_nombregrupo(codigo, nombre){
+                $.ajax({
+                    url: 'validar_grupo.php',
+                    type: 'POST',
+                    dataType: 'html',
+                    data: {codigo: codigo,
+                           nombre: nombre},
+                })
+                .done(function(respuesta){
+                    $("#validar").val(respuesta);
+                })
+                .fail(function(){
+                    console.log("error");
+                })
+            }
+
+            //Detectar los nombres introducidos en el campo de texto nombre
+            $(document).on('keyup', '#nombre', function(){
+                var codigo= $('#codigocurso').val();
+                var nombre=$(this).val();
+                if(nombre !=''){
+                    buscar_nombregrupo(codigo, nombre);
+                }
+                else{
+                    buscar_nombregrupo();
+                }
+            });
+        </script>
+        <script>
+            //validar el nombre de grupo
+            function validar_form(){
+                var validar=$('#validar').val();
+                if(validar=="No valido"){
+                    alertify.alert('Ya existe un grupo con ese nombre, por favor cambielo').set('basic', true);
+                    //$('#mensaje').html("Ya existe un grupo con ese nombre, por favor cambielo");
+                    $('#nombre').focus();
+                    $("#nombre").blur(function(){
+    		        $(this).css("background-color", "#FFFFCC");
+                    });
+                    return false;
+                }else if(validar=='Valido'){
+                    return true;
+                }
+            }
         </script>
     </body>
 </html>

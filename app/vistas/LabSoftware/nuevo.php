@@ -10,6 +10,7 @@
 			<div class="container-fluid" style="text-align:center">
                 <h2>Nuevo Software</h2>
             </div>
+            <br>
             <div class="row form-group">
                 <div class="col-md-2">
                     <label>Nombre: </label>
@@ -153,7 +154,7 @@
                 </div>
                 <div class="col-md-5">
                     <button class="btn btn-primary">Guardar</button>
-                    <button class="btn btn-primary"><a href="index.php?procesos_id=<?php echo $procesos_id ?>">Cancelar</button>
+                    <button class="btn btn-primary"><a href="index.php" style="color: inherit">Cancelar</button>
                 </div>
             </div>
 

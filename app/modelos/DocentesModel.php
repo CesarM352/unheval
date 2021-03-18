@@ -3,7 +3,7 @@
         private $codigodocente;
         private $celular;
         private $dni;
-        private $codigodireccion;
+        private $direccion;
         private $nombre;
         private $codtipocontrato;
         private $user;
@@ -21,18 +21,18 @@
             $this->codigodocente = $data_consulta_bd->codigodocente;
             $this->celular = $data_consulta_bd->celular;
             $this->dni = $data_consulta_bd->dni;
-            $this->codigodireccion = $data_consulta_bd->codigodireccion;
+            $this->direccion = $data_consulta_bd->direccion;
             $this->nombre = $data_consulta_bd->nombre;
             $this->codtipocontrato = $data_consulta_bd->codtipocontrato;
             $this->user = $data_consulta_bd->user;
             $this->pass = $data_consulta_bd->pass;
         }
 
-        public function __construct2($codigodocente, $celular, $dni, $codigodireccion, $nombre, $codtipocontrato, $user, $pass){
+        public function __construct2($codigodocente, $celular, $dni, $direccion, $nombre, $codtipocontrato, $user, $pass){
             $this->codigodocente = $codigodocente;
             $this->celular = $celular;
             $this->dni = $dni;
-            $this->codigodireccion = $codigodireccion;
+            $this->direccion = $direccion;
             $this->nombre = $nombre;
             $this->codtipocontrato = $codtipocontrato;
             $this->user = $user;
@@ -59,12 +59,12 @@
             $this->dni = $dni;
         }
 
-        public function getCodigodireccion(){
-            return $this->codigodireccion;
+        public function getDireccion(){
+            return $this->direccion;
         }
 
-        public function setCodigodireccion($codigodireccion){
-            $this->codigodireccion = $codigodireccion;
+        public function setDireccion($direccion){
+            $this->direccion = $direccion;
         }
 
         public function getNombre(){

@@ -1,8 +1,8 @@
-
-
 <?php include '../cabecera.html' ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+    <br>
+    <div style="text-align:center"><h2>CURSOS</h2></div>
     <br>
     <div class="wraper">
         <div class="row form-group" style="text-align:center">
@@ -16,7 +16,7 @@
             </div>
             <div class="col-md-2">
                 <button id="btn_nuevo" class="btn btn-info font-weight-bolder">
-                    <a href="../Import/index.php" style="color: inherit">Importar <i class="fa fa-plus-circle"></i></a>
+                    <a href="../Import/cursos.php" style="color: inherit">Importar <i class="fa fa-file-upload"></i></a>
                 </button>
             </div>
         </div>
@@ -54,11 +54,6 @@
             else{
                 buscar_cursos();
             }
-        });
-    </script>
-    <script>
-        $(function(){
-            $('#mi-tabla').tablesorter(); 
         });
     </script>
 </body>

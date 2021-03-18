@@ -4,7 +4,7 @@
 
     $salida="";
     if(isset($_POST['estudiante'])){
-        $term=$_POST['estudiante'];
+        $term=utf8_decode($_POST['estudiante']);
         $estudiantes_controlador = new EstudiantesController;
         $estudiantes = $estudiantes_controlador->getAllEstudiantesComplete($conexion, $term);
     }else{

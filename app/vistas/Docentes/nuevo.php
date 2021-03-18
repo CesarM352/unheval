@@ -1,7 +1,11 @@
 <?php
     require_once '../../Conexion.php';
+    require_once '../../controladores/DocentesController.php';
     require_once '../../controladores/DireccionesController.php';
     require_once '../../controladores/TipoContratoDocController.php';
+
+    $docentes_controlador = new DocentesController;
+    $codigodocente = $docentes_controlador->calcularNuevoCodigo($conexion);
 
     $direcciones_controlador = new DireccionesController;
     $direcciones = $direcciones_controlador->getAllDirecciones($conexion);
@@ -17,14 +21,14 @@
         <form action="guardar.php" method="POST">
         <!--<form action="actualizar.php" method="POST">-->
             <br>
-            <div style="text-align:center"><h2>Editar docente</h2></div>
+            <div style="text-align:center"><h2>Nuevo Docente</h2></div>
             <br>
             <div class="row form-group">
                 <div class="col-md-2">
                     <label for="codigo">Código: </label>
                 </div>
                 <div class="col-md-2">
-                    <input type="text" class="form-control" name="codigo"/>
+                    <input type="text" class="form-control" name="codigo" value="<?php echo "00".$codigodocente ?>" readonly/>
                 </div>
             </div>
             <div class="row form-group">
@@ -53,6 +57,14 @@
             </div>
             <div class="row form-group">
                 <div class="col-md-2">
+                    <label for="direccion">Dirección: </label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="direccion"/>
+                </div>
+            </div>
+            <!--<div class="row form-group">
+                <div class="col-md-2">
                     <label for="codigodireccion">Dirección: </label>
                 </div>
                 <div class="col-md-5">
@@ -66,12 +78,12 @@
                         ?>
                     </select>
                 </div>
-            </div>
+            </div>-->
             <div class="row form-group">
                 <div class="col-md-2">
                     <label for="codtipocontrato">tipo Contrato: </label>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-4">
                     <select name="codtipocontrato" class="form-control">
                         <?php
                             foreach ($tipocontratodoc as $key => $tipocontratodo) {

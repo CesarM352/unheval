@@ -16,6 +16,6 @@
     ];
     $grupo_controlador = new GruposController;
     $grupo_controlador->guardar($conexion, $grupo_nuevo);
-
+    
     header("Location: index.php?codigocurso=".$codigo_curso."&carrera=".$nombre_escuela."&nombre=".$nombre_curso."");
 ?>

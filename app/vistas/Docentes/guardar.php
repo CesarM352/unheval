@@ -6,7 +6,7 @@
         "codigodocente" => $_POST["codigo"],
         "celular" => $_POST["celular"],
         "dni" => $_POST["dni"],
-        "codigodireccion" => $_POST["codigodireccion"],
+        "direccion" => utf8_decode($_POST["direccion"]),
         "nombre" => utf8_decode($_POST["nombre"]),
         "codtipocontrato" => $_POST["codtipocontrato"],
         "user" => $_POST["user"],

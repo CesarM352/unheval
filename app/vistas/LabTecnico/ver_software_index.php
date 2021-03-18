@@ -13,6 +13,7 @@
 ?>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wraper" style="text-align: center">
+        <br>
 		<button id="btn_nuevo" class="btn btn-info font-weight-bolder">
 			<a href="../LabSoftware/index.php" style="color: inherit">Administrar Softwares <i class="fa fa-book"></i></a>
 		</button>
@@ -20,7 +21,7 @@
         <h2> <?php //echo $proceso_mdl->getCodigo()." ".$proceso_mdl->getNombre() ?></h2>
         <br>
         <!-- <a href="nuevo.php?proceso_id=<?php //echo $_GET['proceso_id'] ?>">Nuevo</a>-->
-        <div class="form-inline" style="justify-content: center;">
+        <!--<div class="form-inline" style="justify-content: center;">
             <div class="icheck-primary d-inline">
                 <input type="radio" id="rdb_tipo_ambiente_0" name="rdb_tipo_ambiente" value="0" checked onclick="filtrarPorTipoAmbiente(0)"/>
                 <label for="rdb_tipo_ambiente_0">TODOS &nbsp;&nbsp;&nbsp;</label>
@@ -70,8 +71,34 @@
                 </div>
                 <div class="col-md-2"></div>
             </div>
+        </div>-->
+        <div class="wraper">
+            <div class="row form-group" style="text-align:center">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-1">
+                    <label>Buscar:</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" id="buscar_software"></input>
+                </div>
+                <!--<div class="col-md-2">
+                    <button id="btn_nuevo" class="btn btn-info font-weight-bolder">
+                        <a href="../LabEquipo/nuevo.php" style="color: inherit">Nuevo <i class="fa fa-plus-circle"></i></a>
+                    </button>
+                </div>-->
+                <!--<div class="col-md-2">
+                    <button id="btn_nuevo" class="btn btn-info font-weight-bolder">
+                        <a href="nuevo.php" style="color: inherit">Nuevo <i class="fa fa-plus-circle"></i></a>
+                    </button>
+                </div>-->
+            </div>
+            <br>
+            <div class="container-fluid" style="text-align:center" id="tabla_software">
+                
+            </div>
         </div>
-        <br>
+        <!--<br>
         <div class="container-fluid" style="text-align:center">
             Días por vencer: <input type="number" id="dias_por_vencer" min=0 />
             <button class="btn btn-sm btn-danger" id="btn_ver_vencidos">Ver Vencidos</button>
@@ -145,6 +172,7 @@
                 </tbody>
             </table>
         </div>
+
     </div>
     <?php include '../foot.html' ?>
     <script>
@@ -174,6 +202,7 @@
             })
         })
 
+
         function eliminar(id, event){
             if(!confirm("Desea elminar el registro de codigo " + id) )
                 event.preventDefault()
@@ -192,6 +221,36 @@
             filas_mostrar.item(i).style.display="table-row"
         }
     }
+    </script>-->
+    <script>
+        //Para la carga de la tabla software en el módulo software
+        $(buscar_software());
+
+        function buscar_software(software){
+            $.ajax({
+                url: 'tabla_software.php',
+                type: 'POST',
+                dataType: 'html',
+                data: {software: software},
+            })
+            .done(function(respuesta){
+                $("#tabla_software").html(respuesta);
+            })
+            .fail(function(){
+                console.log("error");
+            })
+        }
+
+        //Detectar los software introducidos en el campo de texto software
+        $(document).on('keyup', '#buscar_software', function(){
+            var software=$(this).val();
+            if(software!=""){
+                buscar_software(software);
+            }
+            else{
+                buscar_software();
+            }
+        });
     </script>
 </body>
 </html>

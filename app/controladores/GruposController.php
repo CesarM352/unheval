@@ -46,6 +46,17 @@
 
             return ConexionController::consultar($conexion, $sql_grupos);
         }
+
+        public function getAllGruposCursoIdComplete($conexion, $codigo_curso, $nombre){
+            $sql_grupos = "SELECT G.codigogrupo, G.nombre, G.numeroalumnos, G.maximoalumnos, D.nombre nombre_docente, G.codigocurso
+                            FROM grupos G
+                            INNER JOIN docentes D ON G.codigodocente = D.codigodocente
+                            INNER JOIN cursos C ON G.codigocurso = C.codigocurso
+                            WHERE G.codigocurso = '$codigo_curso' and G.nombre like '$nombre'
+                            ORDER BY G.nombre";
+
+            return ConexionController::consultar($conexion, $sql_grupos);
+        }
 /*
         public function getAllgruposComplete($conexion, $term){
             $sql_grupos = "SELECT u.id id, u.nombre nombre, p.perfil_id perfilid, p.nombre_perfil nombreperfil, u.area_unidad_id area_id, u.email, u.estado_email, au.denominacion denominacion

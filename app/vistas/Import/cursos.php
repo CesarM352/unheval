@@ -93,35 +93,25 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
 </head>
 <body>
 <br>
-    <div class="container-fluid">
+    <div class="container">
         <h2 class="mt-1">Importar cursos de archivo excel</h2>
         <hr>
         <div class="row">
             <div class="col-12 col-md-12">
-                <div class="outer-container">
-                    <form action="" method="post"
-                        name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
-                        <div class="row form-group">
-                            <div class="col-md-3">
-                                <label>Suba su archivo aqui :  </label>
-                            </div>
-                            <div class="col-md-5">
-                                <input type="file" name="file" id="file" accept=".xls,.xlsx"><br><br>
-                            </div>
+            <div class="outer-container">
+                <form action="" method="post"
+                    name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
+                    <div>
+                        <label>Suba su archivo aqui &nbsp;</label> <input type="file" name="file" id="file" accept=".xls,.xlsx">&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;<button type="submit" id="submit" name="import" class="btn-info">Importar Registros</button><br><br>
+                        <div style="text-align: center">
+                        <button class="btn btn-primary"><a href="../Cursos/index.php" style="color: inherit">Volver</a></button>
                         </div>
-                        <div class="row form-group">
-                            <div class="col-md-3">
-                                <button type="submit" id="submit" name="import" class="btn-info">Importar Registros</button><br><br>
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn-primary"><a href="../Cursos/index.php" style="color: inherit">Volver</a></button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div id="response" class="<?php if(!empty($type)) { echo $type . " display-block"; } ?>"><?php if(!empty($message)) { echo $message; } ?></div>
+                    </div>
+                </form>
             </div>
-        </div>
+            <div id="response" class="<?php if(!empty($type)) { echo $type . " display-block"; } ?>"><?php if(!empty($message)) { echo $message; } ?></div>
+        </div>       
     </div>
     <?php include '../foot.html' ?>
 </body>
