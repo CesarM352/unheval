@@ -38,7 +38,9 @@
                     <input type="text" class="form-control" name="nombre" id="nombre" autocomplete="off" required/>
                     <input type="hidden" class="form-control" id="codigocurso" value="<?php echo $codigo_curso ?>"/>
                     <input type="hidden" class="form-control" name="validar" id="validar"/>
+                    
                 </div>
+                <div id="mensaje"></div>
             </div>
             <div class="row form-group">
                 <div class="col-md-2">
@@ -136,7 +138,11 @@
                 var validar=$('#validar').val();
                 if(validar=="No valido"){
                     alertify.alert('Ya existe un grupo con ese nombre, por favor cambielo').set('basic', true);
-                    $('#vale').focus();
+                    //$('#mensaje').html("Ya existe un grupo con ese nombre, por favor cambielo");
+                    $('#nombre').focus();
+                    $("#nombre").blur(function(){
+    		        $(this).css("background-color", "#FFFFCC");
+                    });
                     return false;
                 }else if(validar=='Valido'){
                     return true;
