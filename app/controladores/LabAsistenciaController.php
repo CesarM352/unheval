@@ -30,7 +30,7 @@
                                 INNER JOIN equipos e ON t.codigopatrimonio = e.codigopatrimonio";
             if($codigoestudiante>0)
                 $sql_documento .= " WHERE (SELECT es1.codigoestudiante FROM estudiantes es1 WHERE es1.codigoestudiante = ( SELECT m.codigoestudiante FROM matriculas m WHERE m.codigomatricula = ( SELECT am.codigomatricula FROM alumnos_en_matricula am WHERE am.codigoalum_matri = t.codigoalum_matri) ) ) = '$codigoestudiante' ";
-
+              
             return ConexionController::consultar($conexion, $sql_documento);
         }
 

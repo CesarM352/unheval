@@ -5,7 +5,7 @@
         private $tabla = "cursos";
 
         public function getAllCursos($conexion){
-            $sql_cursos = "SELECT U.codigocurso, U.nombre, U.descripcion, U.numerocredito, C.nombre nombre_carrera
+            $sql_cursos = "SELECT U.codigocurso, U.nombre, U.descripcion, U.numerocredito, C.nombre nombre_carrera, U.h_teoricas, U.h_practicas, U.tipo
                             FROM cursos U
                             INNER JOIN carreras C ON u.codigocarrera = C.codigocarrera
                             ORDER BY C.nombre, U.nombre";
@@ -34,26 +34,12 @@
         }
 
         public function getAllcursosComplete($conexion, $term){
-            $sql_cursos = "SELECT U.codigocurso, U.nombre, U.descripcion, U.numerocredito, C.nombre nombre_carrera
+            $sql_cursos = "SELECT U.codigocurso, U.nombre, U.descripcion, U.numerocredito, C.nombre nombre_carrera, U.h_teoricas, U.h_practicas, U.tipo
                             FROM cursos U
                             INNER JOIN carreras C ON u.codigocarrera = C.codigocarrera
                             WHERE U.nombre like '%" .$term. "%' or U.codigocurso like '%" .$term. "%'
                             ORDER BY C.nombre, U.nombre";
             return ConexionController::consultar($conexion, $sql_cursos);
         }
-/*
-        public function getcursosPerfil($conexion, $perfil){
-            $sql_cursos = "SELECT U.nombre nombre, P.perfil_id perfil_id, P.nombre_perfil FROM cursos U
-                            INNER JOIN perfil P ON U.perfil_id = P.perfil_id
-                            WHERE P.nombre_perfil = '$perfil'
-                            ORDER BY nombre";
-            return ConexionController::consultar($conexion, $sql_cursos);
-        }
-
-        public function getcursosLogin($conexion, $usuario, $password){
-            $sql_cursos = "SELECT * FROM cursos WHERE usuario = '$usuario' and password = '$password'";
-            $cursos_mdl = new CursosModel( ConexionController::consultar($conexion, $sql_cursos)->fetch_object() );
-            return $cursos_mdl;
-        }*/
     }
 ?>

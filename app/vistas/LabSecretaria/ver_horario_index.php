@@ -50,7 +50,7 @@
 			<?php
 				foreach ($ambientes as $key => $ambiente) {
 			?>
-				<tr id="fila_<?php echo $ambiente["id"] ?>" class=" tbl_datos_filas tipo_ambiente_<?php echo $ambiente["codtipoofi"] ?>">
+				<tr class=" tbl_datos_filas tipo_ambiente_<?php echo $ambiente['codtipoofi'] ?>">
 					<td> <?php echo $ambiente["nombre"] ?> </td>
 					<td> <?php echo $ambiente["tipo_oficina_nombre"] ?> </td>
 					<td> 

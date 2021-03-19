@@ -70,7 +70,11 @@
             $sql_software = "SELECT t.*, 
                                     s.nombre AS software_descripcion,
                                     s.tipo_sw AS software_tipo_sw,
-                                    s.forma AS software_forma
+                                    s.forma AS software_forma,
+                                    s.propietario AS software_propietario,
+                                    s.conlicencia AS software_conlicencia,
+                                    DATE_ADD(t.fecha_compra, INTERVAL t.duracion_dias DAY) AS fecha_vencimiento,
+                                    DATEDIFF( NOW(), DATE_ADD(t.fecha_compra, INTERVAL t.duracion_dias DAY) ) AS dias_por_vencer
                                 FROM $this->tabla AS t
                                 INNER JOIN softwares s ON t.software_id = s.codigosoftware
                                 WHERE s.nombre like '%" .$term. "%'

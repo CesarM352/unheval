@@ -74,13 +74,16 @@
         </div>
         <div class="wraper">
             <div class="row form-group" style="text-align:center">
-                <div class="col-md-2">
-                </div>
                 <div class="col-md-1">
                     <label>Buscar:</label>
                 </div>
                 <div class="col-md-5">
                     <input type="text" class="form-control" id="buscar_software"></input>
+                </div>
+                <div class="col-md-6">
+                    Días por vencer: <input type="number" id="dias_por_vencer" min=0 />
+                    <button class="btn btn-sm btn-danger" id="btn_ver_vencidos">Ver Vencidos</button>
+                    <button class="btn btn-sm btn-info" id="btn_ver_todos">Ver Todos</button>
                 </div>
                 <!--<div class="col-md-2">
                     <button id="btn_nuevo" class="btn btn-info font-weight-bolder">
@@ -99,7 +102,7 @@
             </div>
         </div>
         <br>
-        <div class="container-fluid" style="text-align:center">
+        <!--<div class="container-fluid" style="text-align:center">
             Días por vencer: <input type="number" id="dias_por_vencer" min=0 />
             <button class="btn btn-sm btn-danger" id="btn_ver_vencidos">Ver Vencidos</button>
             <button class="btn btn-sm btn-info" id="btn_ver_todos">Ver Todos</button>
@@ -115,7 +118,7 @@
                         <th>PERIODO DE VIGENCIA</th>
                         <th>CONDICÓN</th>
                         <th>LICENCIAS DISPONIBLES</th>
-                        <th>REQUISITOS MINIMOS</th>
+                        <th>REQUISITOS MÍNIMOS</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -171,7 +174,7 @@
             ?>
                 </tbody>
             </table>
-        </div>
+        </div>-->
 
     </div>
     <?php include '../foot.html' ?>

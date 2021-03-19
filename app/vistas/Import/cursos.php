@@ -20,12 +20,11 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
         $sheetCount = count($Reader->sheets());
         for($i=0;$i<$sheetCount;$i++)
         {
-            
             $Reader->ChangeSheet($i);
             
-            foreach ($Reader as $Row)
+            foreach ($Reader as $key => $Row)
             {
-          
+              if($key>0){
                 $codigocurso = "";
                 if(isset($Row[0])) {
                     $codigocurso = $Row[0];
@@ -50,14 +49,32 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
                 if(isset($Row[4])) {
                     $codigocarrera = $Row[4];
                 }
+
+                $h_teoricas = "";
+                if(isset($Row[5])) {
+                    $h_teoricas = $Row[5];
+                }
+
+                $h_practicas = "";
+                if(isset($Row[6])) {
+                    $h_practicas = $Row[6];
+                }
+
+                $tipo = "";
+                if(isset($Row[7])) {
+                    $tipo = $Row[7];
+                }
                 
-                if (!empty($codigocurso) || !empty($nombre) || !empty($descripcion) || !empty($numerocredito) || !empty($codigocarrera)) {
+                if (!empty($codigocurso) || !empty($nombre) || !empty($descripcion) || !empty($numerocredito) || !empty($codigocarrera)|| !empty($h_teoricas)|| !empty($h_practicas)|| !empty($tipo)) {
                     $curso_nuevo = [
                         "codigocurso" => $codigocurso,
                         "nombre" => utf8_decode($nombre),
                         "descripcion" => utf8_decode($descripcion),
                         "numerocredito" => $numerocredito,
-                        "codigocarrera" => $codigocarrera
+                        "codigocarrera" => $codigocarrera,
+                        "h_teoricas" => $h_teoricas,
+                        "h_practicas" => $h_practicas,
+                        "tipo" => $tipo
                     ];
                     $curso_controlador = new CursosController;
                     $neo=$curso_controlador->guardar($conexion, $curso_nuevo);
@@ -71,6 +88,7 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
                         $message = "Hubo un problema al importar registros";
                     }
                 }
+              }
             }
         
         }

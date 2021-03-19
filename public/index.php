@@ -153,7 +153,7 @@
 
             <li class="nav-item">
               <a href="../app/vistas/LabDocente/index.php" class="nav-link" target="base">
-                <i class="nav-icon fas fa-book-open"></i>
+                <i class="nav-icon fas fa-ellipsis-v"></i>
                 <p>
                   Menu
                 </p>
@@ -201,7 +201,7 @@
           ?>
               <li class="nav-item">
                 <a href="../app/vistas/LabEstudiante/registrar_asistencia.php" class="nav-link" target="base">
-                  <i class="nav-icon fas fa-book"></i>
+                  <i class="nav-icon fas fa-file-alt"></i>
                   <p>
                     Registrar asistencia
                   </p>
@@ -209,7 +209,7 @@
               </li>
               <li class="nav-item">
                 <a href="../app/vistas/LabEstudiante/registrar_problema.php" class="nav-link" target="base">
-                  <i class="nav-icon fas fa-book"></i>
+                  <i class="nav-icon fas fa-file-alt"></i>
                   <p>
                     Registrar Problemas
                   </p>
@@ -220,7 +220,7 @@
           ?>
               <li class="nav-item">
                 <a href="../app/vistas/LabSecretaria/ver_horario_index.php" class="nav-link" target="base">
-                  <i class="nav-icon fas fa-book"></i>
+                  <i class="nav-icon fas fa-calendar-alt"></i>
                   <p>
                     Ver horarios
                   </p>
@@ -228,7 +228,7 @@
               </li>
               <li class="nav-item">
                 <a href="../app/vistas/LabSecretaria/ver_software_index.php" class="nav-link" target="base">
-                  <i class="nav-icon fas fa-book"></i>
+                  <i class="nav-icon fas fa-th"></i>
                   <p>
                     Ver software
                   </p>

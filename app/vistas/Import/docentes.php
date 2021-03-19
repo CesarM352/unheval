@@ -23,9 +23,9 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
             
             $Reader->ChangeSheet($i);
             
-            foreach ($Reader as $Row)
+            foreach ($Reader as $key => $Row)
             {
-          
+              if($key>0){
                 $codigodocente = "";
                 if(isset($Row[0])) {
                     $codigodocente = $Row[0];
@@ -89,6 +89,7 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
                         $message = "Hubo un problema al importar registros";
                     }
                 }
+              }
             }
         
         }
