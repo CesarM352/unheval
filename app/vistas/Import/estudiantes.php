@@ -44,6 +44,11 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
                 $pass = "";
                 if(isset($Row[3])) {
                     $pass = $Row[3];
+                    /*if(strlen($pass)!=6){
+                        $type = "error";
+                        $message = "El password del registro ".$codigoestudiante." No tiene 6 digitos, se detuvo la importación";
+                        break;
+                    }*/
                 }
 
                 $anionacimiento = "";
@@ -79,8 +84,8 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
                     $estudiante_nuevo = [
                         "codigoestudiante" => $codigoestudiante,
                         "nombre" => utf8_decode($nombre),
-                        "user" => $user,
-                        "pass" => $pass,
+                        "user" => $dni,
+                        "pass" => crypt($pass,'$2a$07$usesomesillystringforsalt$'),
                         "anionacimiento" => date_format($nacimiento,"Y-m-d"),
                         "fechaingreso" => date_format($ingreso,"Y-m-d"),
                         "dni" => $dni,
@@ -94,7 +99,6 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
                     if (!empty($neo)) {
                         $type = "success";
                         $message = "Excel importado correctamente";
-                        //header("Location: ../Estudiantes/index.php");
                     } else {
                         $type = "error";
                         $message = "Hubo un problema al importar registros";

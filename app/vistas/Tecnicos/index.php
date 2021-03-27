@@ -39,6 +39,7 @@
             })
             .done(function(respuesta){
                 $("#tabla_tecnicos").html(respuesta);
+                $('[data-toggle="tooltip"]').tooltip();
             })
             .fail(function(){
                 console.log("error");

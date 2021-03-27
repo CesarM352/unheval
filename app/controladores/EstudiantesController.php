@@ -36,19 +36,15 @@
                                 ORDER BY nombre";
             return ConexionController::consultar($conexion, $sql_estudiantes);
         }
-/*
-        public function getestudiantesPerfil($conexion, $perfil){
-            $sql_estudiantes = "SELECT U.nombre nombre, P.perfil_id perfil_id, P.nombre_perfil FROM cursos U
-                            INNER JOIN perfil P ON U.perfil_id = P.perfil_id
-                            WHERE P.nombre_perfil = '$perfil'
-                            ORDER BY nombre";
-            return ConexionController::consultar($conexion, $sql_cursos);
+        public function getAllEstudiantesDNI($conexion, $dni){
+            $sql_estudiantes = "SELECT * FROM estudiantes WHERE dni='$dni'";
+            return ConexionController::consultar($conexion, $sql_estudiantes);
         }
 
-        public function getcursosLogin($conexion, $usuario, $password){
-            $sql_cursos = "SELECT * FROM cursos WHERE usuario = '$usuario' and password = '$password'";
-            $cursos_mdl = new CursosModel( ConexionController::consultar($conexion, $sql_cursos)->fetch_object() );
-            return $cursos_mdl;
-        }*/
+        public function calcularNuevoCodigo($conexion){
+            $sql_documento = "SELECT IFNULL(MAX(CAST( codigoestudiante AS INT )),0)+1 AS codigo_siguiente FROM $this->tabla";
+            $fila = ConexionController::consultar($conexion, $sql_documento)->fetch_object();
+            return $fila->codigo_siguiente;
+        }
     }
 ?>

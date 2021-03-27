@@ -20,8 +20,7 @@
                 </button>
             </div>
         </div>
-        <br>
-        <div class="container-fluid" style="text-align:center" id="tabla_cursos">
+        <div class="container-fluid" id="tabla_cursos">
             
         </div>
     </div>
@@ -39,13 +38,14 @@
             })
             .done(function(respuesta){
                 $("#tabla_cursos").html(respuesta);
+                $('[data-toggle="tooltip"]').tooltip();
             })
             .fail(function(){
                 console.log("error");
             })
         }
 
-        //Detectar los curso introducidos en el campo de texto cursos
+        //Detectar el nombre de curso introducidos en el campo de texto cursos
         $(document).on('keyup', '#buscar_curso', function(){
             var curso=$(this).val();
             if(curso!=""){

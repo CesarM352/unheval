@@ -23,8 +23,7 @@
                 </button>
             </div>
         </div>
-        <br>
-        <div class="container-fluid" style="text-align:center" id="tabla_estudiantes">
+        <div class="container-fluid" id="tabla_estudiantes">
             
         </div>
     </div>
@@ -42,6 +41,7 @@
             })
             .done(function(respuesta){
                 $("#tabla_estudiantes").html(respuesta);
+                $('[data-toggle="tooltip"]').tooltip();
             })
             .fail(function(){
                 console.log("error");

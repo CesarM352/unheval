@@ -36,19 +36,16 @@
                              ORDER BY nombre";
             return ConexionController::consultar($conexion, $sql_tecnicos);
         }
-/*
-        public function gettecnicosPerfil($conexion, $perfil){
-            $sql_tecnicos = "SELECT U.nombre nombre, P.perfil_id perfil_id, P.nombre_perfil FROM cursos U
-                            INNER JOIN perfil P ON U.perfil_id = P.perfil_id
-                            WHERE P.nombre_perfil = '$perfil'
-                            ORDER BY nombre";
-            return ConexionController::consultar($conexion, $sql_cursos);
+
+        public function getAllTecnicosDNI($conexion, $dni){
+            $sql_tecnicos = "SELECT * FROM tecnicos WHERE dni='$dni'";
+            return ConexionController::consultar($conexion, $sql_tecnicos);
         }
 
-        public function getcursosLogin($conexion, $usuario, $password){
-            $sql_cursos = "SELECT * FROM cursos WHERE usuario = '$usuario' and password = '$password'";
-            $cursos_mdl = new CursosModel( ConexionController::consultar($conexion, $sql_cursos)->fetch_object() );
-            return $cursos_mdl;
-        }*/
+        public function getAllTecnicosContrato($conexion, $numerocontrato){
+            $sql_tecnicos = "SELECT * FROM tecnicos WHERE numerocontrato='$numerocontrato'";
+            return ConexionController::consultar($conexion, $sql_tecnicos);
+        }
+
     }
 ?>

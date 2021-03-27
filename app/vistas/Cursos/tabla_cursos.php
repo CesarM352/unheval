@@ -13,9 +13,9 @@
     }
 
     if($cursos->num_rows > 0){
-        $salida.="<table class='table table-bordered table-hover'>
+        $salida.="<table class='table table-bordered table-hover' id='cursos'>
                     <thead>
-                        <tr>
+                        <tr style='text-align: center'>
                             <th>Código</th>
                             <th>Nombre</th>
                             <th>Descripción</th>
@@ -39,7 +39,7 @@
                         }else if($curso['tipo']==''){
                             $tipo='';
                         }
-        $salida.="  <tr>
+        $salida.="  <tr style='text-align: center'>
                         <td>".$curso['codigocurso']."</td>
                         <td>".utf8_encode($curso['nombre'])."</td>
                         <td>".utf8_encode($curso['descripcion'])."</td>
@@ -50,19 +50,44 @@
                         <td>".$tipo."</td>
                         <td> <a href='../Grupos/index.php?codigocurso=".$curso['codigocurso'].
                                                         "&nombre=".utf8_encode($curso['nombre']).
-                                                        "&carrera=".utf8_encode($curso['nombre_carrera'])."'>Ver</a> </td>
+                                                        "&carrera=".utf8_encode($curso['nombre_carrera'])."' data-toggle='tooltip' data-placement='left' title='Ver'>
+                                                        <i class='nav-icon fas fa-layer-group'></i></a></td>
                         <!--<td> <a href='editar.php?codigocurso=".$curso['codigocurso']."'>Editar</a> </td>
                         <td> <a href='eliminar.php?codigocurso=".$curso['codigocurso']."' onclick='eliminar(\"".utf8_encode($curso['nombre'])."\", \"".utf8_encode($curso['nombre_carrera'])."\", event)'>Eliminar</a></td>-->
                     </tr>";
                     }
         $salida.="  </tbody>
-                </table>
-
+                </table><br>
                 <script>
                     function eliminar(nombre, escuela, event){
                         if(!confirm('¿Desea eliminar al curso: ' + nombre + ', de la escuela de '+ escuela +'?'))
                             event.preventDefault()
                     }
+                </script>
+                <script>
+                    $(function () {
+                        $('#cursos').DataTable({
+                            'lengthMenu': [[15, 25, 50, -1], [15, 25, 50, 'All']],
+                            'paging': true,
+                            'lengthChange': true,
+                            'searching': false,
+                            'ordering': false,
+                            'info': true,
+                            'autoWidth': false,
+                            'responsive': true,
+                            
+                            'language': {
+                                'info': 'Mostrando del _START_ al _END_, de un total de _TOTAL_ entradas',
+                                'lengthMenu': 'Mostrar _MENU_ registros',
+                                'paginate': {
+                                    'first': 'Primeros',
+                                    'last': 'Ultimos',
+                                    'next': 'Siguiente',
+                                    'previous': 'Anterior'
+                                },
+                            },
+                          });
+                    });
                 </script>";
     }else{
         $salida.="<div style='text-align:center'><h5>Curso no registrado</h5></div>";

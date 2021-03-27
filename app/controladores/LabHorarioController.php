@@ -55,28 +55,28 @@
 					if( $dia_bd["tipo_horario"] == 2 )
 						$var_tipo_horario = "PRÉSTAMO <BR> Fecha: ".$dia_bd["fecha"];
 
-					$horarios_semana[$key + 1][$s_key] = $dia_bd["hora_inicio"]." - ".$dia_bd["hora_fin"]."<br>".$dia_bd["curso"]."<br>".$dia_bd["docente"]."<br>".$var_tipo_horario;
+					$horarios_semana[$key + 1][$s_key] = $dia_bd["hora_inicio"]." - ".$dia_bd["hora_fin"]."<br>".utf8_encode($dia_bd["curso"])."<br>".utf8_encode($dia_bd["docente"])."<br>".$var_tipo_horario;
 				}
 				
 				if($cantidad_filas_dia > $cantidad_filas_maxima)
 					$cantidad_filas_maxima = $cantidad_filas_dia;
 			}
 			
-			echo "<table  class='table table-bordered table-hover'><tr>";
+			echo "<table class='table table-bordered table-hover'> <thead><tr>";
 			foreach($dias_semana as $key => $dia){
-				echo "<td>".$dia."</td>";
+				echo "<th>".$dia."</th>";
 			}
-			echo "</tr>";
+			echo "</tr></thead>";
 			
 			for( $j=0; $j<$cantidad_filas_maxima; $j++ ){
-				echo "<tr>";
+				echo "<tbody><tr>";
 				for($i=1; $i<=7; $i++){
 					if (isset( $horarios_semana[$i][$j] ))
-						echo "<td>".$horarios_semana[$i][$j]."</td>";
+						echo "<td style='background: #E8F8F5'>".$horarios_semana[$i][$j]."</td>";
 					else
-						echo "<td></td>";
+						echo "<td style='background: #ECECEC'></td>";
 				}
-				echo "</tr>";
+				echo "</tr></tbody>";
 			}
 			echo "</table>";
         }
