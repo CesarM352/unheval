@@ -24,9 +24,9 @@
 
         public function __construct1($data_consulta_bd){
             $this->codigoproblema = $data_consulta_bd->codigoproblema;
-            $this->equipo_id = $data_consulta_bd->equipo_id;
-            $this->codigooficina = $data_consulta_bd->codigooficina;
-            $this->detalle = $data_consulta_bd->detalle;
+            $this->codigopatrimonio = $data_consulta_bd->codigopatrimonio;
+            //$this->codigooficina = $data_consulta_bd->codigooficina;
+            $this->detalles = $data_consulta_bd->detalles;
             $this->fechareporte = $data_consulta_bd->fechareporte;
             $this->usuario = $data_consulta_bd->usuario;
             $this->estado = $data_consulta_bd->estado;
@@ -50,11 +50,11 @@
         }
 
         public function getEquipoId(){
-            return $this->equipo_id;
+            return $this->codigopatrimonio;
         }
 
-        public function setEquipoId($equipo_id){
-            $this->equipo_id = $equipo_id;
+        public function setEquipoId($codigopatrimonio){
+            $this->codigopatrimonio = $codigopatrimonio;
         }
 		
 		public function getAmbienteId(){

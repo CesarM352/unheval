@@ -14,13 +14,21 @@
 	
 	include '../cabecera.html';
 ?>
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <body class="hold-transition sidebar-mini layout-fixed" style="padding-left: 40px">
     <div class="container-fluid">
 
         <?php
-            if(isset($_GET['registrado']) && $_GET['registrado']==1)
-                echo "Se registró su problema";
+            if(isset($_GET['registrado']) && $_GET['registrado']==1){
+                //echo "Se registró su problema";
+        ?>
+            <script>
+                Swal.fire('Se registró su problema').then( (result) => {
+                    window.location.href = '../../../public/index.php'
+                } )
+            </script>
+        <?php
+            }
         ?>
 
         <form action="../LabMantenimiento/guardar.php" method="POST" >

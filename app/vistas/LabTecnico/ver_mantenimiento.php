@@ -6,6 +6,7 @@
 	$mantenimientos = $mantenimiento_controlador->getAllMantenimientos($conexion, 0);
 
     include '../cabecera.html';
+    session_start();
 
     //$proceso_mdl = $proceso_controlador->getProceso( $conexion, $_GET['proceso_id'] );
 ?>
@@ -57,7 +58,7 @@
                     <td> <?php echo $mantenimiento["estado"] ?> </td>
                     <td> <?php echo $mantenimiento["justificacion"] ?> </td>
 					<td>
-						<?php if( $mantenimiento["estado"] == 'PENDIENTE' ){ ?> 
+						<?php if( $mantenimiento["estado"] == 'PENDIENTE' || $mantenimiento["tecnico"] == $_SESSION["nombre"] ){ ?> 
 						<a href="../LabMantenimiento/editar_atencion.php?id=<?php echo $mantenimiento["codigoproblema"] ?>">ACTUALIZAR</a>
 						<?php } ?>
 					</td>

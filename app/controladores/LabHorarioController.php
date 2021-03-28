@@ -74,7 +74,7 @@
 					if (isset( $horarios_semana[$i][$j] ))
 						echo "<td>".$horarios_semana[$i][$j]."</td>";
 					else
-						echo "<td></td>";
+						echo "<td style='background-color:#b9c6d2'></td>";
 				}
 				echo "</tr>";
 			}
