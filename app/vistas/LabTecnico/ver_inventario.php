@@ -53,7 +53,7 @@
                     <td> <?php echo $inventario["equipo_descripcion"] ?> </td>
                     <td> <?php echo $inventario["equipo_tipo"] ?> </td>
                     <td> <?php echo $inventario["estadopresente"] ?> </td>
-                    <td> <a href="#">EDITAR</a> </td>
+                    <td> <a href="../LabEquipo/editar.php?<?php echo 'id='.$inventario["equipo_codigo"].'&ambiente_id='.$_GET['ambiente_id'] ?>">EDITAR</a> </td>
 					<td> <a href="#" onclick="cambiarOperacion(2,<?php echo $inventario["equipo_codigo"].",".$inventario["codigolaboratorioequipo"] ?> )">PASAR A</a> </td>
                 </tr>
             <?php

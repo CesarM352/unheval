@@ -1,4 +1,10 @@
 <?php
+    require_once '../../Conexion.php';
+    require_once '../../controladores/LabMantenimientoController.php';
+
+    $mantenimiento_controlador = new LabMantenimientoController;
+	$mantenimiento = $mantenimiento_controlador->getDocumento($conexion, $_GET['id']);
+
     include '../cabecera.html';
 ?>
 <body class="hold-transition sidebar-mini layout-fixed" style="padding-left: 40px">
@@ -17,8 +23,8 @@
                 <div class="col-md-5">
                     <select name="estado" class="form-control" required>
                         <option value="">Seleccione</option>
-                        <option value="REPARADO">REPARADO</option>
-                        <option value="MALOGRADO">MALOGRADO</option>
+                        <option value="REPARADO" <?php echo ( $mantenimiento->getEstado() == 'REPARADO' ) ? 'selected' : ''?> >REPARADO</option>
+                        <option value="MALOGRADO" <?php echo ( $mantenimiento->getEstado() == 'MALOGRADO' ) ? 'selected' : ''?> >MALOGRADO</option>
                     </select>
                 </div>
             </div>
@@ -28,7 +34,7 @@
                     <label>Justificación: </label>
                 </div>
                 <div class="col-md-5">
-                    <textarea class="form-control" name="justificacion" maxlength=250 placeholder='250 caracteres' required></textarea>
+                    <textarea class="form-control" name="justificacion" maxlength=250 placeholder='250 caracteres' required><?php echo $mantenimiento->getJustificacion() ?></textarea>
                 </div>
             </div>
 

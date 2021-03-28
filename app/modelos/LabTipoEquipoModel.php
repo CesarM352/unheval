@@ -3,6 +3,7 @@
         private $codtipoequipo;
         private $tiempoobsolecencia;
         private $nombre;
+        private $codigopatrimonialinicial;
 
         function __construct(){
             $a = func_get_args();
@@ -16,6 +17,7 @@
             $this->codtipoequipo = $data_consulta_bd->codtipoequipo;
             $this->tiempoobsolecencia = $data_consulta_bd->tiempoobsolecencia;
             $this->nombre = $data_consulta_bd->nombre;
+            $this->codigopatrimonialinicial = $data_consulta_bd->codigopatrimonialinicial;
         }
 
         public function getId(){
@@ -36,5 +38,13 @@
 
         public function setNombre($nombre){
             $this->nombre = $nombre;
+        }
+
+        public function getCodigoPatrimonialInicial(){
+            return $this->codigopatrimonialinicial;
+        }
+
+        public function setCodigoPatrimonialInicial($codigopatrimonialinicial){
+            $this->codigopatrimonialinicial = $codigopatrimonialinicial;
         }
     }

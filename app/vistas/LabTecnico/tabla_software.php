@@ -46,7 +46,7 @@
                                 $color_fondo = 'red';
                                 $color_fondo = 'bg-warning por_vencer';
                             }
-        $salida.="  <tr class=".$color_fondo." data-dias_por_vencer=";
+        $salida.="  <tr class='$color_fondo' data-dias_por_vencer=";
                         if( $software['dias_por_vencer'] <= 0) 
         $salida.=           abs($software['dias_por_vencer']);
         $salida.=">     <td>".$software['software_descripcion']."</td>

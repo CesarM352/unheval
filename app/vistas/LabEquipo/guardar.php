@@ -6,7 +6,7 @@
     //$oficinacodigo = $_GET['oficinacodigo'];
 
     $equipo_nuevo = [
-        "codigopatrimonio" => $_POST["codigopatrimonio"],
+        "codigopatrimonio" => $_POST["codigopatrimonialinicial"].$_POST["codigopatrimonio"],
         "descripcion" => $_POST["descripcion"],
         "ram" => $_POST["ram"],
         "procesador" => $_POST["procesador"],
@@ -23,6 +23,9 @@
         "color" => $_POST["color"],
         "modelo" => $_POST["modelo"],
         "serie" => $_POST["serie"],
+        "resolucion" => $_POST["resolucion"],
+        "conectividad" => $_POST["conectividad"],
+        "tipoestabilizador" => $_POST["tipoestabilizador"],
     ];
     $equipo_controlador = new LabEquipoController;
     $equipo_controlador->guardar($conexion, $equipo_nuevo);

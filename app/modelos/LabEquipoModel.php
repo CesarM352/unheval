@@ -20,6 +20,9 @@
         private $serie;
         private $fechabaja;
         private $documentobaja;
+        private $resolucion;
+        private $conectividad;
+        private $tipoestabilizador;
 
         function __construct(){
             $a = func_get_args();
@@ -50,6 +53,9 @@
             $this->serie = $data_consulta_bd->serie;
             $this->fechabaja = $data_consulta_bd->fechabaja;
             $this->documentobaja = $data_consulta_bd->documentobaja;
+            $this->resolucion = $data_consulta_bd->resolucion;
+            $this->conectividad = $data_consulta_bd->conectividad;
+            $this->tipoestabilizador = $data_consulta_bd->tipoestabilizador;
         }
 
         public function getId(){
@@ -206,5 +212,29 @@
 
         public function setDocumentoBaja($documentobaja){
             $this->documentobaja = $documentobaja;
+        }
+
+        public function getResolucion(){
+            return $this->resolucion;
+        }
+
+        public function setResolucion($resolucion){
+            $this->resolucion = $resolucion;
+        }
+
+        public function getConectividad(){
+            return $this->conectividad;
+        }
+
+        public function setConectividad($conectividad){
+            $this->conectividad = $conectividad;
+        }
+
+        public function getTipoEstabilizador(){
+            return $this->tipoestabilizador;
+        }
+
+        public function setTipoEstabilizador($tipoestabilizador){
+            $this->tipoestabilizador = $tipoestabilizador;
         }
     }

@@ -4,6 +4,7 @@
     require_once '../../controladores/LabTipoIngresoController.php';
     require_once '../../controladores/LabEstadoEquipoController.php';
     include_once '../../controladores/LabAmbienteController.php';
+    include_once '../../controladores/LabEquipoController.php';
     $ambiente_controlador = new LabAmbienteController;
     $ambientes = $ambiente_controlador->getAllAmbientes($conexion);
 
@@ -15,18 +16,21 @@
     
     $estado_equipo_controlador = new LabEstadoEquipoController;
     $estados_equipos = $estado_equipo_controlador->getAllEstadosEquipos($conexion, 0);
+
+    $equipo_controlador = new LabEquipoController;
+    $equipo = $equipo_controlador->getDocumento($conexion, $_GET['id']);
 	
 	include '../cabecera.html';
 ?>
 
 <body class="hold-transition sidebar-mini layout-fixed" style="padding-left: 40px">
     <div class="container-fluid">
-        <form action="guardar.php" method="POST" class="formulario">
+        <form action="actualizar.php?<?php echo 'id='.$_GET['id'],'ambiente_id='.$_GET['ambiente_id'] ?>" method="POST" class="formulario">
             <br><br>
             <div class="container-fluid" style="text-align:center">
                 <h2>Nuevo Equipo</h2>
             </div>
-            <div class="row form-group" id="fecha_clase">
+            <!-- <div class="row form-group" id="fecha_clase">
                 <div class="col-md-2">
                     <label>Tipo Equipo: (*)</label>
                 </div>
@@ -35,7 +39,7 @@
                         <option value="">Seleccione</option>
                         <?php foreach ($tipos_equipos as $key => $tipo_equipo) {
                         ?>
-                        <option value="<?php echo $tipo_equipo['codtipoequipo'] ?>" data-codpat="<?php echo $tipo_equipo['codigopatrimonialinicial'] ?>" ><?php echo $tipo_equipo['nombre'] ?></option>
+                        <option value="<?php echo $tipo_equipo['codtipoequipo'] ?>" data-codpat="<?php echo $tipo_equipo['codigopatrimonialinicial'] ?>" <?php echo ($equipo->getCodTipoEquipo() == $tipo_equipo['codtipoequipo'] ) ? 'selected' : '' ?> ><?php echo $tipo_equipo['nombre'] ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -45,17 +49,17 @@
                     <label>Código Patrimonial: (*)</label>
                 </div>
                 <div class="row col-md-5" style="padding-left: 15px;">
-                    <input type="text" name="codigopatrimonialinicial" id="codigopatrimonialinicial" class="form-control col-md-3" readonly required />
-                    <input type="text" name="codigopatrimonio" id="codigopatrimonio" class="form-control col-md-6" required />
+                    <input type="text" name="codigopatrimonialinicial" id="codigopatrimonialinicial" class="form-control col-md-3" readonly required value="<?php echo substr($equipo->getId(),0,8) ?>" />
+                    <input type="text" name="codigopatrimonio" id="codigopatrimonio" class="form-control col-md-6" required value="<?php echo substr($equipo->getId(),9) ?>" />
                 </div>
-            </div>
+            </div> -->
 
             <div class="row form-group">
                 <div class="col-md-2">
                     <label>Nombre: (*) </label>
                 </div>
                 <div class="col-md-5">
-                    <input type="text" name="nombre" class="form-control" required />
+                    <input type="text" name="nombre" class="form-control" required value="<?php echo $equipo->getNombre() ?>" />
                 </div>
             </div>
 
@@ -64,7 +68,7 @@
 					<label>Descripción: </label>
                 </div>
                 <div class="col-md-5">
-                    <textarea class="form-control" name="descripcion" class="form-control" ></textarea>
+                    <textarea class="form-control" name="descripcion" class="form-control" ><?php echo $equipo->getDescripcion() ?></textarea>
                 </div>
             </div>
 
@@ -73,7 +77,7 @@
 					<label>RAM: </label>
                 </div>
                 <div class="col-md-5">
-                    <input type="text" name="ram" id="ram" class="form-control" />
+                    <input type="text" name="ram" id="ram" class="form-control" value="<?php echo $equipo->getRam() ?>" />
                 </div>
             </div>
 
@@ -82,7 +86,7 @@
 					<label>Procesador: </label>
                 </div>
                 <div class="col-md-5">
-                    <input type="text" name="procesador" id="procesador" class="form-control" />
+                    <input type="text" name="procesador" id="procesador" class="form-control" value="<?php echo $equipo->getProcesador() ?>" />
                 </div>
             </div>
 
@@ -91,7 +95,7 @@
 					<label>HDD: </label>
                 </div>
                 <div class="col-md-5">
-                    <input type="text" name="hdd" id="hdd" class="form-control" />
+                    <input type="text" name="hdd" id="hdd" class="form-control" value="<?php echo $equipo->getHdd() ?>" />
                 </div>
             </div>
 
@@ -100,7 +104,7 @@
 					<label>SDD: </label>
                 </div>
                 <div class="col-md-5">
-                    <input type="text" name="ssd" id="ssd" class="form-control" />
+                    <input type="text" name="ssd" id="ssd" class="form-control" value="<?php echo $equipo->getSdd() ?>" />
                 </div>
             </div>
 
@@ -109,7 +113,7 @@
                     <label>Tarjeta Video: </label>
                 </div>
                 <div class="col-md-5">
-                    <input type="text" name="tarjetavideo" class="form-control" />
+                    <input type="text" name="tarjetavideo" class="form-control" value="<?php echo $equipo->getTarjetaVideo() ?>" />
                 </div>
             </div>
 
@@ -118,7 +122,7 @@
 					<label>Resolución: </label>
                 </div>
                 <div class="col-md-5">
-                    <input type="text" name="resolucion" id="resolucion" class="form-control" />
+                    <input type="text" name="resolucion" id="resolucion" class="form-control" value="<?php echo $equipo->getResolucion() ?>" />
                 </div>
             </div>
 
@@ -127,7 +131,7 @@
 					<label>Conectividad: </label>
                 </div>
                 <div class="col-md-5">
-                    <input type="text" name="conectividad" id="conectividad" class="form-control" placeholder="usb, bluetooh, etc." />
+                    <input type="text" name="conectividad" id="conectividad" class="form-control" placeholder="usb, bluetooh, etc." value="<?php echo $equipo->getConectividad() ?>" />
                 </div>
             </div>
 
@@ -138,8 +142,8 @@
                 <div class="col-md-5">
                     <select name="tipoestabilizador" id="tipoestabilizador" class="form-control">
                             <option value="">Seleccione</option>
-                            <option value="SÓLIDO">SÓLIDO</option>
-                            <option value="HÍBRIDO">HÍBRIDO</option>
+                            <option value="SÓLIDO" <?php echo ( $equipo->getTipoEstabilizador() == 'SÓLIDO' ) ? 'selected' : '' ?> >SÓLIDO</option>
+                            <option value="HÍBRIDO" <?php echo ( $equipo->getTipoEstabilizador() == 'HÍBRIDO' ) ? 'selected' : '' ?> >HÍBRIDO</option>
                     </select>
                 </div>
             </div>
@@ -149,7 +153,7 @@
                     <label>Fecha Ingreso: (*)</label>
                 </div>
                 <div class="col-md-5">
-                    <input type="date" name="fechaingreso" class="form-control" required />
+                    <input type="date" name="fechaingreso" class="form-control" required value="<?php echo $equipo->getFechaingreso() ?>" />
                 </div>
             </div>
 
@@ -158,7 +162,7 @@
                     <label>RFID: </label>
                 </div>
                 <div class="col-md-5">
-                    <input type="text" name="rfid" class="form-control" />
+                    <input type="text" name="rfid" class="form-control" value="<?php echo $equipo->getRfid() ?>" />
                 </div>
             </div>
 
@@ -167,8 +171,8 @@
                     <label>Estado Operativo: </label>
                 </div>
                 <div class="col-md-5">
-                    <label><input type="radio" name="estadoperativo" value="1" required />OPERATIVO</label>
-                    <label><input type="radio" name="estadoperativo" value="0" required />INOPERATIVO</label>
+                    <label><input type="radio" name="estadoperativo" value="1"  <?php echo ( $equipo->getEstadOperativo() == 1 ) ? 'selected' : '' ?> required />OPERATIVO</label>
+                    <label><input type="radio" name="estadoperativo" value="0"  <?php echo ( $equipo->getEstadOperativo() == 0 ) ? 'selected' : '' ?> required />INOPERATIVO</label>
                 </div>
             </div>
 
@@ -177,7 +181,7 @@
                     <label>Fecha Caduca: (*)</label>
                 </div>
                 <div class="col-md-5">
-                    <input type="date" name="fechacaduca" class="form-control" required />
+                    <input type="date" name="fechacaduca" class="form-control" required value="<?php echo $equipo->getFechaCaduca() ?>" />
                 </div>
             </div>
 
@@ -190,7 +194,7 @@
                         <option value="">Seleccione</option>
                         <?php foreach ($tipos_ingresos as $key => $tipo_ingreso) {
                         ?>
-                        <option value="<?php echo $tipo_ingreso['codtipoingreso'] ?>"><?php echo $tipo_ingreso['nombre'] ?></option>
+                        <option value="<?php echo $tipo_ingreso['codtipoingreso'] ?>" <?php echo ( $equipo->getCodTipoIngreso() == $tipo_ingreso['codtipoingreso'] ) ? 'selected' : '' ?> ><?php echo $tipo_ingreso['nombre'] ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -207,7 +211,7 @@
                             if($estado_equipo['nombre'] == 'BAJA')
                                 continue;
                         ?>
-                        <option value="<?php echo $estado_equipo['codigoestado'] ?>"><?php echo $estado_equipo['nombre'] ?></option>
+                        <option value="<?php echo $estado_equipo['codigoestado'] ?>" <?php echo ( $equipo->getCodigoEstado() == $tipo_ingreso['codigoestado'] ) ? 'selected' : '' ?>><?php echo $estado_equipo['nombre'] ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -218,7 +222,7 @@
                     <label>Color: </label>
                 </div>
                 <div class="col-md-5">
-                    <input type="text" name="color" class="form-control" />
+                    <input type="text" name="color" class="form-control" value="<?php echo $equipo->getColor() ?>" />
                 </div>
             </div>
 
@@ -227,7 +231,7 @@
                     <label>Modelo: </label>
                 </div>
                 <div class="col-md-5">
-                    <input type="text" name="modelo" class="form-control" />
+                    <input type="text" name="modelo" class="form-control" value="<?php echo $equipo->getModelo() ?>" />
                 </div>
             </div>
 
@@ -236,22 +240,7 @@
                     <label>Serie: </label>
                 </div>
                 <div class="col-md-5">
-                    <input type="text" name="serie" class="form-control" />
-                </div>
-            </div>
-
-            <div class="row form-group" id="fecha_clase">
-                <div class="col-md-2">
-                    <label>Oficina: (*)</label>
-                </div>
-                <div class="col-md-5">
-                    <select name="codigooficina" class="form-control" required>
-                        <option value="">Seleccione</option>
-                        <?php foreach ($ambientes as $key => $ambiente) {
-                        ?>
-                        <option value="<?php echo $ambiente['codigooficina'] ?>"><?php echo $ambiente['nombre'] ?></option>
-                        <?php } ?>
-                    </select>
+                    <input type="text" name="serie" class="form-control" value="<?php echo $equipo->getSerie() ?>" />
                 </div>
             </div>
 
@@ -259,7 +248,7 @@
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-5">
-                    <button class="btn btn-primary">Guardar</button>
+                    <button class="btn btn-primary">Actualizar</button>
                     <button class="btn btn-primary"><a href="index.php?procesos_id=<?php echo $procesos_id ?>">Cancelar</button>
                 </div>
             </div>
@@ -288,8 +277,26 @@
         $(".datosmonitor").hide()
         $(".datosteclado").hide()
         $(".datosestabilizador").hide()
+        
+        switch( <?php substr($equipo->getCodTipoEquipo(),0,8) ?> ){
+            case '42158574':
+                $(".datospc").show()
+                break;
 
-        function cambiarTipoEquipo(){
+            case '42158575':
+                $(".datosmonitor").show()
+                break;
+
+            case '42158576':
+                $(".datosteclado").show()
+                break;
+
+            case '42158577':
+                $(".datosestabilizador").show()
+                break;
+        }
+
+        /* function cambiarTipoEquipo(){
             let codigoInicialSeleccionado = $("#codtipoequipo option:selected").data('codpat')
             $("#codigopatrimonialinicial").val(codigoInicialSeleccionado)
 
@@ -317,6 +324,6 @@
                 $(".datosteclado").hide()
                 $(".datosestabilizador").show()
             }
-        }
+        } */
     </script>
 </body>
