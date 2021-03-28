@@ -3,10 +3,12 @@
 require_once '../../Conexion.php';
 require_once '../../controladores/DocentesController.php';
 
-$codigodocente= $_GET['codigodocente'];
-$docentes_controlador = new DocentesController;
-$docentes_controlador->eliminar($conexion, $codigodocente);
+$codigodocente= $_POST['codigodocente'];
 
-header("Location: index.php");
+if (!$mysqli->query("delete from docentes where codigodocente='$codigodocente'")) {
+    echo($mysqli->errno);
+}else{
+    echo('ok');
+}
 
 ?>

@@ -11,9 +11,9 @@
         $grupos = $grupos_controlador->getAllGruposCursoIdComplete($conexion, $codigo_curso, $nombre);
     
         if($grupos->num_rows > 0){
-            $salida="No valido";
+            $salida="¡Ya existe un grupo con ese nombre!";
         }else{
-            $salida.="Valido";
+            $salida.="Nombre válido";
         }
     }
     echo $salida;

@@ -6,6 +6,7 @@ require_once('vendor/SpreadsheetReader.php');
 
 include '../cabecera.html';
 
+
 if (isset($_POST["import"]))
 {
 $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
@@ -45,24 +46,19 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
                     $numerocredito = $Row[3];
                 }
 
-                $codigocarrera = "";
-                if(isset($Row[4])) {
-                    $codigocarrera = $Row[4];
-                }
-
                 $h_teoricas = "";
-                if(isset($Row[5])) {
-                    $h_teoricas = $Row[5];
+                if(isset($Row[4])) {
+                    $h_teoricas = $Row[4];
                 }
 
                 $h_practicas = "";
-                if(isset($Row[6])) {
-                    $h_practicas = $Row[6];
+                if(isset($Row[5])) {
+                    $h_practicas = $Row[5];
                 }
 
                 $tipo = "";
-                if(isset($Row[7])) {
-                    $tipo = $Row[7];
+                if(isset($Row[6])) {
+                    $tipo = $Row[6];
                 }
                 
                 if (!empty($codigocurso) || !empty($nombre) || !empty($descripcion) || !empty($numerocredito) || !empty($codigocarrera)|| !empty($h_teoricas)|| !empty($h_practicas)|| !empty($tipo)) {
@@ -71,7 +67,7 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
                         "nombre" => utf8_decode($nombre),
                         "descripcion" => utf8_decode($descripcion),
                         "numerocredito" => $numerocredito,
-                        "codigocarrera" => $codigocarrera,
+                        "codigocarrera" => $_POST['escuela'],
                         "h_teoricas" => $h_teoricas,
                         "h_practicas" => $h_practicas,
                         "tipo" => $tipo
@@ -80,11 +76,10 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
                     $neo=$curso_controlador->guardar($conexion, $curso_nuevo);
                 
                     if (!empty($neo)) {
-                        $type = "success";
+                        $type = "container success";
                         $message = "Excel importado correctamente";
-                        //header("Location: ../Cursos/index.php");
                     } else {
-                        $type = "error";
+                        $type = "container error";
                         $message = "Hubo un problema al importar registros";
                     }
                 }
@@ -95,7 +90,7 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
     }
     else
     { 
-            $type = "error";
+            $type = "container error";
             $message = "El archivo enviado es invalido. Por favor vuelva a intentarlo";
     }
 }
@@ -111,7 +106,7 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
 </head>
 <body>
 <br>
-    <div class="container">
+    <div class="container-fluid">
         <h2 class="mt-1">Importar cursos de archivo excel</h2>
         <hr>
         <div class="row">
@@ -119,16 +114,25 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
             <div class="outer-container">
                 <form action="" method="post"
                     name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
-                    <div>
+                    <div class="container" style="overflow:auto">
                         <label>Suba su archivo aqui &nbsp;</label> <input type="file" name="file" id="file" accept=".xls,.xlsx">&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;<button type="submit" id="submit" name="import" class="btn-info">Importar Registros</button><br><br>
-                        <div style="text-align: center">
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-3 col-form-label">Seleccione Escuela:</label>
+                        <select class="form-control form-control-md col-sm-4" name="escuela">
+                            <option value="000465">Ingeniería de Sistemas e Informática</option>
+                            <option value="000568">Ingeniería Industrial</option>
+                        </select>
+                    </div>
+                    <br>  
+                    <div class="container-fluid" style="text-align: center">
                         <button class="btn btn-primary"><a href="../Cursos/index.php" style="color: inherit">Volver</a></button>
-                        </div>
+                    </div>
                     </div>
                 </form>
             </div>
-            <div id="response" class="<?php if(!empty($type)) { echo $type . " display-block"; } ?>"><?php if(!empty($message)) { echo $message; } ?></div>
+            <div id="response" style="text-align: center" class="<?php if(!empty($type)) { echo $type . " display-block"; } ?>"><?php if(!empty($message)) { echo $message; } ?></div>
         </div>       
     </div>
     <?php include '../foot.html' ?>

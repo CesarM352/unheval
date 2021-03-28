@@ -53,11 +53,11 @@
                             <td> <?php echo $ambiente["tipo_oficina_nombre"] ?> </td>
                             <td> 
                                 <?php if( $ambiente["tipo_oficina_nombre"] != "OFICINA" ){ ?>
-                                <a href="ver_horario.php?ambiente_id=<?php echo $ambiente["codigooficina"] ?>&ambiente_nombre=<?php echo $ambiente["nombre"] ?>&tipo_oficina_nombre=<?php echo $ambiente["tipo_oficina_nombre"] ?>" > Ver Horario </a>
+                                <a href="ver_horario.php?ambiente_id=<?php echo $ambiente["codigooficina"] ?>&ambiente_nombre=<?php echo $ambiente["nombre"] ?>&tipo_oficina_nombre=<?php echo $ambiente["tipo_oficina_nombre"] ?>" data-toggle='tooltip' data-placement='left' title='Horario'><i class='nav-icon fas fa-calendar-alt'></i></a>
                                 <?php } ?>
                             </td>
                             <td> 
-                                <a href="ver_software.php?ambiente_id=<?php echo $ambiente["codigooficina"] ?>&ambiente_nombre=<?php echo $ambiente["nombre"] ?>&tipo_oficina_nombre=<?php echo $ambiente["tipo_oficina_nombre"] ?>" > Ver Software</a> 
+                                <a href="ver_software.php?ambiente_id=<?php echo $ambiente["codigooficina"] ?>&ambiente_nombre=<?php echo $ambiente["nombre"] ?>&tipo_oficina_nombre=<?php echo $ambiente["tipo_oficina_nombre"] ?>" data-toggle='tooltip' data-placement='left' title='Software'><i class='nav-icon fas fa-th'></i></a> 
                             </td>
                         </tr>
                     <?php
@@ -70,6 +70,7 @@
             </div>
         </div>
     </div>
+    <?php include '../foot.html' ?>
     <script>
         function eliminar(id, event){
             if(!confirm("Desea elminar el registro de codigo " + id) )
@@ -90,5 +91,10 @@
             }
         }
     </script>
+    <script>
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
+	</script>
 </body>
 </html>

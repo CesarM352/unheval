@@ -9,8 +9,8 @@
         "direccion" => utf8_decode($_POST["direccion"]),
         "nombre" => utf8_decode($_POST["nombre"]),
         "codtipocontrato" => $_POST["codtipocontrato"],
-        "user" => $_POST["user"],
-        "pass" => $_POST["pass"]
+        "user" => $_POST["dni"],
+        "pass" => crypt($_POST["pass"],'$2a$07$usesomesillystringforsalt$')
     ];
     $docentes_controlador = new DocentesController;
     $docentes_controlador->guardar($conexion, $docentes_nuevo);

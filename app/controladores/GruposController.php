@@ -57,29 +57,11 @@
 
             return ConexionController::consultar($conexion, $sql_grupos);
         }
-/*
-        public function getAllgruposComplete($conexion, $term){
-            $sql_grupos = "SELECT u.id id, u.nombre nombre, p.perfil_id perfilid, p.nombre_perfil nombreperfil, u.area_unidad_id area_id, u.email, u.estado_email, au.denominacion denominacion
-                            FROM grupos u
-                            INNER JOIN area_unidad au ON u.area_unidad_id = au.id
-                            INNER JOIN perfil p ON u.perfil_id = p.perfil_id
-                            WHERE u.nombre like '%" .$term. "%'
-                            ORDER BY id";
-            return ConexionController::consultar($conexion, $sql_grupos);
-        }
 
-        public function getgruposPerfil($conexion, $perfil){
-            $sql_grupos = "SELECT U.nombre nombre, P.perfil_id perfil_id, P.nombre_perfil FROM grupos U
-                            INNER JOIN perfil P ON U.perfil_id = P.perfil_id
-                            WHERE P.nombre_perfil = '$perfil'
-                            ORDER BY nombre";
-            return ConexionController::consultar($conexion, $sql_grupos);
+        public function calcularNuevoCodigo($conexion){
+            $sql_documento = "SELECT IFNULL(MAX(CAST( codigogrupo AS INT )),0)+1 AS codigo_siguiente FROM $this->tabla";
+            $fila = ConexionController::consultar($conexion, $sql_documento)->fetch_object();
+            return $fila->codigo_siguiente;
         }
-
-        public function getgruposLogin($conexion, $usuario, $password){
-            $sql_grupos = "SELECT * FROM grupos WHERE usuario = '$usuario' and password = '$password'";
-            $grupos_mdl = new GruposModel( ConexionController::consultar($conexion, $sql_grupos)->fetch_object() );
-            return $grupos_mdl;
-        }*/
     }
 ?>

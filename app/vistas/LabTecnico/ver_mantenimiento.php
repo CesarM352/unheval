@@ -24,7 +24,7 @@
         <br><br>
         <!-- <a href="nuevo.php?proceso_id=<?php //echo $_GET['proceso_id'] ?>">Nuevo</a>-->
         <div class="container-fluid" style="text-align:center">
-            <table class='table table-bordered table-hover'>
+            <table class='table table-bordered table-hover' id="mantenimiento">
                 <thead>
                     <tr>
                         <th>Código</th>
@@ -59,7 +59,7 @@
                     <td> <?php echo $mantenimiento["justificacion"] ?> </td>
 					<td>
 						<?php if( $mantenimiento["estado"] == 'PENDIENTE' || $mantenimiento["tecnico"] == $_SESSION["nombre"] ){ ?> 
-						<a href="../LabMantenimiento/editar_atencion.php?id=<?php echo $mantenimiento["codigoproblema"] ?>">ACTUALIZAR</a>
+						<a href="../LabMantenimiento/editar_atencion.php?id=<?php echo $mantenimiento["codigoproblema"] ?>"data-toggle='tooltip' data-placement='left' title='Actualizar'><i class='nav-icon fas fa-retweet'></i></a>
 						<?php } ?>
 					</td>
                 </tr>
@@ -70,11 +70,42 @@
             </table>
         </div>
     </div>
-    <script>
+    <?php include '../foot.html' ?>
+    <!--<script>
         function eliminar(id, event){
-            if(!confirm("Desea elminar el registro de codigo " + id) )
+            if(!confirm("Desea eliminar el registro de codigo " + id) )
                 event.preventDefault()
         }
+    </script>-->
+    <script>
+        $(function () {
+            $('#mantenimiento').DataTable({
+                'lengthMenu': [[15, 25, 50, -1], [15, 25, 50, 'All']],
+                'paging': false,
+                'lengthChange': false,
+                'searching': false,
+                'ordering': false,
+                'info': false,
+                'autoWidth': false,
+                'responsive': true,
+                
+                'language': {
+                    'info': 'Mostrando del _START_ al _END_, de un total de _TOTAL_ entradas',
+                    'lengthMenu': 'Mostrar _MENU_ registros',
+                    'paginate': {
+                        'first': 'Primeros',
+                        'last': 'Ultimos',
+                        'next': 'Siguiente',
+                        'previous': 'Anterior'
+                    },
+                },
+              });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     </script>
 </body>
 </html>

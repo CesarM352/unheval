@@ -1,12 +1,16 @@
 <?php
     require_once '../../Conexion.php';
     require_once '../../controladores/DocentesController.php';
+    require_once '../../controladores/GruposController.php';
 
     $codigo_curso=$_GET['codigocurso'];
     $nombre_escuela=$_GET['carrera'];
     $nombre_curso=$_GET['nombre'];
     $docentes_controlador = new DocentesController;
     $docentes = $docentes_controlador->getAllDocentes($conexion);
+
+    $grupos_controlador = new gruposController;
+    $codigogrupo = $grupos_controlador->calcularNuevoCodigo($conexion);
 
     include '../cabecera.html';
 ?>
@@ -27,7 +31,7 @@
                     <label for="codigogrupo">Código: </label>
                 </div>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" name="codigogrupo" required/>
+                    <input type="text" id="codigogrupo" class="form-control valida" name="codigogrupo" value="<?php echo "00".$codigogrupo ?>" readonly/>
                 </div>
             </div>
             <div class="row form-group">
@@ -37,17 +41,17 @@
                 <div class="col-md-4">
                     <input type="text" class="form-control" name="nombre" id="nombre" autocomplete="off" required/>
                     <input type="hidden" class="form-control" id="codigocurso" value="<?php echo $codigo_curso ?>"/>
-                    <input type="hidden" class="form-control" name="validar" id="validar"/>
-                    
                 </div>
-                <div id="mensaje"></div>
+                <div class="col-md-4">
+                    <span id="message"> </span>
+                </div>
             </div>
             <div class="row form-group">
                 <div class="col-md-2">
                     <label for="numeroalumnos">numero alumnos: </label>
                 </div>
                 <div class="col-md-1">
-                    <input type="text" class="form-control" name="numeroalumnos" required>
+                    <input type="number" id="numeroalumnos" class="form-control valida" name="numeroalumnos" required>
                 </div>
             </div>
             <div class="row form-group">
@@ -55,7 +59,7 @@
                     <label for="maximoalumnos">maximo alumnos: </label>
                 </div>
                 <div class="col-md-1">
-                    <input class="form-control" type="text" name="maximoalumnos" required/>
+                    <input id="maximoalumnos" class="form-control valida" type="number" name="maximoalumnos" required/>
                 </div>
             </div>
             <div class="row form-group">
@@ -63,8 +67,8 @@
                     <label for="codigodocente">Docente: </label>
                 </div>
                 <div class="col-md-4">
-                    <select name="codigodocente" class="form-control select2bs4" required>
-                        <option disabled selected>Seleccione</option>
+                    <select name="codigodocente" class="form-control select2bs4 valida" required>
+                        <option disabled selected></option>
                         <?php
                             foreach ($docentes as $key => $docente) {
                         ?>
@@ -86,7 +90,7 @@
                 </div>
                 <div class="col-md-7">
                     <button class="btn btn-primary">Guardar</button>
-                    <button class="btn btn-primary"><a href="index.php?codigocurso=<?php echo $codigo_curso ?>&carrera=<?php echo $nombre_escuela ?>&nombre=<?php echo $nombre_curso ?>" style="color: inherit">Cancelar</a></button>
+                    <button id="cancelar" class="btn btn-primary"><a href="index.php?codigocurso=<?php echo $codigo_curso ?>&carrera=<?php echo $nombre_escuela ?>&nombre=<?php echo $nombre_curso ?>" style="color: inherit">Cancelar</a></button>
                 </div>
             </div>
         </form>
@@ -113,7 +117,13 @@
                            nombre: nombre},
                 })
                 .done(function(respuesta){
-                    $("#validar").val(respuesta);
+                    $("#message").text(respuesta);
+                    if(respuesta=='Nombre válido'){
+                        $("#message").css("color", "green");
+                    }
+                    if(respuesta=="¡Ya existe un grupo con ese nombre!"){
+                        $("#message").css("color", "red");
+                    }
                 })
                 .fail(function(){
                     console.log("error");
@@ -133,16 +143,12 @@
             });
         </script>
         <script>
-            //validar el nombre de grupo
+            //Mensaje de error de validación
             function validar_form(){
-                var validar=$('#validar').val();
-                if(validar=="No valido"){
-                    alertify.alert('Ya existe un grupo con ese nombre, por favor cambielo').set('basic', true);
-                    //$('#mensaje').html("Ya existe un grupo con ese nombre, por favor cambielo");
-                    $('#nombre').focus();
-                    $("#nombre").blur(function(){
-    		        $(this).css("background-color", "#FFFFCC");
-                    });
+                var validar=$('#message').text();
+                if(validar=="¡Ya existe un grupo con ese nombre!"){
+                    Swal.fire('¡Ya existe un grupo con ese nombre!, por favor cambielo');
+                    $('#nombre').css("background-color", "#FFFFCC");
                     return false;
                 }else if(validar=='Valido'){
                     return true;

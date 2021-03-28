@@ -36,12 +36,12 @@
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button" data-toggle='tooltip' data-placement='top' title='Maximizar'>
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-slide="true" href="../app/vistas/Login/logout.php" role="button">
+        <a class="nav-link" data-slide="true" href="../app/vistas/Login/logout.php" role="button" data-toggle='tooltip' data-placement='top' title='Salir'>
           <i class="fas fa-sign-out-alt"></i>
         </a>
       </li>
@@ -94,7 +94,7 @@
               <a href="../app/vistas/Docentes/index.php" class="nav-link" target="base">
                 <i class="nav-icon fas fa-chalkboard-teacher"></i>
                 <p>
-                  DocentesCrud
+                  Docentes
                 </p>
               </a>
             </li>
@@ -102,7 +102,7 @@
               <a href="../app/vistas/Tecnicos/index.php" class="nav-link" target="base">
                 <i class="nav-icon fas fa-user-shield"></i>
                 <p>
-                  TecnicosCrud
+                  Tecnicos
                 </p>
               </a>
             </li>
@@ -110,7 +110,7 @@
               <a href="../app/vistas/Estudiantes/index.php" class="nav-link" target="base">
                 <i class="nav-icon fas fa-id-card"></i>
                 <p>
-                  EstudiantesCrud
+                  Estudiantes
                 </p>
               </a>
             </li>
@@ -118,7 +118,7 @@
               <a href="../app/vistas/LabTecnico/ver_mantenimiento.php" class="nav-link" target="base">
                 <i class="nav-icon fas fa-ambulance"></i>
                 <p>
-                  Mantenimiento<span class="badge badge-danger right"><?php echo $_SESSION["mant_pendientes"] ?></span>
+                  Mantenimiento<span class="badge badge-danger right" data-toggle='tooltip' data-placement='top' title='Pendientes'><?php echo $_SESSION["mant_pendientes"] ?></span>
                 </p>
               </a>
             </li>
@@ -167,7 +167,7 @@
               <a href="../app/vistas/LabTecnico/ver_mantenimiento.php" class="nav-link" target="base">
                 <i class="nav-icon fas fa-ambulance"></i>
                 <p>
-                  Mantenimiento<span class="badge badge-danger right"><?php echo $_SESSION["mant_pendientes"] ?></span>
+                  Mantenimiento<span class="badge badge-danger right" data-toggle='tooltip' data-placement='rigth' title='Pendientes'><?php echo $_SESSION["mant_pendientes"] ?></span>
                 </p>
               </a>
             </li>
@@ -249,15 +249,18 @@
     </section>
   </div>
 </div>
-
   <script src="plugins/jquery/jquery.min.js"></script>
   <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-  <script>
-    $.widget.bridge('uibutton', $.ui.button)
-  </script>
+  <script>$.widget.bridge('uibutton', $.ui.button)</script>
+  <script src="plugins/bootstrap/js/bootstrap.js"></script>
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
   <script src="dist/js/adminlte.js"></script>
   <script src="dist/js/demo.js"></script>
+  <script>
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
+	</script>
 </body>
 </html>

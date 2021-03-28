@@ -13,16 +13,13 @@
         <br>
         <h2> <?php //echo $proceso_mdl->getCodigo()." ".$proceso_mdl->getNombre() ?><?php echo $_GET['tipo_oficina_nombre'].' '.$_GET['ambiente_nombre'] ?></h2>
         <br>
+        <button class='btn btn-info font-weight-bolder'>
+            <a href='../LabDocente/index.php' style="color: inherit">Volver <i class="fa fa-backward"></i></a>
+        </button>
         <!-- <a href="nuevo.php?proceso_id=<?php //echo $_GET['proceso_id'] ?>">Nuevo</a>-->
         <div class="container-fluid" style="text-align:center">
             <?php $horario_controlador->verHorarioPorAmbiente($conexion, $_GET['ambiente_id']) ?>
         </div>
-    </div>
-    <br>
-    <div class="container-fluid" style="text-align:center">
-        <button class='btn btn-info font-weight-bolder'>
-            <a href='../LabDocente/index.php' style="color: inherit">Volver</a>
-        </button>
     </div>
     <script>
         function eliminar(id, event){

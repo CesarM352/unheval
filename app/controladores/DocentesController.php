@@ -8,7 +8,7 @@
             $sql_docentes = "SELECT D.codigodocente, D.celular, D.dni, D.direccion, D.nombre, T.nombre nombrecontrato, D.user, D.pass
                             FROM docentes D
                             INNER JOIN tipocontratodoc T ON D.codtipocontrato = T.codtipocontrato
-                            ORDER BY D.codigodocente";
+                            ORDER BY D.nombre";
 
             return ConexionController::consultar($conexion, $sql_docentes);
         }
@@ -39,6 +39,11 @@
                             INNER JOIN tipocontratodoc T ON D.codtipocontrato = T.codtipocontrato
                             WHERE D.nombre like '%" .$term. "%' or D.codigodocente like '%" .$term. "%'
                             ORDER BY D.nombre";
+            return ConexionController::consultar($conexion, $sql_docentes);
+        }
+
+        public function getAllDocentesDNI($conexion, $dni){
+            $sql_docentes = "SELECT * FROM docentes WHERE dni='$dni'";
             return ConexionController::consultar($conexion, $sql_docentes);
         }
 

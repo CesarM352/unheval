@@ -74,8 +74,8 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
                         "direccion" => utf8_decode($direccion),
                         "nombre" => utf8_decode($nombre),
                         "codtipocontrato" => $codtipocontrato,
-                        "user" => $user,
-                        "pass" => $pass
+                        "user" => $dni,
+                        "pass" =>  crypt($pass,'$2a$07$usesomesillystringforsalt$')
                     ];
                     $docentes_controlador = new DocentesController;
                     $neo=$docentes_controlador->guardar($conexion, $docente_nuevo);
@@ -83,7 +83,6 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
                     if (!empty($neo)) {
                         $type = "success";
                         $message = "Excel importado correctamente";
-                        //header("Location: ../Docentes/index.php");
                     } else {
                         $type = "error";
                         $message = "Hubo un problema al importar registros";

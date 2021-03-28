@@ -5,8 +5,8 @@
     $tecnicos_nuevo = [
         "numerocontrato" => utf8_decode($_POST["numerocontrato"]),
         "nombre" => utf8_decode($_POST["nombre"]),
-        "user" => $_POST["user"],
-        "pass" => $_POST["pass"],
+        "user" => $_POST["dni"],
+        "pass" => crypt($_POST["pass"],'$2a$07$usesomesillystringforsalt$'),
         "anionacimiento" => $_POST["anionacimiento"],
         "celular" => $_POST["celular"],
         "fechainicio" => $_POST["fechainicio"],

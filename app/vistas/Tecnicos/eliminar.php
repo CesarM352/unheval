@@ -3,10 +3,12 @@
 require_once '../../Conexion.php';
 require_once '../../controladores/TecnicosController.php';
 
-$numerocontrato= $_GET['numerocontrato'];
-$tecnicos_controlador = new TecnicosController;
-$tecnicos_controlador->eliminar($conexion, $numerocontrato);
+$numerocontrato= $_POST['numerocontrato'];
 
-header("Location: index.php");
+if (!$mysqli->query("delete from tecnicos where numerocontrato='$numerocontrato'")) {
+    echo($mysqli->errno);
+}else{
+    echo('ok');
+}
 
 ?>

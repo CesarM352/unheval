@@ -16,7 +16,7 @@
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
-                        <input type="text" class="form-control" name="usuario" placeholder="Usuario">
+                        <input type="text" class="form-control" name="usuario" placeholder="DNI">
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-append">

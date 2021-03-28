@@ -39,7 +39,7 @@
                     <label for="numeroalumnos">numero alumnos: </label>
                 </div>
                 <div class="col-md-1">
-                    <input type="text" class="form-control" name="numeroalumnos" value="<?php echo $grupos_mdl->getNumeroalumnos() ?>">
+                    <input type="number" class="form-control" name="numeroalumnos" value="<?php echo $grupos_mdl->getNumeroalumnos() ?>" required>
                 </div>
             </div>
             <div class="row form-group">
@@ -47,7 +47,7 @@
                     <label for="maximoalumnos">maximo alumnos: </label>
                 </div>
                 <div class="col-md-1">
-                    <input class="form-control" type="text" name="maximoalumnos" value="<?php echo $grupos_mdl->getMaximoalumnos() ?>"/>
+                    <input class="form-control" type="number" name="maximoalumnos" value="<?php echo $grupos_mdl->getMaximoalumnos() ?>" required/>
                 </div>
             </div>
             <div class="row form-group">

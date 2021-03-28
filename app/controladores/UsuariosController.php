@@ -48,9 +48,12 @@
             return ConexionController::consultar($conexion, $sql_usuario);
         }
 */
-        public function getUsuariosLogin($conexion, $usuario, $password){
-            $sql_usuarios = "SELECT * FROM usuarios WHERE user = '$usuario' and pass = '$password'";
+        public function getUsuariosLogin($conexion, $usuario){
+            
+            $sql_usuarios = "SELECT * FROM usuarios WHERE user = '$usuario'";
             $usuarios_mdl = new UsuariosModel( ConexionController::consultar($conexion, $sql_usuarios)->fetch_object() );
             return $usuarios_mdl;
+            //echo $sql_usuarios;
+            //exit();
         }
     }
