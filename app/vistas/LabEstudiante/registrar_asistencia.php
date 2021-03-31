@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-md-5">
                     <button class="btn btn-primary">Guardar</button>
-                    <button class="btn btn-primary"><a href="index.php?procesos_id=<?php echo $procesos_id ?>">Cancelar</a></button>
+                    <button class="btn btn-primary"><a href="index.php?procesos_id=<?php echo $procesos_id ?>" style="color: inherit">Cancelar</a></button>
                 </div>
             </div>
         </form>
@@ -86,7 +86,7 @@
         ?>
             <tr>
                 <td> <?php echo $asistencia["estudiante_nombres"] ?> </td>
-                <td> <?php echo $asistencia["grupo_nombre"] ?> </td>
+                <td> <?php echo utf8_encode($asistencia["grupo_nombre"]) ?> </td>
                 <td> <?php echo $asistencia["fecha"] ?> </td>
                 <td> <?php echo $asistencia["hora"] ?> </td>
                 <td> <?php echo $asistencia["oficina_nombre"] ?> </td>

@@ -54,7 +54,7 @@
                             <td> <?php echo $ambiente["nombre"] ?> </td>
                             <td> <?php echo $ambiente["tipo_oficina_nombre"] ?> </td>
                             <td> 
-                                <a href="ver_horario.php?ambiente_id=<?php echo $ambiente["codigooficina"] ?>" > Ver Horario </a>
+                                <a href="ver_horario.php?ambiente_id=<?php echo $ambiente["codigooficina"] ?>" data-toggle='tooltip' data-placement='left' title='Horario'><i class='nav-icon fas fa-calendar-alt'></i></a>
                             </td>
                         </tr>
                     <?php
@@ -67,6 +67,7 @@
             </div>
         </div>
     </div>
+    <?php include '../foot.html'; ?>
     <script>
         function eliminar(id, event){
             if(!confirm("Desea elminar el registro de codigo " + id) )
@@ -86,6 +87,11 @@
                 filas_mostrar.item(i).style.display="table-row"
             }
         }
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     </script>
 </body>
 </html>

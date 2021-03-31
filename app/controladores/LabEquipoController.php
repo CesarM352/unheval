@@ -1,6 +1,8 @@
 <?php
     require '../../modelos/LabEquipoModel.php';
 
+    date_default_timezone_set("America/Lima");
+
     class LabEquipoController{
         private $tabla = "equipos";
 
@@ -64,6 +66,36 @@
                                 INNER JOIN tipoequipos te ON t.codtipoequipo = te.codtipoequipo
                                 INNER JOIN estadoequipo ee ON t.codigoestado = ee.codigoestado
                                 WHERE ee.nombre = 'BAJA'";
+
+            return ConexionController::consultar($conexion, $sql_documento);
+        }
+
+        public function equiposPorVencer($conexion){
+            $sql_documento = "SELECT t.*, 
+                                o.nombre AS ambiente_nombre,
+                                te.nombre AS equipo_tipo,
+                                ee.nombre AS equipo_estado
+                                FROM equipos AS t 
+                                INNER JOIN laboratorios_equipo le ON t.codigopatrimonio = le.codigopatrimonio
+                                INNER JOIN oficina o ON le.codigooficina = o.codigooficina
+                                INNER JOIN tipoequipos te ON t.codtipoequipo = te.codtipoequipo
+                                INNER JOIN estadoequipo ee ON t.codigoestado = ee.codigoestado
+                                WHERE (year(t.fechacaduca)-year(NOW()))=1";
+
+            return ConexionController::consultar($conexion, $sql_documento);
+        }
+
+        public function equiposObsoletos($conexion){
+            $sql_documento = "SELECT t.*, 
+                                o.nombre AS ambiente_nombre,
+                                te.nombre AS equipo_tipo,
+                                ee.nombre AS equipo_estado
+                                FROM equipos AS t 
+                                INNER JOIN laboratorios_equipo le ON t.codigopatrimonio = le.codigopatrimonio
+                                INNER JOIN oficina o ON le.codigooficina = o.codigooficina
+                                INNER JOIN tipoequipos te ON t.codtipoequipo = te.codtipoequipo
+                                INNER JOIN estadoequipo ee ON t.codigoestado = ee.codigoestado
+                                WHERE (year(NOW())-year(t.fechacaduca))>0";
 
             return ConexionController::consultar($conexion, $sql_documento);
         }

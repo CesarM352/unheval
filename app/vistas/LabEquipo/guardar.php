@@ -36,7 +36,7 @@
         "codigooficina" => $_POST["codigooficina"],
         "fechaingreso" => $_POST["fechaingreso"],
         "estadopresente" => 1,
-        "codigopatrimonio" => $_POST["codigopatrimonio"],
+        "codigopatrimonio" => $_POST["codigopatrimonialinicial"].$_POST["codigopatrimonio"],
     ];
     $laboratorio_equipo_controlador->guardar($conexion, $laboratorio_equipo_nuevo);
 

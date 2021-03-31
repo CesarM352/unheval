@@ -56,7 +56,7 @@
                             <td> <?php echo $ambiente["nombre"] ?> </td>
                             <td> <?php echo $ambiente["tipo_oficina_nombre"] ?> </td>
                             <td> 
-                                <a href="ver_software.php?ambiente_id=<?php echo $ambiente["codigooficina"] ?>" > Ver Software</a> 
+                                <a href="ver_software.php?ambiente_id=<?php echo $ambiente["codigooficina"] ?>" data-toggle='tooltip' data-placement='left' title='Software'><i class='nav-icon fas fa-th'></i></a> 
                             </td>
                         </tr>
                     <?php
@@ -83,7 +83,7 @@
                 </div>
             </div>
             <br>
-            <div class="container-fluid" style="text-align:center" id="tabla_software">
+            <div class="container-fluid" style="text-align:left" id="tabla_software">
                 
             </div>
         </div>
@@ -166,6 +166,11 @@
                 buscar_software();
             }
         });
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     </script>
 </body>
 </html>

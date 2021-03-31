@@ -44,11 +44,6 @@ $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','applicati
                 $pass = "";
                 if(isset($Row[3])) {
                     $pass = $Row[3];
-                    /*if(strlen($pass)!=6){
-                        $type = "error";
-                        $message = "El password del registro ".$codigoestudiante." No tiene 6 digitos, se detuvo la importación";
-                        break;
-                    }*/
                 }
 
                 $anionacimiento = "";

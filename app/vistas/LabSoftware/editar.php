@@ -118,7 +118,7 @@
                 </div>
                 <div class="col-md-7">
                     <button class="btn btn-primary">Actualizar</button>
-                    <button class="btn btn-primary"><a href="index.php?procesos_id=<?php echo $software_mdl->getProcesosId() ?>">Cancelar</button>
+                    <button class="btn btn-primary"><a href="index.php?procesos_id=<?php //echo $software_mdl->getProcesosId() ?>" style="color: inherit">Cancelar</button>
                 </div>
             </div>
         </form>

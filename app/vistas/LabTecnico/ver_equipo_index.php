@@ -57,7 +57,7 @@
                             <td> <?php echo $ambiente["nombre"] ?> </td>
                             <td> <?php echo $ambiente["tipo_oficina_nombre"] ?> </td>
                             <td> 
-                                <a href="ver_inventario.php?ambiente_id=<?php echo $ambiente["codigooficina"] ?>" > Ver Equipos</a> 
+                                <a href="ver_inventario.php?ambiente_id=<?php echo $ambiente["codigooficina"] ?>" data-toggle='tooltip' data-placement='left' title='Equipos'><i class='nav-icon fas fa-desktop'></i></a> 
                             </td>
                         </tr>
                     <?php
@@ -67,128 +67,101 @@
                     </table>
                 </div>
                 <div class="col-md-2"></div>
-            </div>
+            </div><br>
         </div>
-        <br>
-		
-		
-
-        <!--<div class="wraper">
-            <div class="row form-group" style="text-align:center">
-                <div class="col-md-1">
-                </div>
-                <div class="col-md-1">
-                    <label>Código:</label>
-                </div>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" id="buscar_curso"></input>
-                </div>
-                <div class="col-md-1">
-                    <label>Ambiente:</label>
-                </div>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" id="buscar_curso"></input>
-                </div>
-                <div class="col-md-2">
-                    <button id="btn_nuevo" class="btn btn-info font-weight-bolder">
-                        <a href="../LabEquipo/nuevo.php" style="color: inherit">Nuevo <i class="fa fa-plus-circle"></i></a>
-                    </button>
-                </div>
-                <div class="col-md-2">
-                    <button id="btn_nuevo" class="btn btn-info font-weight-bolder">
-                        <a href="nuevo.php" style="color: inherit">Nuevo <i class="fa fa-plus-circle"></i></a>
-                    </button>
-                </div>
-            </div>
-            <br>
-            <div class="container-fluid" style="text-align:center" id="tabla_equipos">
-                
-            </div>
-        </div>-->
-        
         <button id="btn_nuevo" class="btn btn-info font-weight-bolder">
-                        <a href="../LabEquipo/nuevo.php" style="color: inherit">Nuevo <i class="fa fa-plus-circle"></i></a>
-                    </button>
-        <div class="container-fluid" style="text-align:center">
-            <H2>REPORTE DE EQUIPOS</H2>
-            <table id="tbl_datos" class='table table-bordered table-hover'>
-                <thead>
-                    <tr id="fil">
-                        <th>CÓDIGO</th>
-                        <th>DESCRIPCIÓN</th>
-                        <th>TIPO</th>
-                        <th>ESTADO</th>
-                        <th>UBICACIÓN</th>
-                    </tr>
-                </thead>
-                <tbody>
-            <?php
-                foreach ($equipos as $key => $equipo) {
-            ?>
-                <tr>
-                    <td> <?php echo $equipo["codigopatrimonio"] ?> </td>
-                    <td> <?php echo $equipo["descripcion"] ?> </td>
-                    <td> <?php echo $equipo["equipo_tipo"] ?> </td>
-                    <td> <?php echo $equipo["equipo_estado"] ?> </td>
-                    <td> <?php echo $equipo["ambiente_nombre"] ?> </td>
-                </tr>
-            <?php
-                }
-            ?>
-                </tbody>
-            </table>
-			
-			<br>
+            <a href="../LabEquipo/nuevo.php" style="color: inherit">Nuevo <i class="fa fa-plus-circle"></i></a>
+        </button>
+        <br><br>
 
-            <H2>REPORTE DE EQUIPOS DADOS DE BAJA</H2>
-			<table id="tbl_datos" class='table table-bordered table-hover'>
-				<thead>
-					<tr id="fil">
-						<th>CÓDIGO</th>
-						<th>DESCRIPCIÓN</th>
-						<th>TIPO</th>
-						<th>FECHA BAJA</th>
-						<th>DOCUMENTO</th>
-					</tr>
-				</thead>
-				<tbody>
-			<?php
-				foreach ($equipos_baja as $key => $equipo) {
-			?>
-				<tr>
-					<td> <?php echo $equipo["codigopatrimonio"] ?> </td>
-					<td> <?php echo $equipo["descripcion"] ?> </td>
-					<td> <?php echo $equipo["equipo_tipo"] ?> </td>
-					<td> <?php echo $equipo["fechabaja"] ?> </td>
-					<td> <a href='../../../public/doc/<?php echo $equipo["documentobaja"] ?>'><?php echo $equipo["documentobaja"] ?></a> </td>
-				</tr>
-			<?php
-				}
-			?>
-				</tbody>
-			</table>
+
+
+        <div><H2>REPORTE DE EQUIPOS</H2></div>
+        <div class="form-inline" style="justify-content: center;">
+            <div class="icheck-primary d-inline">
+                <input type="radio" id="rdb_tipo_equipo_1" name="rdb_tipo_equipo" value="1" onclick="filtrarPorTipoEquipo(1)"/>
+                <label for="rdb_tipo_equipo_1">VIGENTES &nbsp;&nbsp;&nbsp;</label>
+            </div>
+            <div class="icheck-primary d-inline">
+                <input type="radio" id="rdb_tipo_equipo_2" name="rdb_tipo_equipo" value="2" onclick="filtrarPorTipoEquipo(2)"/>
+                <label for="rdb_tipo_equipo_2">POR VENCER &nbsp;&nbsp;&nbsp;</label>
+            </div>
+            <div class="icheck-primary d-inline">
+                <input type="radio" id="rdb_tipo_equipo_3" name="rdb_tipo_equipo" value="3" onclick="filtrarPorTipoEquipo(3)"/>
+                <label for="rdb_tipo_equipo_3">OBSOLETOS &nbsp;&nbsp;&nbsp;</label>
+            </div>
+            <div class="icheck-primary d-inline">
+                <input type="radio" id="rdb_tipo_equipo_4" name="rdb_tipo_equipo" value="4" onclick="filtrarPorTipoEquipo(4)"/>
+                <label for="rdb_tipo_equipo_4">DE BAJA &nbsp;&nbsp;&nbsp;</label>
+            </div>
         </div>
+        <div class="container-fluid" id="tabla_equipos" style="text-align: left"></div>
     </div>
+    <?php include '../foot.html'; ?>
 
     <script>
-        function eliminar(id, event){
-            if(!confirm("Desea elminar el registro de codigo " + id) )
-                event.preventDefault()
+        function filtrarPorTipoAmbiente( numero ){
+            filas = document.getElementsByClassName("tbl_datos_filas")
+            for(i=0; i<filas.length; i++){
+                if( numero != 0 )
+                    filas.item(i).style.display="none"
+                else
+                    filas.item(i).style.display="table-row"
+            }
+            filas_mostrar = document.getElementsByClassName("tipo_ambiente_" + numero)
+            for(i=0; i<filas_mostrar.length; i++){
+                filas_mostrar.item(i).style.display="table-row"
+            }
         }
+    </script>
+    <script>
+        function filtrarPorTipoEquipo( numero ){
+            filas = document.getElementsByClassName("tbl_datos_filas")
+            for(i=0; i<filas.length; i++){
+                if( numero != 0 )
+                    filas.item(i).style.display="none"
+                else
+                    filas.item(i).style.display="table-row"
+            }
+            filas_mostrar = document.getElementsByClassName("tipo_equipo_" + numero)
+            for(i=0; i<filas_mostrar.length; i++){
+                filas_mostrar.item(i).style.display="table-row"
+            }
+        }
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        //Para la carga de la tabla equipos en el módulo equipos
+        $(buscar_equipos());
 
-    function filtrarPorTipoAmbiente( numero ){
-        filas = document.getElementsByClassName("tbl_datos_filas")
-        for(i=0; i<filas.length; i++){
-            if( numero != 0 )
-                filas.item(i).style.display="none"
-            else
-                filas.item(i).style.display="table-row"
+        function buscar_equipos(equipo){
+            $.ajax({
+                url: 'tabla_equipos.php',
+                type: 'POST',
+                dataType: 'html',
+                data: {equipo: equipo},
+            })
+            .done(function(respuesta){
+                $("#tabla_equipos").html(respuesta);
+                $('[data-toggle="tooltip"]').tooltip();
+            })
+            .fail(function(){
+                console.log("error");
+            })
         }
-        filas_mostrar = document.getElementsByClassName("tipo_ambiente_" + numero)
-        for(i=0; i<filas_mostrar.length; i++){
-            filas_mostrar.item(i).style.display="table-row"
-        }
-    }
+        //Detectar el nombre de equipo introducidos en el campo de texto equipos
+        function filtrarPorTipoEquipo(numero){
+            var equipo=numero;
+            if(equipo!=""){
+                buscar_equipos(equipo);
+            }else{
+                buscar_equipos();
+            }
+        };
     </script>
 </body>
 </html>

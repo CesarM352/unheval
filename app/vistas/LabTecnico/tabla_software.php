@@ -15,7 +15,7 @@
     if($softwares->num_rows > 0){
         $salida.="<table id='tbl_datos_todos' class='table table-bordered table-hover'>
                     <thead>
-                        <tr>
+                        <tr style='text-align: center'>
                             <th>SOFTWARE</th>
                             <th>TIPO</th>
                             <th>FORMA</th>
@@ -46,7 +46,7 @@
                                 $color_fondo = 'red';
                                 $color_fondo = 'bg-warning por_vencer';
                             }
-        $salida.="  <tr class='$color_fondo' data-dias_por_vencer=";
+        $salida.="  <tr style='text-align: center' class='$color_fondo' data-dias_por_vencer=";
                         if( $software['dias_por_vencer'] <= 0) 
         $salida.=           abs($software['dias_por_vencer']);
         $salida.=">     <td>".$software['software_descripcion']."</td>
@@ -124,14 +124,37 @@
                         filas_mostrar.item(i).style.display='table-row'
                     }
                 }
+                </script>
+                <script>
+                    $(function () {
+                        $('#tbl_datos_todos').DataTable({
+                            'lengthMenu': [[15, 25, 50, -1], [15, 25, 50, 'All']],
+                            'paging': true,
+                            'lengthChange': true,
+                            'searching': false,
+                            'ordering': false,
+                            'info': true,
+                            'autoWidth': false,
+                            'responsive': true,
+                            
+                            'language': {
+                                'info': 'Mostrando del _START_ al _END_, de un total de _TOTAL_ entradas',
+                                'lengthMenu': 'Mostrar _MENU_ registros',
+                                'paginate': {
+                                    'first': 'Primeros',
+                                    'last': 'Ultimos',
+                                    'next': 'Siguiente',
+                                    'previous': 'Anterior'
+                                },
+                            },
+                          });
+                    });
                 </script>";
     }else{
         $salida.="<div style='text-align:center'><h5>Software no registrado</h5></div>";
     }
     echo $salida;
 ?>
-
-  
     <script>
         $(function () {
             $("#btn_ver_todos").click( function(){

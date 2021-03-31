@@ -15,6 +15,7 @@ try{
         //echo$usuarios->getPass();
         //var_dump($usuarios);
         //if($usuarios->getUser()!=''){
+        if(!is_null($usuarios->getPass())){
         if(hash_equals($usuarios->getPass(),crypt($password,'$2a$07$usesomesillystringforsalt$'))){
             session_start();
             $_SESSION["codigo"]=$usuarios->getcodigo();
@@ -31,9 +32,12 @@ try{
         }else{
             header("location:login.php");
         }
+    }else{
+        header("location:login.php");
+    }
     }
     
 }catch(Exception $e){
-    die("Error:".$e->getMessage());
+    //die("Error:".$e->getMessage());
 }
 ?>

@@ -1,8 +1,0 @@
-Ingresar a : http://localhost/unheval/app/vistas/Login/login.php
-Cuentas de prueba
-usuario	clave
-ing	1111
-doc	2222
-tec	3333
-est	4444
-sec	5555
