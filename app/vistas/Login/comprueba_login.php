@@ -15,19 +15,23 @@ try{
         //echo$usuarios->getPass();
         //var_dump($usuarios);
         //if($usuarios->getUser()!=''){
-        if(hash_equals($usuarios->getPass(),crypt($password,'$2a$07$usesomesillystringforsalt$'))){
-            session_start();
-            $_SESSION["codigo"]=$usuarios->getcodigo();
-            $_SESSION["nombre"]=utf8_encode($usuarios->getNombre());
-            $_SESSION["usuario"]=$usuarios->getUser();
-            $_SESSION["perfil_id"]=$usuarios->getPerfil_id();
+        if( !is_null($usuarios->getPass()) ){
+            if(hash_equals($usuarios->getPass(),crypt($password,'$2a$07$usesomesillystringforsalt$'))){
+                session_start();
+                $_SESSION["codigo"]=$usuarios->getcodigo();
+                $_SESSION["nombre"]=utf8_encode($usuarios->getNombre());
+                $_SESSION["usuario"]=$usuarios->getUser();
+                $_SESSION["perfil_id"]=$usuarios->getPerfil_id();
 
-            //cargar la Cargar la variable $_SESSION con el número de mantenimientos pendientes
-            $mantenimiento_controlador = new LabMantenimientoController;
+                //cargar la Cargar la variable $_SESSION con el número de mantenimientos pendientes
+                $mantenimiento_controlador = new LabMantenimientoController;
 
-            $_SESSION["mant_pendientes"] = $mantenimiento_controlador->calcularCantidadPendientes($conexion);
+                $_SESSION["mant_pendientes"] = $mantenimiento_controlador->calcularCantidadPendientes($conexion);
 
-            header("location:../../../public/");
+                header("location:../../../public/");
+            }else{
+                header("location:login.php");
+            }
         }else{
             header("location:login.php");
         }

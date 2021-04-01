@@ -18,6 +18,7 @@
         <a href="ver_equipo_index.php">INVENTARIO</a>
         <a href="ver_software_index.php">SOFTWARE</a>
         <a href="ver_horario_index.php">HORARIO</a>
+        <a href="ver_prestamo_index.php">PRÉSTAMO/INCIDENCIAS</a>
 </div>
 
     <script>

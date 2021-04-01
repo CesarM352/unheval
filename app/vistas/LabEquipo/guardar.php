@@ -2,8 +2,13 @@
     require_once '../../Conexion.php';
     require_once '../../controladores/LabEquipoController.php';
     require_once '../../controladores/LabLaboratorioEquipoController.php';
+    require_once '../../controladores/LabTipoEquipoController.php';
 
     //$oficinacodigo = $_GET['oficinacodigo'];
+
+    $tipo_equipo = (new LabTipoEquipoController)->getTipoEquipo($conexion, $_POST["codtipoequipo"] );
+    $fecha_ini = date_create($_POST["fechaingreso"]);
+    date_add($fecha_ini, date_interval_create_from_date_string( $tipo_equipo->getTiempoObsolecencia().' years'));
 
     $equipo_nuevo = [
         "codigopatrimonio" => $_POST["codigopatrimonialinicial"].$_POST["codigopatrimonio"],
@@ -16,7 +21,7 @@
         "tarjetavideo" => $_POST["tarjetavideo"],
         "rfid" => $_POST["rfid"],
         "estadoperativo" => $_POST["estadoperativo"],
-        "fechacaduca" => $_POST["fechacaduca"],
+        "fechacaduca" => $fecha_ini->format('Y-m-d H:i:s.u'),
         "codtipoingreso" => $_POST["codtipoingreso"],
         "codtipoequipo" => $_POST["codtipoequipo"],
         "codigoestado" => $_POST["codigoestado"],
@@ -36,7 +41,7 @@
         "codigooficina" => $_POST["codigooficina"],
         "fechaingreso" => $_POST["fechaingreso"],
         "estadopresente" => 1,
-        "codigopatrimonio" => $_POST["codigopatrimonio"],
+        "codigopatrimonio" => $_POST["codigopatrimonialinicial"].$_POST["codigopatrimonio"],
     ];
     $laboratorio_equipo_controlador->guardar($conexion, $laboratorio_equipo_nuevo);
 

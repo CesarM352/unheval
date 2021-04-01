@@ -1,3 +1,17 @@
+<?php
+  //Para iniciar sesion con el usuario logueado
+  session_start();
+  if(!isset($_SESSION["usuario"])){
+      header("Location:../neo/app/vistas/Login/login.php");
+  }
+  else{
+      $srv_archivo_actual = basename($_SERVER["REQUEST_URI"]);
+  
+      if(strtolower($srv_archivo_actual)=='neo'){
+          header("Location:../neo/public");
+      }
+  }
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
