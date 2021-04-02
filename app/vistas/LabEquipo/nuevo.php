@@ -260,7 +260,7 @@
                 </div>
                 <div class="col-md-5">
                     <button class="btn btn-primary">Guardar</button>
-                    <button class="btn btn-primary"><a href="index.php?procesos_id=<?php echo $procesos_id ?>">Cancelar</button>
+                    <button class="btn btn-primary"><a href="../LabTecnico/ver_equipo_index.php" style="color: inherit">Cancelar</button>
                 </div>
             </div>
 
@@ -293,30 +293,31 @@
             let codigoInicialSeleccionado = $("#codtipoequipo option:selected").data('codpat')
             $("#codigopatrimonialinicial").val(codigoInicialSeleccionado)
 
-            if( codigoInicialSeleccionado == 42158574 ){
+            if( codigoInicialSeleccionado == 74089950 || codigoInicialSeleccionado == 74089949 ){
                 $(".datospc").show()
                 $(".datosmonitor").hide()
                 $(".datosteclado").hide()
                 $(".datosestabilizador").hide()
             }
-            else if(codigoInicialSeleccionado == 42158575){
+            else if(codigoInicialSeleccionado == 74087700){
                 $(".datospc").hide()
                 $(".datosmonitor").show()
                 $(".datosteclado").hide()
                 $(".datosestabilizador").hide()
             }
-            else if(codigoInicialSeleccionado == 42158576){
+            else if(codigoInicialSeleccionado == 74089500){
                 $(".datospc").hide()
                 $(".datosmonitor").hide()
                 $(".datosteclado").show()
                 $(".datosestabilizador").hide()
             }
-            else if(codigoInicialSeleccionado == 42158577){
+            else if(codigoInicialSeleccionado == 46225215){
                 $(".datospc").hide()
                 $(".datosmonitor").hide()
                 $(".datosteclado").hide()
                 $(".datosestabilizador").show()
             }
+            
         }
     </script>
 </body>

@@ -1,17 +1,4 @@
-<?php
-  //Para iniciar sesion con el usuario logueado
-  session_start();
-  if(!isset($_SESSION["usuario"])){
-      header("Location:../neo/app/vistas/Login/login.php");
-  }
-  else{
-      $srv_archivo_actual = basename($_SERVER["REQUEST_URI"]);
-  
-      if(strtolower($srv_archivo_actual)=='neo'){
-          header("Location:../neo/public");
-      }
-  }
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -27,7 +14,7 @@
 
 <?php
   //Para iniciar sesion con el usuario logueado
-  session_start();
+  //session_start();
   if(!isset($_SESSION["usuario"])){
       header("Location:../neo/app/vistas/Login/login.php");
   }
@@ -88,11 +75,19 @@
             //Presentación de los menus según el perfil del usuario
             if($_SESSION["perfil_id"]=='1'){ //Administrador
           ?>
-              <li class="nav-item">
-              <a href="../app/vistas/cursos/index.php" class="nav-link" target="base">
+            <li class="nav-item">
+              <a href="../app/vistas/Cursos/index.php" class="nav-link" target="base">
                 <i class="nav-icon fas fa-book"></i>
                 <p>
                   Cursos
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../app/vistas/Matriculas/index.php" class="nav-link" target="base">
+                <i class="nav-icon fas fa-book"></i>
+                <p>
+                  Matrículas
                 </p>
               </a>
             </li>
@@ -138,7 +133,7 @@
             </li>
             <li class="nav-item">
               <a href="../app/vistas/LabTecnico/ver_equipo_index.php" class="nav-link" target="base">
-                <i class="nav-icon fas fa-book-open"></i>
+                <i class="nav-icon fas fa-clipboard-list"></i>
                 <p>
                   Inventario
                 </p>
@@ -187,7 +182,7 @@
             </li>
             <li class="nav-item">
               <a href="../app/vistas/LabTecnico/ver_equipo_index.php" class="nav-link" target="base">
-                <i class="nav-icon fas fa-book-open"></i>
+                <i class="nav-icon fas fa-clipboard-list"></i>
                 <p>
                   Inventario
                 </p>
