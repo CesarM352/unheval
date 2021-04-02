@@ -72,6 +72,9 @@
         <button id="btn_nuevo" class="btn btn-info font-weight-bolder">
             <a href="../LabEquipo/nuevo.php" style="color: inherit">Nuevo <i class="fa fa-plus-circle"></i></a>
         </button>
+        <button id="btn_nuevo" class="btn btn-info font-weight-bolder">
+                    <a href="../import/equipos.php" style="color: inherit">Importar <i class="fa fa-file-upload"></i></a>
+        </button>
         <br><br>
 
 

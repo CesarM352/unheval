@@ -127,7 +127,7 @@
               <a href="../app/vistas/LabTecnico/ver_mantenimiento.php" class="nav-link" target="base">
                 <i class="nav-icon fas fa-ambulance"></i>
                 <p>
-                  Mantenimiento<span class="badge badge-danger right" data-toggle='tooltip' data-placement='top' title='Pendientes'><?php echo $_SESSION["mant_pendientes"] ?></span>
+                  Mantenimiento<span ID="cant_man" class="badge badge-danger right" data-toggle='tooltip' data-placement='top' title='Pendientes'><?php echo $_SESSION["mant_pendientes"] ?></span>
                 </p>
               </a>
             </li>
@@ -270,6 +270,18 @@
 		$(function () {
 			$('[data-toggle="tooltip"]').tooltip()
 		})
+
+    function bindEvent(element, eventName, eventHandler){
+      if( element.addEventListener ){
+        element.addEventListener(eventName, eventHandler, false)
+      } else if(element.attachEvent){
+        element.attachEvent('on' + eventName, eventHandler)
+      }
+    }
+
+    bindEvent(window, 'message', function(e){
+      $("#cant_man").text(e.data)
+    })
 	</script>
 </body>
 </html>

@@ -13,4 +13,4 @@
     $mantenimiento_controlador = new LabMantenimientoController;
     $mantenimiento_controlador->actualizar($conexion,$id, $mantenimiento_actualizar);
 
-    header("Location: ../LabTecnico/ver_mantenimiento.php");
+    header("Location: ../LabTecnico/ver_mantenimiento.php?actualizado=1");
