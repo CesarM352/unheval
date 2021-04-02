@@ -50,7 +50,9 @@
 							<input type="checkbox" value="<?php echo $inventario["equipo_codigo"] ?>" name="equipos[]" />
 							<?php echo $inventario["equipo_codigo"] ?> 
 						</label>
-						<a href='../../../public/doc_equipo/<?php echo $inventario["equipo_documento"] ?>' data-toggle='tooltip' data-placement='left' title='Ver Documento'><i class='nav-icon fas fa-file'></i></a>
+						<?php if( $inventario["equipo_documento"] != '' ){ ?>
+							<a href='../../../public/doc_equipo/<?php echo $inventario["equipo_documento"] ?>' data-toggle='tooltip' data-placement='left' title='Ver Documento'><i class='nav-icon fas fa-file'></i></a>
+						<?php } ?>
 					</td>
                     <td> <?php echo $inventario["equipo_descripcion"] ?> </td>
                     <td> <?php echo $inventario["equipo_tipo"] ?> </td>

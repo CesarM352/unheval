@@ -67,4 +67,17 @@
 
             return ConexionController::consultar($conexion, $sql_documento);
         }
+
+        public function equiposEnBajaDoumento($conexion, $documento){
+            $sql_documento = "SELECT t.*, 
+                                te.nombre AS equipo_tipo,
+                                ee.nombre AS equipo_estado
+                                FROM $this->tabla AS t 
+                                INNER JOIN tipoequipos te ON t.codtipoequipo = te.codtipoequipo
+                                INNER JOIN estadoequipo ee ON t.codigoestado = ee.codigoestado
+                                WHERE ee.nombre = 'BAJA' 
+                                    AND documentobaja = '$documento'";
+
+            return ConexionController::consultar($conexion, $sql_documento);
+        }
     }
