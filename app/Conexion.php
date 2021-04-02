@@ -1,6 +1,6 @@
 <?php
     require_once 'controladores/ConexionController.php';
 
-    $conexion = ConexionController::crearConexion('localhost','laboratoriosbd1','root','','mysql');
+    $conexion = ConexionController::crearConexion('localhost','laboratoriosbd2','root','','mysql');
 
-    $mysqli = new mysqli("localhost", "root", "", "laboratoriosbd1");
+    $mysqli = new mysqli("localhost", "root", "", "laboratoriosbd2");

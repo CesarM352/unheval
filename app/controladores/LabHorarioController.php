@@ -34,7 +34,7 @@
             return ConexionController::eliminar($conexion, $this->tabla, $id);
         }
 		
-		public function verHorarioPorAmbiente($conexion, $codigooficina){
+		public function verHorarioPorAmbiente($conexion, $codigooficina, $semanas_diferencias=0){
             $horarios_semana = [];
 			$dias_semana = ["LUNES", "MARTES", "MIÉRCOLES", "JUEVES", "VIERNES", "SÁBADO", "DOMINGO"];
 			$cantidad_filas_maxima = 0;
@@ -42,10 +42,17 @@
 			foreach($dias_semana as $key => $dia){
 				$cantidad_filas_dia = 0;
 				//$sql_horario = "SELECT * FROM $this->tabla WHERE codigooficina=$codigooficina AND nro_dia = ".($key + 1)."  ORDER BY hora_inicio ASC";
+				if($semanas_diferencias == 0)
 				$sql_horario = "SELECT * FROM $this->tabla 
 								WHERE codigooficina=$codigooficina 
 								AND nro_dia = ".($key + 1)." AND ( ((fecha is NULL || fecha = '') AND tipo_horario=1) || (fecha BETWEEN date_format(date_sub(now(), INTERVAL (WEEKDAY(now()) - 2) DAY),'%Y-%m-%d') 
 								AND date_format(date_add(now(), INTERVAL (8 - WEEKDAY(now()) )  DAY),'%y-%m-%d')  AND tipo_horario=2  ) ) 
+								ORDER BY hora_inicio ASC";
+				else
+				$sql_horario = "SELECT * FROM $this->tabla 
+								WHERE codigooficina=$codigooficina 
+								AND nro_dia = ".($key + 1)." AND ( ((fecha is NULL || fecha = '') AND tipo_horario=1) || (fecha BETWEEN date_format(date_sub(date_add(now(), INTERVAL $semanas_diferencias WEEK), INTERVAL (WEEKDAY(date_add(now(), INTERVAL $semanas_diferencias WEEK)) - 2) DAY),'%Y-%m-%d') 
+								AND date_format(date_add(date_add(now(), INTERVAL $semanas_diferencias WEEK), INTERVAL (8 - WEEKDAY(date_add(now(), INTERVAL $semanas_diferencias WEEK)) )  DAY),'%y-%m-%d')  AND tipo_horario=2  ) ) 
 								ORDER BY hora_inicio ASC";
 				$dias_bd = ConexionController::consultar($conexion, $sql_horario);
 				
@@ -86,4 +93,32 @@
             $fila = ConexionController::consultar($conexion, $sql_documento)->fetch_object();
             return $fila->codigo_siguiente;
         }
+
+		public function cantidadHorarios($conexion, $tipo_horario, $nro_dia, $hora_inicio, $hora_fin, $fecha, $codigooficina){
+			if( $tipo_horario == 'CLASE' ){
+				$sql_documento = "SELECT COUNT(*) AS cantidad FROM $this->tabla 
+									WHERE codigooficina=$codigooficina 
+									AND nro_dia=$nro_dia 
+									AND (
+												(hora_inicio BETWEEN '$hora_inicio' AND '$hora_fin')
+											OR	(hora_fin BETWEEN '$hora_inicio' AND '$hora_fin')
+											OR	(hora_inicio <= '$hora_inicio' AND '$hora_fin' <= hora_fin)
+											OR	('$hora_inicio' <= hora_inicio AND hora_fin <= '$hora_fin')
+										)";
+			}
+			else {
+				$sql_documento = "SELECT COUNT(*) AS cantidad FROM $this->tabla 
+									WHERE codigooficina=$codigooficina 
+									AND fecha='$fecha' 
+									AND (
+												(hora_inicio BETWEEN '$hora_inicio' AND '$hora_fin')
+											OR	(hora_fin BETWEEN '$hora_inicio' AND '$hora_fin')
+											OR	(hora_inicio <= '$hora_inicio' AND '$hora_fin' <= hora_fin)
+											OR	('$hora_inicio' <= hora_inicio AND hora_fin <= '$hora_fin')
+										)";
+			}
+
+			$result = ConexionController::consultar($conexion, $sql_documento)->fetch_object();
+            return $result->cantidad;
+		}
     }

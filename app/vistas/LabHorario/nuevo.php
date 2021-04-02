@@ -100,7 +100,7 @@
                     <label>Docente: </label>
                 </div>
                 <div class="col-md-5">
-                    <select name="docente_clase" id="sel_docente_clase" class="form-control select2bs4">
+                    <select name="docente_clase" id="sel_docente_clase" class="form-control" readonly>
                         <option value="">Seleccione</option>
                         <?php foreach ($docentes as $key => $docente) {
                         ?>
@@ -144,10 +144,10 @@
                 console.log(doc_codigo + ',' +doc_nombre + ',' + valor_sel )
 
                 $("#sel_docente_clase").val(doc_codigo)
-                $('#sel_docente_clase').select2().trigger('change'); 
+                /* $('#sel_docente_clase').select2().trigger('change'); 
                 $('#sel_docente_clase').select2({
                     theme: 'bootstrap4'
-                });
+                }); */
             })
 
             $("#hora_inicio").change(function(){

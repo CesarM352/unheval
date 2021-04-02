@@ -10,6 +10,7 @@
                                         o.nombre AS ambiente_nombre,
                                         e.codigopatrimonio AS equipo_codigo,
                                         e.descripcion AS equipo_descripcion,
+                                        e.documento AS equipo_documento,
                                         te.nombre AS equipo_tipo
                                     FROM $this->tabla AS t
                                     INNER JOIN equipos e ON t.codigopatrimonio = e.codigopatrimonio
@@ -22,6 +23,7 @@
                                         o.nombre AS ambiente_nombre,
                                         e.codigopatrimonio AS equipo_codigo,
                                         e.descripcion AS equipo_descripcion,
+                                        e.documento AS equipo_documento,
                                         te.nombre AS equipo_tipo
                                     FROM $this->tabla AS t
                                     INNER JOIN equipos e ON t.codigopatrimonio = e.codigopatrimonio
