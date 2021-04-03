@@ -26,6 +26,6 @@
     $mantenimiento_controlador->guardar($conexion,$mantenimiento_nuevo);
 
     if( $_POST['perfil'] == 'tecnico' )
-        header("Location: ../LabTecnico/ver_mantenimiento.php");
+        header("Location: ../LabTecnico/ver_mantenimiento.php?actualizado=1");
     elseif( $_POST['perfil'] == 'estudiante' )
         header("Location: ../LabEstudiante/registrar_problema.php?registrado=1");

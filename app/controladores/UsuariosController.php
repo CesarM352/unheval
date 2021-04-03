@@ -5,7 +5,7 @@
         private $tabla = "usuarios";
 
         public function getAllUsuarios($conexion){
-            $sql_usuarios = "SELECT * FROM usuarios ORDER BY id";
+            $sql_usuarios = "SELECT * FROM usuarios ORDER BY codigo";
 
             return ConexionController::consultar($conexion, $sql_usuarios);
         }

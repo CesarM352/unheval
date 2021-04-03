@@ -10,6 +10,10 @@
     $grupo_controlador = new GruposController;
     $docente_controlador = new DocentesController;
 
+    if( $mantenimiento_controlador->cantidadHorarios($conexion, $_POST["tipo_horario"], $_POST["nro_dia"], $_POST["hora_inicio"], $_POST["hora_fin"], $_POST["fecha"], $_POST["ambiente_id"]) > 0){
+        echo "Este horario está ocupado"; die();
+    }
+
     $nuevo_codigo_horario = $mantenimiento_controlador->calcularNuevoCodigo($conexion);
     $dias = ['LUNES','MARTES','MIÉRCOLES','JUEVES','VIERNES','SÁBADO','DOMINGO'];
 

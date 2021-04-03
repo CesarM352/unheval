@@ -32,4 +32,5 @@
     $software_controlador->guardar($conexion,$software_nuevo);
     $software_adquisicion_controlador->guardar($conexion,$software_adquisicion_nuevo);
 
-    header("Location: index.php");
+    //header("Location: index.php");
+    header("Location: ../LabTecnico/ver_software_index.php");

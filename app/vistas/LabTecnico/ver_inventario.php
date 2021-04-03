@@ -26,9 +26,10 @@
 				<div id="div_botones">
 					<button onclick="cambiarOperacion(1,0,0)" class="btn btn-primary">Dar de baja</button>
 					<!--<button onclick="cambiarOperacion(2,0,0)" class="btn btn-primary">Pasar a otra oficina</button>-->
+					<button onclick="cambiarOperacion(3,0,0)" class="btn btn-primary">Asignar documento</button>
 					<button id="btn_nuevo" class="btn btn-info font-weight-bolder">
 						<a href="../LabTecnico/ver_equipo_index.php" style="color: inherit">Volver <i class="fa fa-backward"></i></a>
-				</button>
+					</button>
 				</div>
 				<table class='table table-bordered table-hover'>
 					<thead>
@@ -51,6 +52,9 @@
 								<input type="checkbox" value="<?php echo $inventario["equipo_codigo"] ?>" name="equipos[]" />
 								<?php echo $inventario["equipo_codigo"] ?> 
 							</label>
+							<?php if( $inventario["equipo_documento"] != '' ){ ?>
+							<a href='../../../public/doc_equipo/<?php echo $inventario["equipo_documento"] ?>' data-toggle='tooltip' data-placement='left' title='Ver Documento'><i class='nav-icon fas fa-file'></i></a>
+						<?php } ?>
 						</td>
 						<td> <?php echo $inventario["equipo_descripcion"] ?> </td>
 						<td> <?php echo $inventario["equipo_tipo"] ?> </td>
@@ -64,6 +68,7 @@
 					</tbody>
 				</table>
 			</form>
+			
 			<form action="#" id="frm_transferir" method="POST" style="display:none">
 				<div class="row form-group">
 					<div class="col-md-2">
@@ -142,6 +147,9 @@
 					document.getElementById('div_equipo_transferir').innerText = codigoequipo
 					document.getElementById('codigopatrimonio').value = codigoequipo
 					document.getElementById('codigolaboratorioequipo').value = codigolaboratorioequipo
+					break;
+				case 3:
+					document.getElementById('frm_operacion').action = "../LabEquipo/asignar_documento.php"
 					break;
 			}
 		}

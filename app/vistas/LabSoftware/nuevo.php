@@ -95,7 +95,7 @@
                 </div>
             </div>
 
-            <div class="row form-group">
+            <div class="row form-group" id="div_duracion_dias">
                 <div class="col-md-2">
                     <label>Días de licencia</label>
                 </div>
@@ -189,11 +189,12 @@
                 }
                 else if( campo == 'licenciaperpetua' ){
                     if(opcion==0){
-                        document.getElementById('duracion_dias').value=-1
-                        document.getElementById('licenciaperpetua0').check()
+                        document.getElementById('duracion_dias').value=''
+                        document.getElementById('div_duracion_dias').style.display='flex'
                     }
                     else if(opcion==1){
                         document.getElementById('duracion_dias').value=-1
+                        document.getElementById('div_duracion_dias').style.display='none'
                     }
                 }
             }

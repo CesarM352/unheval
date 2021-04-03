@@ -33,6 +33,7 @@
         $equipo_controlador->actualizar($conexion,$codigo, $equipo_actualizar);
     }
 
+    //header("Location: ../LabTecnico/ver_equipo_index.php");
     if($oficinacodigo == 0)
         header("Location: ../LabTecnico/ver_equipo_index.php");
     elseif ($oficinacodigo > 0) {

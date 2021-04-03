@@ -106,6 +106,10 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
+        <?php if( isset($_GET["actualizado"]) ){ ?>
+            window.parent.postMessage(<?php echo $mantenimiento_controlador->calcularCantidadPendientes($conexion); ?>, '*');
+            //window.parent.document.getElementById('cant_man').textContent = <?php echo $mantenimiento_controlador->calcularCantidadPendientes($conexion); ?>
+        <?php } ?>
     </script>
 </body>
 </html>
