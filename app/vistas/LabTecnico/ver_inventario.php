@@ -20,7 +20,7 @@
 		<h3> <?php //echo $proceso_mdl->getCodigo()." ".$proceso_mdl->getNombre() ?> OFICINA <?php echo $ambiente->getNombre() ?> </h3>
         <br>
         <!-- <a href="nuevo.php?proceso_id=<?php echo $_GET['proceso_id'] ?>">Nuevo</a>-->
-        <div class="container-fluid" style="text-align:center">
+        <div class="container-fluid" style="text-align: center">
 		
 			<form action="#" id="frm_operacion" method="POST">
 				<div id="div_botones">
@@ -30,43 +30,45 @@
 					<button id="btn_nuevo" class="btn btn-info font-weight-bolder">
 						<a href="../LabTecnico/ver_equipo_index.php" style="color: inherit">Volver <i class="fa fa-backward"></i></a>
 					</button>
-				</div>
-				<table class='table table-bordered table-hover'>
-					<thead>
-						<tr>
-							<th>CÓDIGO</th>
-							<th>DESCRIPCIÓN</th>
-							<th>TIPO</th>
-							<th>ESTADO</th>
-							<th>EDITAR</th>
-							<th>PASAR A</th>
+				</div><br>
+				<div style="text-align: left !important">
+					<table class='table table-bordered table-hover' id="tabla_ambiente">
+						<thead>
+							<tr style="text-align: center">
+								<th>CÓDIGO</th>
+								<th>DESCRIPCIÓN</th>
+								<th>TIPO</th>
+								<th>ESTADO</th>
+								<th>EDITAR</th>
+								<th>PASAR A</th>
+							</tr>
+						</thead>
+						<tbody>
+					<?php
+						foreach ($inventarios as $key => $inventario) {
+					?>
+						<tr style="text-align: center">
+							<td>
+								<label>
+									<input type="checkbox" value="<?php echo $inventario["equipo_codigo"] ?>" name="equipos[]" />
+									<?php echo $inventario["equipo_codigo"] ?> 
+								</label>
+								<?php if( $inventario["equipo_documento"] != '' ){ ?>
+								<a href='../../../public/doc_equipo/<?php echo $inventario["equipo_documento"] ?>' data-toggle='tooltip' data-placement='left' title='Ver Documento'><i class='nav-icon fas fa-file'></i></a>
+							<?php } ?>
+							</td>
+							<td> <?php echo $inventario["equipo_descripcion"] ?> </td>
+							<td> <?php echo $inventario["equipo_tipo"] ?> </td>
+							<td> <?php echo $inventario["estadopresente"] ?> </td>
+							<td> <a href="../LabEquipo/editar.php?<?php echo 'id='.$inventario["equipo_codigo"].'&ambiente_id='.$_GET['ambiente_id'] ?>" data-toggle='tooltip' data-placement='left' title='Editar'><i class='nav-icon fas fa-edit'></i></a></td>
+							<td> <a href="#" onclick="cambiarOperacion(2,<?php echo $inventario["equipo_codigo"].",".$inventario["codigolaboratorioequipo"] ?> )" data-toggle='tooltip' data-placement='left' title='Mover A'><i class='nav-icon fas fa-dolly'></i></a></td>
 						</tr>
-					</thead>
-					<tbody>
-				<?php
-					foreach ($inventarios as $key => $inventario) {
-				?>
-					<tr>
-						<td>
-							<label>
-								<input type="checkbox" value="<?php echo $inventario["equipo_codigo"] ?>" name="equipos[]" />
-								<?php echo $inventario["equipo_codigo"] ?> 
-							</label>
-							<?php if( $inventario["equipo_documento"] != '' ){ ?>
-							<a href='../../../public/doc_equipo/<?php echo $inventario["equipo_documento"] ?>' data-toggle='tooltip' data-placement='left' title='Ver Documento'><i class='nav-icon fas fa-file'></i></a>
-						<?php } ?>
-						</td>
-						<td> <?php echo $inventario["equipo_descripcion"] ?> </td>
-						<td> <?php echo $inventario["equipo_tipo"] ?> </td>
-						<td> <?php echo $inventario["estadopresente"] ?> </td>
-						<td> <a href="../LabEquipo/editar.php?<?php echo 'id='.$inventario["equipo_codigo"].'&ambiente_id='.$_GET['ambiente_id'] ?>" data-toggle='tooltip' data-placement='left' title='Editar'><i class='nav-icon fas fa-edit'></i></a></td>
-						<td> <a href="#" onclick="cambiarOperacion(2,<?php echo $inventario["equipo_codigo"].",".$inventario["codigolaboratorioequipo"] ?> )" data-toggle='tooltip' data-placement='left' title='Mover A'><i class='nav-icon fas fa-dolly'></i></a></td>
-					</tr>
-				<?php
-					}
-				?>
-					</tbody>
-				</table>
+					<?php
+						}
+					?>
+						</tbody>
+					</table>
+				</div>
 			</form>
 			
 			<form action="#" id="frm_transferir" method="POST" style="display:none">
@@ -158,6 +160,31 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
+    </script>
+	<script>
+        $(function () {
+           $('#tabla_ambiente').DataTable({
+               'lengthMenu': [[15, 25, 50, -1], [15, 25, 50, 'All']],
+               'paging': true,
+               'lengthChange': true,
+               'searching': true,
+               'ordering': false,
+               'info': true,
+               'autoWidth': false,
+               'responsive': true,
+               
+               'language': {
+                   'info': 'Mostrando del _START_ al _END_, de un total de _TOTAL_ entradas',
+                   'lengthMenu': 'Mostrar _MENU_ registros',
+                   'paginate': {
+                       'first': 'Primeros',
+                       'last': 'Ultimos',
+                       'next': 'Siguiente',
+                       'previous': 'Anterior'
+                   },
+               },
+             });
+        });
     </script>
 </body>
 </html>
