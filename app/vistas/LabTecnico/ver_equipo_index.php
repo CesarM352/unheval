@@ -74,8 +74,6 @@
         </button>
         <br><br>
 
-
-
         <div><H2>REPORTE DE EQUIPOS</H2></div>
         <div class="form-inline" style="justify-content: center;">
             <div class="icheck-primary d-inline">

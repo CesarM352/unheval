@@ -25,7 +25,7 @@
                             <th>PERIODO DE VIGENCIA</th>
                             <th>CONDICIÓN</th>
                             <th>LICENCIAS DISPONIBLES</th>
-                            <th>REQUISITOS MINIMOS</th>
+                            <th>VER</th>
                         </tr>
                     </thead>
                     <tbody>";
@@ -73,7 +73,8 @@
                         else
         $salida.=       '&infin;';
         $salida.="      </td>        
-                        <td>".$software["requisitos_minimos"]."</td>
+                        <td><a href='requisitos.php?codigosoftware=".$software['software_id']."'  data-toggle='tooltip' data-placement='left' title='Requisitos Mínimos'><i class='nav-icon fas fa-list-alt'></i></a>
+                        <a href='detalles.php?codigosoftware=".$software['software_id']."' data-toggle='tooltip' data-placement='left' title='Detalles'><i class='nav-icon fas fa-bookmark'></i></a></td>
                     </tr>";
                     }
         $salida.="  </tbody>
@@ -147,6 +148,10 @@
                                     'previous': 'Anterior'
                                 },
                             },
+                            'columnDefs': [
+								{ 'width': '20%', 'targets': 0,
+                                  'width': '5%', 'targets': 9 }
+							]
                           });
                     });
                 </script>";

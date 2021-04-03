@@ -208,10 +208,10 @@
                     <select name="codigoestado" id="codigoestado" class="form-control" required>
                         <option value="">Seleccione</option>
                         <?php foreach ($estados_equipos as $key => $estado_equipo) {
-                            if($estado_equipo['nombre'] == 'BAJA')
-                                continue;
+                            if($estado_equipo['nombre'] == 'BAJA'){
+                                continue;}
                         ?>
-                        <option value="<?php echo $estado_equipo['codigoestado'] ?>" <?php echo ( $equipo->getCodigoEstado() == $tipo_ingreso['codigoestado'] ) ? 'selected' : '' ?>><?php echo $estado_equipo['nombre'] ?></option>
+                        <option value="<?php echo $estado_equipo['codigoestado'] ?>" <?php echo ( $equipo->getCodigoEstado() == $estado_equipo['codigoestado'] ) ? 'selected' : '' ?>><?php echo $estado_equipo['nombre'] ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -249,7 +249,7 @@
                 </div>
                 <div class="col-md-5">
                     <button class="btn btn-primary">Actualizar</button>
-                    <button class="btn btn-primary"><a href="index.php?procesos_id=<?php echo $procesos_id ?>">Cancelar</button>
+                    <button class="btn btn-primary"><a href="../LabTecnico/ver_inventario.php?ambiente_id=<?php echo $_GET['ambiente_id'] ?>" style="color: inherit">Cancelar</button>
                 </div>
             </div>
 

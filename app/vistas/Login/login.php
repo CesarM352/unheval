@@ -5,8 +5,8 @@
     <div class="register-box">
         <div class="card card-outline card-primary" style="text-align:center">
             <div class="card-header text-center">
-            <img id="profile-img" class="profile-img-card" src="../../../public/dist/img/Unheval.png" width="50%" height="80%"/>
-            <h1 style="color:blue"><b>UNHEVAL</b></h1>
+                <img id="profile-img" class="profile-img-card" src="../../../public/dist/img/Unheval.png" width="50%" height="80%"/>
+                <h1 style="color:blue"><b>UNHEVAL</b></h1>
             </div>
             <div class="card-body">
                 <form action="comprueba_login.php" method="post">

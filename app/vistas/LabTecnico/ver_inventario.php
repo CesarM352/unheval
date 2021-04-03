@@ -22,47 +22,48 @@
         <!-- <a href="nuevo.php?proceso_id=<?php echo $_GET['proceso_id'] ?>">Nuevo</a>-->
         <div class="container-fluid" style="text-align:center">
 		
-		<form action="#" id="frm_operacion" method="POST">
-			<div id="div_botones">
-				<button onclick="cambiarOperacion(1,0,0)" class="btn btn-primary">Dar de baja</button>
-				<!--<button onclick="cambiarOperacion(2,0,0)" class="btn btn-primary">Pasar a otra oficina</button>-->
-			</div>
-			
-            <table class='table table-bordered table-hover'>
-                <thead>
-                    <tr>
-                        <th>CÓDIGO</th>
-                        <th>DESCRIPCIÓN</th>
-                        <th>TIPO</th>
-                        <th>ESTADO</th>
-                        <th>EDITAR</th>
-                        <th>PASAR A</th>
-                    </tr>
-                </thead>
-                <tbody>
-            <?php
-                foreach ($inventarios as $key => $inventario) {
-            ?>
-                <tr>
-                    <td>
-						<label>
-							<input type="checkbox" value="<?php echo $inventario["equipo_codigo"] ?>" name="equipos[]" />
-							<?php echo $inventario["equipo_codigo"] ?> 
-						</label>
-					</td>
-                    <td> <?php echo $inventario["equipo_descripcion"] ?> </td>
-                    <td> <?php echo $inventario["equipo_tipo"] ?> </td>
-                    <td> <?php echo $inventario["estadopresente"] ?> </td>
-                    <td> <a href="../LabEquipo/editar.php?<?php echo 'id='.$inventario["equipo_codigo"].'&ambiente_id='.$_GET['ambiente_id'] ?>">EDITAR</a> </td>
-					<td> <a href="#" onclick="cambiarOperacion(2,<?php echo $inventario["equipo_codigo"].",".$inventario["codigolaboratorioequipo"] ?> )">PASAR A</a> </td>
-                </tr>
-            <?php
-                }
-            ?>
-                </tbody>
-            </table>
-		</form>
-			
+			<form action="#" id="frm_operacion" method="POST">
+				<div id="div_botones">
+					<button onclick="cambiarOperacion(1,0,0)" class="btn btn-primary">Dar de baja</button>
+					<!--<button onclick="cambiarOperacion(2,0,0)" class="btn btn-primary">Pasar a otra oficina</button>-->
+					<button id="btn_nuevo" class="btn btn-info font-weight-bolder">
+						<a href="../LabTecnico/ver_equipo_index.php" style="color: inherit">Volver <i class="fa fa-backward"></i></a>
+				</button>
+				</div>
+				<table class='table table-bordered table-hover'>
+					<thead>
+						<tr>
+							<th>CÓDIGO</th>
+							<th>DESCRIPCIÓN</th>
+							<th>TIPO</th>
+							<th>ESTADO</th>
+							<th>EDITAR</th>
+							<th>PASAR A</th>
+						</tr>
+					</thead>
+					<tbody>
+				<?php
+					foreach ($inventarios as $key => $inventario) {
+				?>
+					<tr>
+						<td>
+							<label>
+								<input type="checkbox" value="<?php echo $inventario["equipo_codigo"] ?>" name="equipos[]" />
+								<?php echo $inventario["equipo_codigo"] ?> 
+							</label>
+						</td>
+						<td> <?php echo $inventario["equipo_descripcion"] ?> </td>
+						<td> <?php echo $inventario["equipo_tipo"] ?> </td>
+						<td> <?php echo $inventario["estadopresente"] ?> </td>
+						<td> <a href="../LabEquipo/editar.php?<?php echo 'id='.$inventario["equipo_codigo"].'&ambiente_id='.$_GET['ambiente_id'] ?>" data-toggle='tooltip' data-placement='left' title='Editar'><i class='nav-icon fas fa-edit'></i></a></td>
+						<td> <a href="#" onclick="cambiarOperacion(2,<?php echo $inventario["equipo_codigo"].",".$inventario["codigolaboratorioequipo"] ?> )" data-toggle='tooltip' data-placement='left' title='Mover A'><i class='nav-icon fas fa-dolly'></i></a></td>
+					</tr>
+				<?php
+					}
+				?>
+					</tbody>
+				</table>
+			</form>
 			<form action="#" id="frm_transferir" method="POST" style="display:none">
 				<div class="row form-group">
 					<div class="col-md-2">
@@ -123,6 +124,7 @@
 			</form>
         </div>
     </div>
+	<?php include '../foot.html' ?>
     <script>
         function eliminar(id, event){
             if(!confirm("Desea elminar el registro de codigo " + id) )
@@ -143,6 +145,11 @@
 					break;
 			}
 		}
+    </script>
+	<script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     </script>
 </body>
 </html>

@@ -84,7 +84,6 @@
             </div>
             <br>
             <div class="container-fluid" style="text-align:left" id="tabla_software">
-                
             </div>
         </div>
         <br>
@@ -150,6 +149,7 @@
             })
             .done(function(respuesta){
                 $("#tabla_software").html(respuesta);
+                $('[data-toggle="tooltip"]').tooltip();
             })
             .fail(function(){
                 console.log("error");
